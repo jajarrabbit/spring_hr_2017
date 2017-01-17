@@ -10,7 +10,6 @@
 
 	<js th:include="common/js :: js"></js>
 	<noscript>
-
 		<css th:include="common/css :: css"></css>
 	</noscript>
 
@@ -26,7 +25,6 @@
 		<p>Faucibus neque adipiscing mi lorem semper blandit</p>
 	</header>
 	<div class="container">
-
 		<!-- Content -->
 		<section id="content">
 			<table>
@@ -45,23 +43,17 @@
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
 					<td th:text="${leaveHistory.leaveType.categoryName}">32</td>
-
 				</tr>
 				</tbody>
 			</table>
-
-
-
 		</section>
-
 	</div>
 </section>
-
 <!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
 			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
-				</span>
+	</span>
 </footer>
 
 </body>
