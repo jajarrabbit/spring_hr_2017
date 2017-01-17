@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <css th:include="common/css :: css"></css>
+</head>
+<body>
+<div th:fragment="header(title)">
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="index.html">HTML5 Website <span>by Html5webtemplates.co.uk</span></a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li>
+                    <a href="" class="icon fa-angle-down">Layouts</a>
+                    <ul>
+                        <li><a href="/leaveHistory/list">One</a></li>
+                        <li><a href="/leaveHistory/create?form">Two</a></li>
+                        <li><a href="/three">Three</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="elements.html">Elements</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+</body>
+</html>
