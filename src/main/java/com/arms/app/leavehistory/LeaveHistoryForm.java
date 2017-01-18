@@ -17,6 +17,7 @@ public class LeaveHistoryForm {
     private Integer categoryId;
     private String reason;
     private String remark;
+    private String hireDate;
 
     public LeaveHistoryForm(Integer empId, Date periodFrom, Date periodUntil, Integer categoryId, String reason, String remark) {
         this.empId = empId;
@@ -25,6 +26,7 @@ public class LeaveHistoryForm {
         this.categoryId = categoryId;
         this.reason = reason;
         this.remark = remark;
+        this.hireDate = hireDate;
     }
     public LeaveHistoryForm() {}
 }

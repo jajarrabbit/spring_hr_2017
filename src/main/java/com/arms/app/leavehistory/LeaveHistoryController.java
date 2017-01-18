@@ -10,12 +10,12 @@ import com.arms.domain.service.LeaveHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arms20170106 on 16/1/2560.
@@ -59,6 +59,14 @@ public class LeaveHistoryController {
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(LeaveHistoryForm leaveHistoryForm) {
         leaveHistoryService.save(leaveHistoryForm);
-        return "/leaveHistory/create";
+        return "redirect:/leaveHistory/list";
     }
+    @ResponseBody
+    @RequestMapping(value = "getHireDate")
+    Map<String, String> getHireDate(@RequestParam String empId) throws Exception {
+        Map<String, String> returnMap = new LinkedHashMap<String, String>();
+        returnMap = leaveHistoryService.getHireDate(empId);
+        return returnMap;
+    }
+
 }

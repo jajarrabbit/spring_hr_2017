@@ -4,8 +4,11 @@ import com.arms.domain.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     Employee findOneByFirstName(String firstName);
 
-
     @Query(value = "SELECT * FROM employees WHERE first_name = :xxx", nativeQuery = true)
     Employee findPerson(@Param("xxx") String firstName);
+
 }
