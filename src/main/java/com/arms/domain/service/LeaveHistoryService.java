@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,10 +28,15 @@ public class LeaveHistoryService {
     EmployeeRepository employeeRepository;
 
     public void save(LeaveHistoryForm leaveHistoryForm) {
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
         LeaveHistory leaveHistory = new LeaveHistory();
         leaveHistory.setEmpId(leaveHistoryForm.getEmpId());
-        leaveHistory.setPeriodFrom(leaveHistoryForm.getPeriodFrom());
-        leaveHistory.setPeriodUntil(leaveHistoryForm.getPeriodUntil());
+        try{
+            leaveHistory.setPeriodFrom(formatt.parse(leaveHistoryForm.getPeriodFrom()));
+        }catch(ParseException ex){}
+        try{
+            leaveHistory.setPeriodUntil(formatt.parse(leaveHistoryForm.getPeriodUntil()));
+        }catch(ParseException ex){}
         leaveHistory.setCategoryId(leaveHistoryForm.getCategoryId());
         leaveHistory.setReason(leaveHistoryForm.getReason());
         leaveHistory.setRemark(leaveHistoryForm.getRemark());
@@ -39,7 +45,7 @@ public class LeaveHistoryService {
     public HashMap<String, String> getHireDate(String empId){
         HashMap<String, String> returnMap = new HashMap<>();
         Employee hd = employeeRepository.findOne(Integer.parseInt(empId));
-        SimpleDateFormat formatter = new SimpleDateFormat(" yyyy/MM/dd ");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         if (hd != null){
             returnMap.put("hire_date", formatter.format(hd.getHireDate()).toString());
         }else{

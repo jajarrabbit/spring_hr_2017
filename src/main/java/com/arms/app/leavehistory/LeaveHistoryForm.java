@@ -2,7 +2,9 @@ package com.arms.app.leavehistory;
 
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -11,15 +13,21 @@ import java.util.Date;
  */
 @Data
 public class LeaveHistoryForm {
+    @NotNull
     private Integer empId;
-    private Date periodFrom;
-    private Date periodUntil;
+    @NotEmpty
+    private String periodFrom;
+    @NotEmpty
+    private String periodUntil;
+    @NotNull
     private Integer categoryId;
+    @NotEmpty
     private String reason;
+    @NotEmpty
     private String remark;
     private String hireDate;
 
-    public LeaveHistoryForm(Integer empId, Date periodFrom, Date periodUntil, Integer categoryId, String reason, String remark) {
+    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark) {
         this.empId = empId;
         this.periodFrom = periodFrom;
         this.periodUntil = periodUntil;

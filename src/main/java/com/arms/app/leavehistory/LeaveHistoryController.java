@@ -10,6 +10,8 @@ import com.arms.domain.service.LeaveHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,9 +59,20 @@ public class LeaveHistoryController {
         return modelAndView;
     }
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(LeaveHistoryForm leaveHistoryForm) {
-        leaveHistoryService.save(leaveHistoryForm);
-        return "redirect:/leaveHistory/list";
+    public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
+            List<Employee> employeeList = employeeRepository.findAll();
+            modelAndView.addObject("employeeList", employeeList);
+            modelAndView.addObject("leaveTypeList", leaveTypeList);
+            modelAndView.setViewName("/leaveHistory/create");
+            return modelAndView;
+        } else {
+            leaveHistoryService.save(leaveHistoryForm);
+            modelAndView.setViewName("redirect:/leaveHistory/list");
+            return modelAndView;
+        }
+
     }
     @ResponseBody
     @RequestMapping(value = "getHireDate")
