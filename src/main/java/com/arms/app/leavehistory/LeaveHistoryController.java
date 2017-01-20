@@ -38,15 +38,43 @@ public class LeaveHistoryController {
     LeaveTypeRepository leaveTypeRepository;
 
     @ModelAttribute
+    LeaveHistorySearch setLeaveHistorySearch() {return new LeaveHistorySearch();}
+
+    @ModelAttribute
     LeaveHistoryForm setLeaveHistoryForm() { return new LeaveHistoryForm(); }
 
-    @RequestMapping("list")
-    public ModelAndView home4(ModelAndView modelAndView) {
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ModelAndView blankList(ModelAndView modelAndView) {
         List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
-        modelAndView.addObject(leaveHistoryList);
-        modelAndView.setViewName("leaveHistory/list");
+        List<Employee> employeeList = employeeRepository.findAll();
+        modelAndView.addObject("employeeList", employeeList);
+        modelAndView.addObject("leaveHistoryList",leaveHistoryList);
+        modelAndView.addObject("leaveHistorySearch", new LeaveHistorySearch());
+        modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
+
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public  ModelAndView showList(ModelAndView modelAndView, LeaveHistorySearch leaveHistorySearch) {
+        List<Employee> employeeList = employeeRepository.findAll();
+        modelAndView.addObject("employeeList", employeeList);
+//        if (leaveHistorySearch.getEmpId()== null && leaveHistorySearch.getPeriodFrom() == null && leaveHistorySearch.getPeriodUntil() == null)  {
+//            List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
+//            modelAndView.addObject("leaveHistoryList", leaveHistoryList);
+//        }else if (leaveHistorySearch.getEmpId()== null && leaveHistorySearch.getPeriodFrom() != null && leaveHistorySearch.getPeriodUntil() != null)
+//        {
+//            List<LeaveHistory> leaveSearchList = leaveHistoryRepository.findAllByLeaveHistory(leaveHistorySearch.getEmpId(),leaveHistorySearch.getPeriodFrom(),leaveHistorySearch.getPeriodUntil());
+//            modelAndView.addObject("leaveHistoryList", leaveSearchList);
+//        }else {
+        List<LeaveHistory> leaveSearchList = leaveHistoryRepository.findAllByLeaveHistory(leaveHistorySearch.getEmpId(), leaveHistorySearch.getPeriodFrom(), leaveHistorySearch.getPeriodUntil());
+        modelAndView.addObject("leaveHistoryList", leaveSearchList);
+//    }
+        modelAndView.setViewName("/leaveHistory/list");
+        return modelAndView;
+    }
+
+
+
 
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {

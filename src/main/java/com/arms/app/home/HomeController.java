@@ -21,8 +21,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @Autowired
-    LeaveHistoryRepository leaveHistoryRepository;
+
 
     @RequestMapping("/")
     public ModelAndView home(ModelAndView modelAndView) {
