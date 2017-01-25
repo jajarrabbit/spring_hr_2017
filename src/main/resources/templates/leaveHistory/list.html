@@ -27,7 +27,6 @@
 		<div class="form-group row ">
 			<label for="empId" class="col-2">Name : </label>
 			<div class="col-4" >
-				<!--<input class="form-control" th:field="*{empId}" id="empId" type="text" name="empId">-->
 				<select  id="empId" th:field="*{empId}">
 					<option value=""></option>
 					<option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
@@ -41,7 +40,6 @@
 				<label for="periodFrom" class="col-2 col-form-label">Period From : </label>
 				<div class="col-4" >
 					<div class="input-group date ">
-						<!--<input class="form-control" type="text" id="periodFrom" th:field="*{periodFrom}"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
 						<input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 					</div>
@@ -52,16 +50,14 @@
 						<input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-
 				</div>
-
 			</div>
 		</form>
 	</header>
 	<div class="container">
 		<!-- Content -->
 		<section id="content">
-			<table>
+			<table id = "leaveHistoryTable" >
 				<thead class="fcWhite baseBgcolor fwNomal">
 				<tr>
 					<th th:text="'No'">No</th>
@@ -71,13 +67,14 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr th:each="leaveHistory,index : ${leaveHistoryList}">
+				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:attr="leaveId=${leaveHistory.leaveId}">
 					<td th:text="${index.count}">No</td>
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
 					<td th:text="${leaveHistory.leaveType.categoryName}">32</td>
 				</tr>
 				</tbody>
+
 			</table>
 		</section>
 	</div>
@@ -88,6 +85,14 @@
 			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
 	</span>
 </footer>
+<script type="text/javascript">
 
+    $('#leaveHistoryTable tbody tr').dblclick(function(e){
+        var index = $(this).attr('leaveId');
+        window.location.href = "/leaveHistory/detail/" + index;
+    });
+
+
+</script>
 </body>
 </html>

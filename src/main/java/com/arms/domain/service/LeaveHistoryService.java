@@ -1,17 +1,20 @@
 package com.arms.domain.service;
 
+import com.arms.app.leavehistory.LeaveHistoryDetailForm;
 import com.arms.app.leavehistory.LeaveHistoryForm;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.entity.LeaveHistory;
+import com.arms.domain.entity.LeaveType;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.repository.LeaveHistoryRepository;
+import com.arms.domain.repository.LeaveTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -20,6 +23,9 @@ import java.util.HashMap;
 @Service
 @Transactional
 public class LeaveHistoryService {
+
+    @Autowired
+    LeaveTypeRepository leaveTypeRepository;
 
     @Autowired
     LeaveHistoryRepository leaveHistoryRepository;
@@ -53,5 +59,24 @@ public class LeaveHistoryService {
         }
         return returnMap;
     }
+    public LeaveHistoryDetailForm getHistoryDetailByLeaveId(Integer leaveId) {
+        LeaveHistoryDetailForm view = new LeaveHistoryDetailForm();
+        LeaveHistory leave = leaveHistoryRepository.findOne(leaveId);
+//        view.setEmpId(leave.getEmpId());
+        Employee employee = employeeRepository.findOne(leave.getEmpId());
+        view.setFirstName(employee.getFirstName());
+        view.setLastName(employee.getLastName());
 
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        view.setHireDate(df.format(employee.getHireDate()));
+
+        view.setPeriodFrom(df.format(leave.getPeriodFrom()));
+        view.setPeriodUntil(df.format(leave.getPeriodUntil()));
+        LeaveType type = leaveTypeRepository.findOne(leave.getCategoryId());
+        view.setCategoryName(type.getCategoryName());
+        view.setReason(leave.getReason());
+        view.setRemark(leave.getRemark());
+
+        return view;
+    }
 }

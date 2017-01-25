@@ -7,15 +7,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-
     <js th:include="common/js :: js"></js>
-    <!--<noscript>-->
     <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
-
-
-        <css th:include="common/css :: css"></css>
-    <!--</noscript>-->
+    <css th:include="common/css :: css"></css>
 
 </head>
 <body>
@@ -37,7 +32,6 @@
             <div class="form-group row ">
                 <label for="empId" class="col-2">Name : </label>
                 <div class="col-4" >
-                    <!--<input class="form-control" th:field="*{empId}" id="empId" type="text" name="empId">-->
                     <select  id="empId" th:field="*{empId}">
                         <option value=""></option>
                         <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
@@ -56,30 +50,21 @@
                 <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
                 <div class="col-4" >
                     <div class="input-group date ">
-
-
-                        <!--<input class="form-control" type="text" id="periodFrom" th:field="*{periodFrom}"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                         <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 
                         </div>
                     <span class="help-block" th:if="${#fields.hasErrors('periodFrom')}" th:errors="*{periodFrom}">Date Start Error </span>
                 </div>
-
                 <label for="periodUntil" class="col-2 col-form-label">Until : </label>
-
                 <div class="col-4" >
                     <div class="input-group date">
-
                     <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                     <span class="help-block" th:if="${#fields.hasErrors('periodUntil')}" th:errors="*{periodUntil}">Date end Error </span>
                 </div>
-
             </div>
-
-
             <div class="form-group row">
                 <label for="categoryId" class="col-2 col-form-label">Category : </label>
                 <div class="col-5">
@@ -88,34 +73,25 @@
                     </select>
                     <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
                 </div>
-
             </div>
-
             <div class="form-group row">
                 <label for="reason" class="col-2 col-form-label">Reason : </label>
                 <div class="col-10">
                     <textarea class="form-control " rows="5" id="reason" th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;"></textarea>
                     <span class="help-block" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}">Reason Error </span>
                 </div>
-
             </div>
-
-
-
             <div class="form-group row">
                 <label for="remark" class="col-2 col-form-label">Remark : </label>
                 <div class="col-10">
                     <textarea class="form-control " rows="5" id="remark" th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;"></textarea>
                     <span class="help-block" th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">Remark Error </span>
                 </div>
-
             </div>
             <button type="submit">Submit!</button>
             </form>
         </section>
-
     </div>
-
 </section>
 
 <!-- Footer -->
@@ -138,7 +114,6 @@ $(document).ready(function() {
             }
         });
     });
-
 });
 </script>
 </body>

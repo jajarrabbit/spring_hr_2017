@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <!--<noscript>-->
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+    <!--</noscript>-->
+</head>
+<body>
+
+<header th:include="common/header :: header('Head')"></header>
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h2>Two</h2>
+        <p>Faucibus neque adipiscing mi lorem semper blandit</p>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <form  th:object="${leaveHistoryDetailForm}" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+                <div class="form-group row ">
+                    <label for="name" class="col-2">Name : </label>
+                    <div class="col-4" >
+                        <!--<input class="form-control" th:field="*{empId}" id="empId" type="text" name="empId">-->
+                        <input class="form-control"  id="name"  th:value="*{firstName} + ' ' + *{lastName}" rows="1" disabled />
+                    <label for="hireDate" class="col-2 ">HireDate : </label>
+                    <div class="col-4">
+                        <input  class="form-control" id="hireDate" th:field="*{hireDate}"    disabled/>
+                    </div>
+                </div>
+                <div class = "form-group row " >
+                    <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
+                    <div class="col-4" >
+                            <input type="text" class="form-control" id="periodFrom" th:field="*{periodFrom}" disabled/>
+                    </div>
+                    <label for="periodUntil" class="col-2 col-form-label">Until : </label>
+                    <div class="col-4" >
+                            <input class="form-control" type="text" id="periodUntil" th:field="*{periodUntil}"  disabled/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="categoryId" class="col-2 col-form-label">Category : </label>
+                    <div class="col-5">
+                        <input class="form-control" id="categoryId" th:field="*{categoryName}" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="reason" class="col-2 col-form-label">Reason : </label>
+                    <div class="col-10">
+                        <textarea class="form-control " rows="5" id="reason"  th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="remark" class="col-2 col-form-label">Remark : </label>
+                    <div class="col-10">
+                        <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;" disabled/>
+                    </div>
+                </div>
+                <button type="submit">Submit!</button>
+            </form>
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+
+	<span class="copyright">
+			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
+    </span>
+</footer>
+
+</body>
+</html>

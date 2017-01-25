@@ -43,6 +43,9 @@ public class LeaveHistoryController {
     @ModelAttribute
     LeaveHistoryForm setLeaveHistoryForm() { return new LeaveHistoryForm(); }
 
+    @ModelAttribute
+    LeaveHistoryDetailForm setLeaveHiistoryDetailForm(){ return new LeaveHistoryDetailForm();}
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
@@ -58,23 +61,21 @@ public class LeaveHistoryController {
     public  ModelAndView showList(ModelAndView modelAndView, LeaveHistorySearch leaveHistorySearch) {
         List<Employee> employeeList = employeeRepository.findAll();
         modelAndView.addObject("employeeList", employeeList);
-//        if (leaveHistorySearch.getEmpId()== null && leaveHistorySearch.getPeriodFrom() == null && leaveHistorySearch.getPeriodUntil() == null)  {
-//            List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
-//            modelAndView.addObject("leaveHistoryList", leaveHistoryList);
-//        }else if (leaveHistorySearch.getEmpId()== null && leaveHistorySearch.getPeriodFrom() != null && leaveHistorySearch.getPeriodUntil() != null)
-//        {
-//            List<LeaveHistory> leaveSearchList = leaveHistoryRepository.findAllByLeaveHistory(leaveHistorySearch.getEmpId(),leaveHistorySearch.getPeriodFrom(),leaveHistorySearch.getPeriodUntil());
-//            modelAndView.addObject("leaveHistoryList", leaveSearchList);
-//        }else {
         List<LeaveHistory> leaveSearchList = leaveHistoryRepository.findAllByLeaveHistory(leaveHistorySearch.getEmpId(), leaveHistorySearch.getPeriodFrom(), leaveHistorySearch.getPeriodUntil());
         modelAndView.addObject("leaveHistoryList", leaveSearchList);
-//    }
         modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
 
 
+    @RequestMapping(value = "detail/{leaveId}", method = RequestMethod.GET)
+    public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView) {
 
+        modelAndView.addObject("leaveHistoryDetailForm",  leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
+//        modelAndView.addObject("leaveHistory", leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
+        modelAndView.setViewName("leaveHistory/detail");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {

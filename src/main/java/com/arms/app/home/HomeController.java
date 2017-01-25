@@ -41,24 +41,6 @@ public class HomeController {
         return modelAndView;
     }
 
-//    @RequestMapping("/one")
-//    public ModelAndView home4(ModelAndView modelAndView) {
-//        List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
-//        modelAndView.addObject(leaveHistoryList);
-//        modelAndView.setViewName("one");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping("/two")
-//    public ModelAndView home5(ModelAndView modelAndView) {
-//        modelAndView.setViewName("two");
-//        return modelAndView;
-//    }
-//    @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
-//    public String createForm(ModelAndView modelAndView) {
-//        modelAndView.addObject("leaveHistoryForm", new LeaveHistoryForm());
-//        return "leaveHistory/create";
-//    }
 
     @RequestMapping("/three")
     public ModelAndView home6(ModelAndView modelAndView) {
