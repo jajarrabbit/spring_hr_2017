@@ -46,6 +46,9 @@ public class LeaveHistoryController {
     @ModelAttribute
     LeaveHistoryDetailForm setLeaveHiistoryDetailForm(){ return new LeaveHistoryDetailForm();}
 
+    @ModelAttribute
+    LeaveHistoryEditForm setLeaveHistoryEditForm(){return new LeaveHistoryEditForm();}
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
@@ -72,10 +75,32 @@ public class LeaveHistoryController {
     public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView) {
 
         modelAndView.addObject("leaveHistoryDetailForm",  leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
-//        modelAndView.addObject("leaveHistory", leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
         modelAndView.setViewName("leaveHistory/detail");
         return modelAndView;
     }
+
+    @RequestMapping(value = "edit/{leaveId}", method = RequestMethod.GET)
+    public ModelAndView showEdit(@PathVariable Integer leaveId, ModelAndView modelAndView) {
+        modelAndView.addObject("leaveHistoryEditForm",  leaveHistoryService.getHistoryEditByLeaveId(leaveId));
+        List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
+        modelAndView.addObject("leaveTypeList", leaveTypeList);
+        List<Employee> employeeList = employeeRepository.findAll();
+        modelAndView.addObject("employeeList", employeeList);
+        modelAndView.setViewName("leaveHistory/edit");
+        return modelAndView;
+    }
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public ModelAndView edit(ModelAndView modelAndView,LeaveHistoryEditForm leaveHistoryEditForm) {
+        leaveHistoryService.update(leaveHistoryEditForm);
+        modelAndView.setViewName("redirect:/leaveHistory/list");
+        return modelAndView;
+    }
+    @RequestMapping(value = "delete/{leaveId}", method = RequestMethod.GET)
+    public String delete(@PathVariable Integer leaveId) {
+        leaveHistoryService.delete(leaveId);
+        return "redirect:/leaveHistory/list";
+    }
+
 
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {

@@ -1,6 +1,7 @@
 package com.arms.domain.service;
 
 import com.arms.app.leavehistory.LeaveHistoryDetailForm;
+import com.arms.app.leavehistory.LeaveHistoryEditForm;
 import com.arms.app.leavehistory.LeaveHistoryForm;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.entity.LeaveHistory;
@@ -62,14 +63,11 @@ public class LeaveHistoryService {
     public LeaveHistoryDetailForm getHistoryDetailByLeaveId(Integer leaveId) {
         LeaveHistoryDetailForm view = new LeaveHistoryDetailForm();
         LeaveHistory leave = leaveHistoryRepository.findOne(leaveId);
-//        view.setEmpId(leave.getEmpId());
         Employee employee = employeeRepository.findOne(leave.getEmpId());
         view.setFirstName(employee.getFirstName());
         view.setLastName(employee.getLastName());
-
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         view.setHireDate(df.format(employee.getHireDate()));
-
         view.setPeriodFrom(df.format(leave.getPeriodFrom()));
         view.setPeriodUntil(df.format(leave.getPeriodUntil()));
         LeaveType type = leaveTypeRepository.findOne(leave.getCategoryId());
@@ -78,5 +76,44 @@ public class LeaveHistoryService {
         view.setRemark(leave.getRemark());
 
         return view;
+    }
+
+    public LeaveHistoryEditForm getHistoryEditByLeaveId(Integer leaveId) {
+        LeaveHistoryEditForm view = new LeaveHistoryEditForm();
+        LeaveHistory leave = leaveHistoryRepository.findOne(leaveId);
+        view.setLeaveId(leave.getLeaveId());
+        view.setEmpId(leave.getEmpId());
+        Employee employee = employeeRepository.findOne(leave.getEmpId());
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        view.setHireDate(df.format(employee.getHireDate()));
+        view.setPeriodFrom(df.format(leave.getPeriodFrom()));
+        view.setPeriodUntil(df.format(leave.getPeriodUntil()));
+        view.setCategoryId(leave.getCategoryId());
+        view.setReason(leave.getReason());
+        view.setRemark(leave.getRemark());
+
+        return view;
+    }
+
+    public void update(LeaveHistoryEditForm leaveHistoryEditForm) {
+
+        LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveHistoryEditForm.getLeaveId());
+//        leaveHistory.setLeaveId(leaveHistory.getLeaveId());
+        leaveHistory.setEmpId(leaveHistoryEditForm.getEmpId());
+        SimpleDateFormat formattt = new SimpleDateFormat("yyyy/MM/dd");
+        try{
+            leaveHistory.setPeriodFrom(formattt.parse(leaveHistoryEditForm.getPeriodFrom()));
+        }catch(ParseException ex){}
+        try{
+            leaveHistory.setPeriodUntil(formattt.parse(leaveHistoryEditForm.getPeriodUntil()));
+        }catch(ParseException ex){}
+        leaveHistory.setCategoryId(leaveHistoryEditForm.getCategoryId());
+        leaveHistory.setReason(leaveHistoryEditForm.getReason());
+        leaveHistory.setRemark(leaveHistoryEditForm.getRemark());
+        leaveHistoryRepository.save(leaveHistory);
+    }
+
+    public  void delete(Integer leaveId) {
+        leaveHistoryRepository.delete(leaveId);
     }
 }

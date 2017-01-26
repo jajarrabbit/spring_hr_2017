@@ -32,11 +32,13 @@
                     <div class="col-4" >
                         <!--<input class="form-control" th:field="*{empId}" id="empId" type="text" name="empId">-->
                         <input class="form-control"  id="name"  th:value="*{firstName} + ' ' + *{lastName}" rows="1" disabled />
-                    <label for="hireDate" class="col-2 ">HireDate : </label>
+                    </div>
+                        <label for="hireDate" class="col-2 ">HireDate : </label>
                     <div class="col-4">
                         <input  class="form-control" id="hireDate" th:field="*{hireDate}"    disabled/>
                     </div>
                 </div>
+
                 <div class = "form-group row " >
                     <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
                     <div class="col-4" >
@@ -65,7 +67,7 @@
                         <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;" disabled/>
                     </div>
                 </div>
-                <button type="submit">Submit!</button>
+
             </form>
         </section>
     </div>

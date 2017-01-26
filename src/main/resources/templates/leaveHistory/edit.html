@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <!--<noscript>-->
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+    <!--</noscript>-->
+</head>
+<body>
+
+<header th:include="common/header :: header('Head')"></header>
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h2>Two</h2>
+        <p>Faucibus neque adipiscing mi lorem semper blandit</p>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <form th:action="@{/leaveHistory/edit}" method="POST" th:object="${leaveHistoryEditForm}" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+
+                <input type="hidden" th:field="*{leaveId}" />
+                <div class="form-group row ">
+
+                    <label for="empId" class="col-2">Name : </label>
+                    <div class="col-4" >
+                            <select id="empId" th:field="*{empId}" >
+                                <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}"">AAA</option>
+                            </select>
+                    </div>
+                    <label for="hireDate" class="col-2 ">HireDate : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="hireDate" th:field="*{hireDate}"   type="text" disabled/>
+                    </div>
+                    </div>
+                    <div class = "form-group row " >
+                        <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
+                        <div class="col-4" >
+                            <div class="input-group date ">
+                                <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <label for="periodUntil" class="col-2 col-form-label">Until : </label>
+                        <div class="col-4" >
+                            <div class="input-group date">
+                                <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="categoryId" class="col-2 col-form-label">Category : </label>
+                        <div class="col-5">
+                            <select id="categoryId" th:field="*{categoryId}" >
+                                <!--<option th:value ="*{categoryId}" th:text="*{categoryName}"></option>-->
+                                <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="reason" class="col-2 col-form-label">Reason : </label>
+                        <div class="col-10">
+                            <textarea class="form-control " rows="5" id="reason"  th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="remark" class="col-2 col-form-label">Remark : </label>
+                        <div class="col-10">
+                            <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;" />
+                        </div>
+                    </div>
+                    <button type="submit">Submit!</button>
+            </form>
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+
+	<span class="copyright">
+			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
+    </span>
+</footer>
+
+</body>
+</html>
