@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+
+</head>
+<body>
+
+
+<header th:include="common/header :: header('Head')"></header>
+
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h3>Edit</h3>
+    </header>
+    <div class="container">
+
+        <!-- Content -->
+        <section id="content">
+            <form th:action="@{/employee/edit}" th:object="${employeeEditForm}" method="POST" class="form-horizontal form-width120 ml15" role="form" name="form1">
+                <input id="empId" th:field="*{empId}" type="hidden"/>
+                <div class="form-group row">
+                    <label for="firstName" class="col-2 ">First name : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="firstName" th:field="*{firstName}"   type="text" /> </div>
+                    <label for="lastName" class="col-2 ">Last name : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="lastName" th:field="*{lastName}"   type="text" /> </div>
+                </div>
+                <div class="form-group row">
+                    <label for="hireDate" class="col-2 col-form-label">Hire Date : </label>
+                    <div class="col-4" >
+                        <div class="input-group date "  >
+                            <input type="text" class="form-control-lg" id="hireDate" th:field="*{hireDate}"/>
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-2 ">E mail: </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="email" th:field="*{email}"   type="text" />
+                    </div>
+
+                    <label for="phone" class="col-2 ">Phone : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="phone" th:field="*{phone}"   type="text" />
+                    </div>
+                </div>
+                <button id="submit" type="submit" >Submit!</button>
+            </form>
+
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+
+	<span class="copyright">
+	Try for LEARN!!!  </span>
+</footer>
+<script type="text/javascript">
+
+<!--$(document).ready(function() {-->
+
+<!--$('#empId').change(function() {-->
+<!--var empId = $('#empId').val();-->
+<!--$.ajax({-->
+<!--type: 'get',-->
+<!--url: '/leaveHistory/getHireDate?empId=' + empId,-->
+<!--success: function(data) {-->
+<!--$('#hireDate').val(data.hire_date);-->
+<!--}-->
+<!--});-->
+<!--});-->
+<!--});-->
+</script>
+</body>
+</html>

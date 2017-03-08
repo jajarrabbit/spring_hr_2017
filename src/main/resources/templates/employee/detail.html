@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+</head>
+<body>
+<header th:include="common/header :: header('Head')"></header>
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h3>Detail</h3>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <form  th:object="${employeeDetailForm}"  class="form-horizontal form-width120 ml15" role="form" name="form1">
+                <div class="form-group row">
+                    <label for="firstName" class="col-2 ">First name : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="firstName" th:field="*{firstName}"   type="text" disabled/> </div>
+                    <label for="lastName" class="col-2 ">Last name : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="lastName" th:field="*{lastName}"   type="text" disabled/> </div>
+                </div>
+                <div class="form-group row">
+                    <label for="hireDate" class="col-2 col-form-label">Hire Date : </label>
+                    <div class="col-4" >
+                            <input type="text" class="form-control-lg" id="hireDate" th:field="*{hireDate}" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-2 ">E mail: </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="email" th:field="*{email}"   type="text" disabled/>
+                    </div>
+                    <label for="phone" class="col-2 ">Phone : </label>
+                    <div class="col-4">
+                        <input  class="form-control-lg" id="phone" th:field="*{phone}"   type="text" disabled/>
+                    </div>
+                </div>
+                <a th:href="'/employee/edit/' + ${empId}" class="btn-sm btn-info" role="button" >
+                    Edit<i class="glyphicon glyphicon-pencil"></i></a>
+            </form>
+        </section>
+    </div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+	<span class="copyright">
+	Try for LEARN!!! </span>
+</footer>
+<script type="text/javascript">
+</script>
+</body>
+</html>

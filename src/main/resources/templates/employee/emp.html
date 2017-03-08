@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title> </title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<js th:include="common/js :: js"></js>
+	<noscript>
+		<css th:include="common/css :: css"></css>
+		<link rel="stylesheet" type="text/css" href="/css/style-xlarge.css" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+	</noscript>
+</head>
+<body>
+<header th:include="common/header :: header('Head')"></header>
+
+<!-- Main -->
+<section id="main" class="wrapper style1">
+	<header class="major">
+		<h3>Employee List</h3>
+	</header>
+	<div class="container">
+		<!-- Content -->
+		<section id="content">
+			<table id = "employeeTable" >
+				<thead class="fcWhite baseBgcolor fwNomal">
+				<a href="/employee/create?form" class="btn-middle-lg btn-success" role ="button"><div class="btn -lg btn-success">
+					Create
+				</div>
+				</a>
+				<tr>
+					<th th:text="'No'">No</th>
+					<th th:text="'Name'">Name</th>
+					<th th:text="'Hire Date'">Hire Date</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="employeeList,index : ${employeeList}"  th:attr="empId=${employeeList.empId}">
+					<td th:text="${index.count}">No</td>
+					<td th:text="${employeeList.firstName} + ' ' + ${employeeList.lastName}">Thymus Thymi</td>
+					<td th:text="${#dates.format(employeeList.hireDate, 'yyyy/MM/dd')}">12</td>
+				</tr>
+				</tbody>
+			</table>
+		</section>
+	</div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+	<span class="copyright">
+	Try for LEARN!!!</span>
+</footer>
+<script type="text/javascript">
+ $('#employeeTable tbody tr').dblclick(function(e){
+        var index = $(this).attr('empId');
+        window.location.href = "/employee/detail/" + index;
+    });
+</script>
+</body>
+</html>

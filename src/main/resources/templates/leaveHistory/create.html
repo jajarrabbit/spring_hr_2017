@@ -21,8 +21,7 @@
 <!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
-        <h2>Two</h2>
-        <p>Faucibus neque adipiscing mi lorem semper blandit</p>
+        <h3>Create</h3>
     </header>
     <div class="container">
 
@@ -65,15 +64,25 @@
                     <span class="help-block" th:if="${#fields.hasErrors('periodUntil')}" th:errors="*{periodUntil}">Date end Error </span>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="categoryId" class="col-2 col-form-label">Category : </label>
-                <div class="col-5">
-                    <select id="categoryId" th:field="*{categoryId}">
-                        <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
-                    </select>
-                    <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
+                <div class="form-group row">
+                    <label for="categoryId" class="col-2 col-form-label">Category : </label>
+                    <div class="col-5">
+                        <select id="categoryId" th:field="*{categoryId}">
+                            <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
+                        </select>
+                        <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group row">
+                    <label  class="col-2 col-form-label">Type : </label>
+                    <div class="col-5">
+                        <select>
+                            <option value="0">Half Day</option>
+                            <option value="1">Full Day</option>
+                        </select>
+                        <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
+                    </div>
+                </div>
             <div class="form-group row">
                 <label for="reason" class="col-2 col-form-label">Reason : </label>
                 <div class="col-10">
@@ -93,17 +102,13 @@
         </section>
     </div>
 </section>
-
 <!-- Footer -->
 <footer id="footer">
-
 	<span class="copyright">
-			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
-    </span>
+	Try for LEARN!!! </span>
 </footer>
 <script type="text/javascript">
 $(document).ready(function() {
-
     $('#empId').change(function() {
         var empId = $('#empId').val();
         $.ajax({

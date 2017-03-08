@@ -10,15 +10,12 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class LeaveHistorySearch {
-
-
         private Integer empId;
         private String periodFrom;
         private String periodUntil;
         private Integer categoryId;
         private String reason;
         private String remark;
-
 
         public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark) {
             this.empId = empId;
@@ -27,7 +24,6 @@ public class LeaveHistorySearch {
             this.categoryId = categoryId;
             this.reason = reason;
             this.remark = remark;
-
         }
         public LeaveHistorySearch() {}
     }

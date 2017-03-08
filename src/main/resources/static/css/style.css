@@ -1230,12 +1230,12 @@
 
 	#banner {
 		background-attachment: scroll,						fixed;
-		background-color: #494d53;
+		background-color: #81F7F3;
 		background-image: url("images/overlay.png"), url("../images/banner.jpg");
 		background-position: top left,					center center;
 		background-repeat: repeat,						no-repeat;
 		background-size: auto,						cover;
-		color: #d1d2d4;
+		color: #81F7F3;
 		padding: 16em 0;
 		position: relative;
 		text-align: center;

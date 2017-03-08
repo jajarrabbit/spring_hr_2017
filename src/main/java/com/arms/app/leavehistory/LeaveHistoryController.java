@@ -1,11 +1,15 @@
 package com.arms.app.leavehistory;
 
+
+import com.arms.app.leaveBalance.LeaveBalanceAmount;
+import com.arms.app.leaveBalance.LeaveBalanceStart;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.entity.LeaveHistory;
 import com.arms.domain.entity.LeaveType;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.repository.LeaveHistoryRepository;
 import com.arms.domain.repository.LeaveTypeRepository;
+import com.arms.domain.service.LeaveBalanceService;
 import com.arms.domain.service.LeaveHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +53,8 @@ public class LeaveHistoryController {
     @ModelAttribute
     LeaveHistoryEditForm setLeaveHistoryEditForm(){return new LeaveHistoryEditForm();}
 
+    @Autowired
+    LeaveBalanceService leaveBalanceService;
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
@@ -59,7 +65,6 @@ public class LeaveHistoryController {
         modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
-
     @RequestMapping(value = "list", method = RequestMethod.POST)
     public  ModelAndView showList(ModelAndView modelAndView, LeaveHistorySearch leaveHistorySearch) {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -69,16 +74,13 @@ public class LeaveHistoryController {
         modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
-
-
-    @RequestMapping(value = "detail/{leaveId}", method = RequestMethod.GET)
-    public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView) {
-
+    @RequestMapping(value = "detail/{leaveId}/{empId}/{categoryId}", method = RequestMethod.GET)
+    public ModelAndView showDetail(@PathVariable Integer leaveId, @PathVariable Integer empId, @PathVariable Integer categoryId, ModelAndView modelAndView, LeaveBalanceAmount leaveBalanceAmount, LeaveBalanceStart leaveBalanceStart) {
         modelAndView.addObject("leaveHistoryDetailForm",  leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
+        leaveBalanceService.calculate(empId);
         modelAndView.setViewName("leaveHistory/detail");
         return modelAndView;
     }
-
     @RequestMapping(value = "edit/{leaveId}", method = RequestMethod.GET)
     public ModelAndView showEdit(@PathVariable Integer leaveId, ModelAndView modelAndView) {
         modelAndView.addObject("leaveHistoryEditForm",  leaveHistoryService.getHistoryEditByLeaveId(leaveId));
@@ -100,8 +102,6 @@ public class LeaveHistoryController {
         leaveHistoryService.delete(leaveId);
         return "redirect:/leaveHistory/list";
     }
-
-
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
@@ -126,7 +126,6 @@ public class LeaveHistoryController {
             modelAndView.setViewName("redirect:/leaveHistory/list");
             return modelAndView;
         }
-
     }
     @ResponseBody
     @RequestMapping(value = "getHireDate")
@@ -135,5 +134,4 @@ public class LeaveHistoryController {
         returnMap = leaveHistoryService.getHireDate(empId);
         return returnMap;
     }
-
 }

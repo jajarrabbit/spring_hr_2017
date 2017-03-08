@@ -5,9 +5,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-
-
 /**
  * Created by arms20170106 on 16/1/2560.
  */
@@ -27,7 +24,7 @@ public class LeaveHistoryForm {
     private String remark;
     private String hireDate;
 
-    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark) {
+    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark,String hireDate) {
         this.empId = empId;
         this.periodFrom = periodFrom;
         this.periodUntil = periodUntil;

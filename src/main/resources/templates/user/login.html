@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <noscript>
+        <css th:include="common/css :: css"></css>
+    </noscript>
+</head>
+<body>
+<header th:include="common/header :: header('Head')"></header>
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h3>LOG IN</h3>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <div id="login">
+                <h4>User Login</h4>
+                <div th:if="${loginFail}" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <span aria-hidden="true" th:text="${errorMsg}">&times;</span>
+                </div>
+                <div th:if="${loginSuccess}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form th:action="@{/user/login}" method="post" role="form" name="form1">
+                    <p id="username-field">
+                    <div class="form-group">
+                        <label>username</label>
+                        <div class="text-left w70 vaM col-3">
+                            <input type="text" class=" form-control" name="username" id= username>
+                        </div>
+                    </div>
+                    </p>
+                    <p id="password-field">
+                        <label >Password</label>
+                    <div class="text-left w70 vaM col-3">
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div style="color: #a94442" class="help-block" th:if="${param.error}"  >
+                        <span>Invalid username and password.</span>
+                    </div>
+                    </p>
+                    <p id="signin-field">
+                        <button class="btn btn-primary btn-lg" type="submit" id="signin" value="Sign in" >Sign in</button>  OR  <a href="/user/signUp" class="btn btn-lg btn-primary"> <span
+                            class="glyphicon glyphicon-user" aria-
+                            hidden="true"></span> Sign up
+                        now!
+                    </a>
+                    </p>
+                </form>
+            </div>
+        </section>
+</div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+	<span class="copyright">
+			Try for LEARN!!!</span>
+</footer>
+</body>
+</html>

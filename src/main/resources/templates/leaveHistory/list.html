@@ -14,18 +14,13 @@
 		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 	</noscript>
 </head>
-
 <body>
-
 <header th:include="common/header :: header('Head')"></header>
-
 <!-- Main -->
 <section id="main" class="wrapper style1">
 	<header class="major">
-		<h2>One</h2>
-
+		<h3>Leave History List</h3>
 		<form th:action="@{/leaveHistory/list}" th:object="${leaveHistorySearch}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
-
 		<div class="form-group row ">
 			<label for="empId" class="col-2">Name : </label>
 			<div class="col-3" >
@@ -54,9 +49,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
 		</form>
 	</header>
 	<div class="container">
@@ -72,7 +64,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId}">
+				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId},empId=${leaveHistory.empId},categoryId=${leaveHistory.categoryId}">
 					<td th:text="${index.count}">No</td>
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
@@ -82,31 +74,25 @@
 							Edit<i class="glyphicon glyphicon-pencil"></i></a>
 						<a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger" role="button" >
 							Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
-
 					</td>
 				</tr>
 				</tbody>
-
 			</table>
-
 		</section>
-
 	</div>
 </section>
 <!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
-			&copy; Copyright. All rights reserved. Template by <a href="http://www.html5webtemplates.co.uk">Responsive Web Templates</a>
-	</span>
+			Try for LEARN!!!</span>
 </footer>
 <script type="text/javascript">
-
     $('#leaveHistoryTable tbody tr').dblclick(function(e){
         var index = $(this).attr('leaveId');
-        window.location.href = "/leaveHistory/detail/" + index;
+               var index1 = $(this).attr('empId');
+                      var index2 = $(this).attr('categoryId');
+        window.location.href = "/leaveHistory/detail/" + index+"/"+ index1+"/"+ index2;
     });
-
-
 </script>
 </body>
 </html>

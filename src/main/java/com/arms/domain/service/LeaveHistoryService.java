@@ -24,13 +24,10 @@ import java.util.HashMap;
 @Service
 @Transactional
 public class LeaveHistoryService {
-
     @Autowired
     LeaveTypeRepository leaveTypeRepository;
-
     @Autowired
     LeaveHistoryRepository leaveHistoryRepository;
-
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -74,7 +71,6 @@ public class LeaveHistoryService {
         view.setCategoryName(type.getCategoryName());
         view.setReason(leave.getReason());
         view.setRemark(leave.getRemark());
-
         return view;
     }
 
@@ -84,6 +80,8 @@ public class LeaveHistoryService {
         view.setLeaveId(leave.getLeaveId());
         view.setEmpId(leave.getEmpId());
         Employee employee = employeeRepository.findOne(leave.getEmpId());
+        view.setFirstName(employee.getFirstName());
+        view.setLastName(employee.getLastName());
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         view.setHireDate(df.format(employee.getHireDate()));
         view.setPeriodFrom(df.format(leave.getPeriodFrom()));
@@ -91,14 +89,11 @@ public class LeaveHistoryService {
         view.setCategoryId(leave.getCategoryId());
         view.setReason(leave.getReason());
         view.setRemark(leave.getRemark());
-
         return view;
     }
 
     public void update(LeaveHistoryEditForm leaveHistoryEditForm) {
-
         LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveHistoryEditForm.getLeaveId());
-//        leaveHistory.setLeaveId(leaveHistory.getLeaveId());
         leaveHistory.setEmpId(leaveHistoryEditForm.getEmpId());
         SimpleDateFormat formattt = new SimpleDateFormat("yyyy/MM/dd");
         try{

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <noscript>
+        <css th:include="common/css :: css"></css>
+        <link rel="stylesheet" type="text/css" href="/css/style-xlarge.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    </noscript>
+</head>
+
+<body>
+
+<header th:include="common/header :: header('Head')"></header>
+
+<!-- Main -->
+<section id="main" class="wrapper style1">
+	<header class="major">
+		<h3>Add Annual leave</h3>
+		<form th:action="@{/holidayLeave/three}" th:object="${annualLeaveSearch}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+			<div class="form-group row ">
+				<label class="col-2">Year : </label>
+				<div class="col-3" >
+                    <input  class="form-control-lg" th:field="*{year}" type="text" />
+                  </div>
+				<div class="col-2">
+					<button class="btn-lg btn-success" type="submit">Search !    <i class="	glyphicon glyphicon-search"></i> </button>
+				</div>
+			</div>
+		</form>
+	</header>
+	<div class="container">
+		<!-- Content -->
+		<section id="content">
+			<table id = "leaveHistoryTable" >
+				<thead class="fcWhite baseBgcolor fwNomal">
+				<tr>
+					<th th:text="'No'">No</th>
+					<th th:text="'Name'">Name</th>
+					<th th:text="'Date'">Date</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="holidayLeave,index : ${holidayLeaveList}"  >
+					<td th:text="${index.count}">No</td>
+					<td th:text="${holidayLeave.holidayDetail}">Thymus Thymi</td>
+					<td th:text="${holidayLeave.holidayDate}">12</td>
+					<td>
+					<a th:href ="'/holidayLeave/add/'+ ${holidayLeave.holId}" class="btn-sm btn-info" role="button" >
+						Add</a>
+						<a th:href ="'/holidayLeave/delete/'+ ${holidayLeave.holId}" class="btn-sm btn-danger" role="button" >
+							Delete</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<a href="/holidayLeave/create?form" class="btn-middle-lg btn-success" role ="button">.   Create   .</a>
+		</section>
+	</div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+	<span class="copyright">
+			Try for LEARN!!!</span>
+</footer>
+</body>
+</html>
