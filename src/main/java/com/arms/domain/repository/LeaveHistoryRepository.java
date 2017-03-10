@@ -4,11 +4,14 @@ import com.arms.domain.entity.LeaveHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * Created by arms20170106 on 13/1/2560.
  */
+@Repository
 public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Integer> {
     @Query(value = " SELECT * FROM leave_history " +
             " WHERE " +
@@ -32,8 +35,8 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
 
     @Query(value = " SELECT COUNT(*) AS counts FROM leave_history " +
             " WHERE " +
-            " CASE WHEN emp_id = :empId AND year(period_from) BETWEEN year(now()) - 5  AND year(now()) " +
-            " END"
+            " emp_id = :empId AND year(period_from) BETWEEN year(now()) - 5 AND year( now() ) "
+
             , nativeQuery = true)
     Integer countByEmpId(@Param("empId") Integer empId);
 

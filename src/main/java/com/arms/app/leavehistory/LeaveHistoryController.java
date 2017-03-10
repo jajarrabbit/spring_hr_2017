@@ -7,6 +7,7 @@ import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.repository.LeaveHistoryRepository;
 import com.arms.domain.repository.LeaveTypeRepository;
 import com.arms.domain.service.ExportPdfService;
+import com.arms.domain.service.LeaveBalanceService;
 import com.arms.domain.service.LeaveHistoryService;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class LeaveHistoryController {
     @Autowired
     LeaveTypeRepository leaveTypeRepository;
 
+
     @ModelAttribute
     LeaveHistorySearch setLeaveHistorySearch() {return new LeaveHistorySearch();}
 
@@ -74,9 +76,10 @@ public class LeaveHistoryController {
         return modelAndView;
     }
     @RequestMapping(value = "detail/{leaveId}", method = RequestMethod.GET)
-    public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView) {
+    public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView, Integer empId) {
         modelAndView.addObject("leaveHistoryDetailForm",  leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
         modelAndView.setViewName("leaveHistory/detail");
+
         return modelAndView;
     }
     @RequestMapping(value = "edit/{leaveId}", method = RequestMethod.GET)

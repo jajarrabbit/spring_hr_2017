@@ -47,6 +47,7 @@ return new JasperPdfModelBean(jasperPath +"/leave/leaveCer.jrxml",beanList,filen
              Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
              bean.setFirstName(employee.getFirstName());
              bean.setLastName(employee.getLastName());
+
          }
          if (leaveHistory.getPeriodFrom() != null)
         {
@@ -60,6 +61,7 @@ return new JasperPdfModelBean(jasperPath +"/leave/leaveCer.jrxml",beanList,filen
         {
             LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getCategoryId());
             bean.setCategoryName(leaveType.getCategoryName());
+
         }
         if (leaveHistory.getReason() != null)
         {
@@ -69,5 +71,9 @@ return new JasperPdfModelBean(jasperPath +"/leave/leaveCer.jrxml",beanList,filen
         {
             bean.setRemark(leaveHistory.getRemark());
         }
+        beanList.add(bean);
     }
+
+
+
 }

@@ -14,6 +14,8 @@ public class PdfBean {
     private String lastName;
     private Date periodFrom;
     private Date periodUntil;
+    private Integer empId;
+    private Integer categoryId;
     private String categoryName;
     private String remark;
     private String reason;

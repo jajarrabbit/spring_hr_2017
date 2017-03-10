@@ -3,7 +3,9 @@ import com.arms.app.employee.EmployeeCreateForm;
 import com.arms.app.employee.EmployeeDetailForm;
 import com.arms.app.employee.EmployeeEditForm;
 import com.arms.app.leavehistory.LeaveHistoryEditForm;
+import com.arms.domain.entity.CalLeave;
 import com.arms.domain.entity.Employee;
+import com.arms.domain.repository.CalLeaveRepository;
 import com.arms.domain.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,14 @@ import java.text.SimpleDateFormat;
 public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    CalLeaveRepository calLeaveRepository;
 
     public void save(EmployeeCreateForm employeeCreateForm) {
         Employee employee = new Employee();
+
+        employeeCreateForm.getEmpId();
+
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
         employee.setFirstName(employeeCreateForm.getFirstName());
         employee.setLastName(employeeCreateForm.getLastName());
@@ -32,7 +39,21 @@ public class EmployeeService {
         try{
             employee.setHireDate(formatt.parse(employeeCreateForm.getHireDate()));
         }catch(ParseException ex){}
+
         employeeRepository.save(employee);
+
+
+        save1();
+
+    }
+
+    public  void  save1()
+    {
+        Integer employees = employeeRepository.maxByEmpId();
+        CalLeave calLeave = new CalLeave();
+        calLeave.setEmpId(employees);
+        calLeave.setBLeave(15);
+        calLeaveRepository.save(calLeave);
     }
 
     public EmployeeDetailForm getHistoryDetailByEmpId (Integer empId) {

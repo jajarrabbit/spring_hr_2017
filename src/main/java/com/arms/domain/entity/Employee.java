@@ -25,6 +25,7 @@ public class Employee {
         this.empId = empId;
     }
 
+
     private List<LeaveHistory> leaveHistoryList;
     @OneToMany(mappedBy = "employee")
     public List<LeaveHistory> getLeaveHistoryList(){
@@ -33,6 +34,8 @@ public class Employee {
     public void setLeaveHistory(List<LeaveHistory> leaveHistoryList){
         this.leaveHistoryList = leaveHistoryList;
     }
+
+
 
     private String firstName;
     @Basic

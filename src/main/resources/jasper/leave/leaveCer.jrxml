@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-07T17:58:17 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="leaveCer" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5017268e-da3d-4cd0-b7c6-aee88cd5d27a">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+<!-- 2017-03-10T10:40:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="leaveCer" pageWidth="595" pageHeight="842" columnWidth="540" leftMargin="27" rightMargin="28" topMargin="20" bottomMargin="20" isSummaryNewPage="true" whenResourceMissingType="Error" uuid="45e6a2bf-bdeb-4cf3-a357-23801ca7c193">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -12,6 +11,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="emptyDataSource" class="net.sf.jasperreports.engine.JRDataSource">
 		<defaultValueExpression><![CDATA["src/main/resources/jasper"]]></defaultValueExpression>
 	</parameter>
@@ -21,8 +21,8 @@
 	<field name="firstName" class="java.lang.String"/>
 	<field name="lastName" class="java.lang.String"/>
 	<field name="categoryName" class="java.lang.String"/>
-	<field name="periodFrom" class="java.lang.String"/>
-	<field name="periodUntil" class="java.lang.String"/>
+	<field name="periodFrom" class="java.util.Date"/>
+	<field name="periodUntil" class="java.util.Date"/>
 	<field name="remark" class="java.lang.String"/>
 	<field name="reason" class="java.lang.String"/>
 	<background>
@@ -117,7 +117,7 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{periodFrom}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("YYYY/MM/dd", Locale.getDefault()).format($F{periodFrom})]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="348" y="40" width="60" height="39" uuid="4abaaa0e-2d2a-4d55-b422-4fcec285b1e7"/>
@@ -139,7 +139,7 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{periodUntil}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("YYYY/MM/dd", Locale.getDefault()).format($F{periodUntil})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement positionType="FixRelativeToBottom" x="179" y="79" width="368" height="40" uuid="a76d7258-45bb-45af-bb29-59c36f55fcd5"/>
@@ -250,7 +250,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[Section Manager]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="0" y="40" width="99" height="69" uuid="177cc2de-eb0d-435d-8163-0b0a4e472b36"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -259,7 +259,6 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="299" y="0" width="98" height="40" uuid="06bcf35f-36b4-4cf1-abcc-dc37481f6da3"/>
@@ -272,7 +271,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[Project Manager ]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="99" y="40" width="100" height="69" uuid="8e133085-5611-4a4e-a3aa-3d41cca23346"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -281,9 +280,8 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="199" y="40" width="100" height="69" uuid="281c7ee4-0af2-453f-ac78-b21150daac90"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -294,9 +292,8 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 				</textField>
-				<textField pattern="">
+				<textField pattern="" isBlankWhenNull="true">
 					<reportElement x="299" y="40" width="98" height="69" uuid="0f415e50-bbc1-4f3a-83cb-1afe8ad3f16e"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -305,7 +302,6 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
@@ -323,7 +319,7 @@
 					</textElement>
 					<text><![CDATA[Admin]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="89" y="0" width="109" height="40" uuid="86ec9150-747f-413e-8814-43b3386d0be9"/>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -332,12 +328,8 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="105" splitType="Stretch"/>
-	</summary>
 </jasperReport>

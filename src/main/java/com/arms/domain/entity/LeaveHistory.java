@@ -39,6 +39,8 @@ public class LeaveHistory {
     public Employee getEmployee() {return employee;}
     public void setEmployee(Employee employee) {this.employee = employee;}
 
+
+
     private Date periodFrom;
     @Basic
     @Column(name = "period_from")

@@ -5,6 +5,7 @@ package com.arms.app.employee;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.service.EmployeeService;
+import com.arms.domain.service.LeaveBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,8 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    LeaveBalanceService leaveBalanceService;
     @ModelAttribute
     EmployeeDetailForm setEmployeeDetailForm(){return new EmployeeDetailForm();}
     @ModelAttribute
@@ -76,6 +79,7 @@ public class EmployeeController {
     public ModelAndView showDetail(@PathVariable Integer empId, ModelAndView modelAndView) {
         modelAndView.addObject("employeeDetailForm",  employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/detail");
+        leaveBalanceService.calculate(empId);
         return modelAndView;
     }
     @RequestMapping(value = "edit/{empId}", method = RequestMethod.GET)
