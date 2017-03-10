@@ -32,14 +32,6 @@ public class LeaveType {
     public void setLeaveHistory(List<LeaveHistory> leaveHistoryList){
         this.leaveHistoryList = leaveHistoryList;
     }
-//    private List<AmountStart> amountStartsList;
-//    @OneToMany(mappedBy = "leaveType")
-//    public List<AmountStart> getAmountStartList(){
-//        return amountStartsList;
-//    }
-//    public void setAmountStart(List<AmountStart> amountStartsList){
-//        this.amountStartsList = amountStartsList;
-//    }
 
     private String categoryName;
     @Basic

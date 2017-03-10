@@ -64,7 +64,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId},empId=${leaveHistory.empId},categoryId=${leaveHistory.categoryId}">
+				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId}">
 					<td th:text="${index.count}">No</td>
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
@@ -74,6 +74,8 @@
 							Edit<i class="glyphicon glyphicon-pencil"></i></a>
 						<a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger" role="button" >
 							Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
+						<a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-info" role="button" >
+							Download</a>
 					</td>
 				</tr>
 				</tbody>
@@ -89,9 +91,7 @@
 <script type="text/javascript">
     $('#leaveHistoryTable tbody tr').dblclick(function(e){
         var index = $(this).attr('leaveId');
-               var index1 = $(this).attr('empId');
-                      var index2 = $(this).attr('categoryId');
-        window.location.href = "/leaveHistory/detail/" + index+"/"+ index1+"/"+ index2;
+        window.location.href = "/leaveHistory/detail/" + index;
     });
 </script>
 </body>

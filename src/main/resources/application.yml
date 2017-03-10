@@ -29,3 +29,6 @@ spring.mail:
   properties.mail.smtp.auth: true
   properties.mail.smtp.ssl.enable: true
 
+leave:
+  jasper:
+    path: src/main/resources/jasper

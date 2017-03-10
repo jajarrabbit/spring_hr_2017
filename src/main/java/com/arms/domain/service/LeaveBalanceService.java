@@ -1,7 +1,5 @@
 package com.arms.domain.service;
 
-import com.arms.app.leaveBalance.LeaveBalanceAmount;
-import com.arms.app.leaveBalance.LeaveBalanceStart;
 import com.arms.domain.entity.*;
 import com.arms.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,54 +17,54 @@ public class LeaveBalanceService {
     EmployeeRepository employeeRepository;
     @Autowired
     LeaveBalanceRepository leaveBalanceRepository;;
-    @Autowired
-    CalLeaveRepository calLeaveRepository;
+//    @Autowired
+//    CalLeaveRepository calLeaveRepository;
     @Autowired
     LeaveHistoryRepository leaveHistoryRepository;
 
-    public void balance(LeaveBalanceAmount leaveBalanceAmount, Integer empId, LeaveBalanceStart leaveBalanceStart, Integer categoryId)
-{
-    LeaveBalanceAmount leaveAmount = new LeaveBalanceAmount();
-    Employee employee = employeeRepository.findOne(empId);
-    LeaveHistory leaveHistory = leaveHistoryRepository.findOne(empId);
-    CalLeave calLeave = new CalLeave();
-    AmountStart amountStart = leaveBalanceRepository.findOne(categoryId);
-    Calendar calendar = Calendar.getInstance();
-    Date a = employee.getHireDate() ;
-    long diff = calendar.getTime().getYear() - a.getYear();
-    int i;
-    if (amountStart.getCategoryId() ==1) {
-        int am = amountStart.getAmount();
-        for (i = 0; i <= diff; i++) {
-            if (diff <= 3) {
-                 am = am+1;
-            } else if ( diff > 3)
-            {
-                am = am + 3;
-                if(am >=15){
-                    am = 15;
-                }
-            }
-        }
-        calLeave.setBLeaveAmount(am);
-    }else  if (amountStart.getCategoryId() == 3){
-        int am = amountStart.getAmount();
-        for (i =0; i <= diff; i++){
-            if (diff <=3){
-                am = am +1;
-            } else if (diff > 3){
-                am = am + 3;
-                if (am >= 15){
-                    am = 15;
-                }
-            }
-        }
-        calLeave.setSiceLeaveAmount(am);
-    }
-    calLeave.setEmpId(leaveBalanceAmount.getEmpId());
-
-    calLeaveRepository.save(calLeave);
-}
+//    public void balance(LeaveBalanceAmount leaveBalanceAmount, Integer empId, LeaveBalanceStart leaveBalanceStart, Integer categoryId)
+//{
+//    LeaveBalanceAmount leaveAmount = new LeaveBalanceAmount();
+//    Employee employee = employeeRepository.findOne(empId);
+//    LeaveHistory leaveHistory = leaveHistoryRepository.findOne(empId);
+//    CalLeave calLeave = new CalLeave();
+//    AmountStart amountStart = leaveBalanceRepository.findOne(categoryId);
+//    Calendar calendar = Calendar.getInstance();
+//    Date a = employee.getHireDate() ;
+//    long diff = calendar.getTime().getYear() - a.getYear();
+//    int i;
+//    if (amountStart.getCategoryId() ==1) {
+//        int am = amountStart.getAmount();
+//        for (i = 0; i <= diff; i++) {
+//            if (diff <= 3) {
+//                 am = am+1;
+//            } else if ( diff > 3)
+//            {
+//                am = am + 3;
+//                if(am >=15){
+//                    am = 15;
+//                }
+//            }
+//        }
+//        calLeave.setBLeaveAmount(am);
+//    }else  if (amountStart.getCategoryId() == 3){
+//        int am = amountStart.getAmount();
+//        for (i =0; i <= diff; i++){
+//            if (diff <=3){
+//                am = am +1;
+//            } else if (diff > 3){
+//                am = am + 3;
+//                if (am >= 15){
+//                    am = 15;
+//                }
+//            }
+//        }
+//        calLeave.setSiceLeaveAmount(am);
+//    }
+//    calLeave.setEmpId(leaveBalanceAmount.getEmpId());
+//
+//    calLeaveRepository.save(calLeave);
+//}
     public void calculate(Integer empId) {
         Employee employee = employeeRepository.findOne(empId);
         Calendar calendar = Calendar.getInstance();

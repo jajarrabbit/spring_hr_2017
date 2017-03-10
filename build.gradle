@@ -23,6 +23,10 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	mavenCentral artifactUrls: [
+			'http://jasperreports.sourceforge.net/maven2',
+			'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+	]
 }
 
 
@@ -37,6 +41,6 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	runtime('mysql:mysql-connector-java')
 	compile('net.sourceforge.nekohtml:nekohtml')
-	compile('org.hibernate:hibernate-entitymanager:5.2.3.Final')
-	compile('org.hibernate:hibernate-core:4.1.4.Final')
+	compile('org.projectlombok:lombok')
+	compile 'net.sf.jasperreports:jasperreports:6.3.0'
 }

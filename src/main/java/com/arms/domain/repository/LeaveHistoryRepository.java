@@ -4,8 +4,6 @@ import com.arms.domain.entity.LeaveHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -32,11 +30,11 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
              , nativeQuery = true)
     List<LeaveHistory> findAllByLeaveHistory(@Param("empId") Integer empId,@Param("periodFrom") String periodFrom,@Param("periodUntil") String periodUntil);
 
-    @Query(value = " SELECT COUNT(*) " +
-            " FROM leave_history WHERE emp_id = :empId " +
-            " AND year(period_from) " +
-            " BETWEEN year(now()) - 5 " +
-            " AND year(now()) "
-            ,nativeQuery = true)
+    @Query(value = " SELECT COUNT(*) AS counts FROM leave_history " +
+            " WHERE " +
+            " CASE WHEN emp_id = :empId AND year(period_from) BETWEEN year(now()) - 5  AND year(now()) " +
+            " END"
+            , nativeQuery = true)
     Integer countByEmpId(@Param("empId") Integer empId);
+
 }
