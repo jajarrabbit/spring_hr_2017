@@ -20,14 +20,16 @@ public class EmployeeCreateForm {
     private String phone;
     @NotEmpty
     private String hireDate;
+    private Integer leaveLeft;
 
-    public  EmployeeCreateForm (Integer empId, String firstName, String lastName, String email, String phone, String hireDate){
+    public  EmployeeCreateForm (Integer empId, String firstName, String lastName, String email, String phone, String hireDate, Integer leaveLeft){
         this.empId =empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.hireDate = hireDate;
+        this.leaveLeft = leaveLeft;
     }
     public  EmployeeCreateForm() {}
 }

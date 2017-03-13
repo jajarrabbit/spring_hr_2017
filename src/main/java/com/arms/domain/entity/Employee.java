@@ -87,5 +87,11 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
+//    private  Integer leaveLeft;
+//    @Basic
+//    @Column(name = "leave_left")
+//    public Integer getLeaveLeft(){return leaveLeft;}
+//    public void setLeaveLeft() {this.leaveLeft = leaveLeft;}
+
 }
 

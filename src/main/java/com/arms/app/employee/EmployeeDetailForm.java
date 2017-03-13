@@ -14,14 +14,16 @@ public class EmployeeDetailForm {
     private String email;
     private String phone;
     private String hireDate;
+    private Integer leaveLeft;
 
-    public  EmployeeDetailForm (Integer empId, String firstName, String lastName, String email, String phone, String hireDate){
+    public  EmployeeDetailForm (Integer leaveLeft,Integer empId, String firstName, String lastName, String email, String phone, String hireDate){
         this.empId =empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.hireDate = hireDate;
+        this.leaveLeft = leaveLeft;
     }
     public  EmployeeDetailForm() {}
 }

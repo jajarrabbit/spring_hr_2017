@@ -3,7 +3,9 @@ package com.arms.app.employee;
 
 
 import com.arms.domain.entity.Employee;
+import com.arms.domain.entity.EmployeeShowList;
 import com.arms.domain.repository.EmployeeRepository;
+import com.arms.domain.repository.EmployeeShowListRepository;
 import com.arms.domain.service.EmployeeService;
 import com.arms.domain.service.LeaveBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class EmployeeController {
     EmployeeRepository employeeRepository;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    EmployeeShowListRepository employeeShowListRepository;
 
     @Autowired
     LeaveBalanceService leaveBalanceService;
@@ -41,14 +45,14 @@ public class EmployeeController {
 
     @RequestMapping(value = "emp", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
-        List<Employee> employeeList = employeeRepository.findAll();
+        List<EmployeeShowList> employeeList = employeeShowListRepository.findAllLeaveLeft();
         modelAndView.addObject("employeeList", employeeList);
         modelAndView.setViewName("/employee/emp");
         return modelAndView;
     }
     @RequestMapping(value = "emp", method = RequestMethod.POST)
     public ModelAndView showList(ModelAndView modelAndView){
-        List<Employee> employeeList = employeeRepository.findAll();
+        List<EmployeeShowList> employeeList = employeeShowListRepository.findAllLeaveLeft();
         modelAndView.addObject("employeeList", employeeList);
         modelAndView.setViewName("/employee/emp");
         return modelAndView;

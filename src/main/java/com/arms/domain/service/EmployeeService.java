@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 /**
@@ -52,7 +53,7 @@ public class EmployeeService {
         Integer employees = employeeRepository.maxByEmpId();
         CalLeave calLeave = new CalLeave();
         calLeave.setEmpId(employees);
-        calLeave.setBLeave(15);
+        calLeave.setBLeave(3);
         calLeaveRepository.save(calLeave);
     }
 
@@ -79,6 +80,7 @@ public class EmployeeService {
         }catch(ParseException ex){}
         employee.setEmail(employeeEditForm.getEmail());
         employee.setPhone(employeeEditForm.getPhone());
+
         employeeRepository.save(employee);
     }
 }
