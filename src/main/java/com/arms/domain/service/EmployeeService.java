@@ -2,7 +2,6 @@ package com.arms.domain.service;
 import com.arms.app.employee.EmployeeCreateForm;
 import com.arms.app.employee.EmployeeDetailForm;
 import com.arms.app.employee.EmployeeEditForm;
-import com.arms.app.leavehistory.LeaveHistoryEditForm;
 import com.arms.domain.entity.CalLeave;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.repository.CalLeaveRepository;
@@ -14,8 +13,6 @@ import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-
 
 /**
  * Created by arms20170106 on 30/1/2560.
@@ -29,9 +26,7 @@ public class EmployeeService {
 
     public void save(EmployeeCreateForm employeeCreateForm) {
         Employee employee = new Employee();
-
         employeeCreateForm.getEmpId();
-
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
         employee.setFirstName(employeeCreateForm.getFirstName());
         employee.setLastName(employeeCreateForm.getLastName());
@@ -40,10 +35,7 @@ public class EmployeeService {
         try{
             employee.setHireDate(formatt.parse(employeeCreateForm.getHireDate()));
         }catch(ParseException ex){}
-
         employeeRepository.save(employee);
-
-
         save1();
 
     }
@@ -53,7 +45,7 @@ public class EmployeeService {
         Integer employees = employeeRepository.maxByEmpId();
         CalLeave calLeave = new CalLeave();
         calLeave.setEmpId(employees);
-        calLeave.setBLeave(3);
+        calLeave.setBLeave(15);
         calLeaveRepository.save(calLeave);
     }
 
@@ -80,7 +72,6 @@ public class EmployeeService {
         }catch(ParseException ex){}
         employee.setEmail(employeeEditForm.getEmail());
         employee.setPhone(employeeEditForm.getPhone());
-
         employeeRepository.save(employee);
     }
 }

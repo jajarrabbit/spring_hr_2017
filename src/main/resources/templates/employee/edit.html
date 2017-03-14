@@ -11,20 +11,15 @@
     <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
-
 </head>
 <body>
-
-
 <header th:include="common/header :: header('Head')"></header>
-
 <!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
         <h3>Edit</h3>
     </header>
     <div class="container">
-
         <!-- Content -->
         <section id="content">
             <form th:action="@{/employee/edit}" th:object="${employeeEditForm}" method="POST" class="form-horizontal form-width120 ml15" role="form" name="form1">

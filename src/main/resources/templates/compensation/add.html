@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+</head>
+<body>
+<header th:include="common/header :: header('Head')"></header>
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h3>Create</h3>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <form th:action="@{/compensation/add}"  th:object="${compCreateForm}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1">
+                <div class="form-group row ">
+                    <label for="empId" class="col-2">Name : </label>
+                    <div class="col-4" >
+                        <select  id="empId" th:field="*{empId}">
+                            <option value=""></option>
+                            <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="compAddDate" class="col-2 col-form-label"> Date : </label>
+                    <div class="col-4" >
+                        <div class="input-group date ">
+                            <input type="text" class="form-control-lg" id="compAddDate" th:field="*{compAddDate}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                          </div>
+                </div>
+                    <div class="form-group row">
+                        <label for="compDetail" class="col-2 col-form-label">Detail : </label>
+                        <div class="col-10">
+                            <textarea class="form-control " rows="5" id="compDetail" th:field="*{compDetail}" style="margin: 0px; width: 671px; height: 180px;"></textarea>
+                            <span class="help-block" th:if="${#fields.hasErrors('compDetail')}" th:errors="*{compDetail}">Remark Error </span>
+                        </div>
+                    </div>
+                <button type="submit">Submit!</button>
+            </form>
+        </section>
+    </div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+	<span class="copyright">
+	Try for LEARN!!!</span>
+</footer>
+</body>
+</html>

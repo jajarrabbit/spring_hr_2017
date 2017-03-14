@@ -3,9 +3,8 @@ package com.arms.app.employee;
 
 
 import com.arms.domain.entity.Employee;
-import com.arms.domain.entity.EmployeeShowList;
 import com.arms.domain.repository.EmployeeRepository;
-import com.arms.domain.repository.EmployeeShowListRepository;
+import com.arms.domain.service.CompService;
 import com.arms.domain.service.EmployeeService;
 import com.arms.domain.service.LeaveBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
     @Autowired
-    EmployeeShowListRepository employeeShowListRepository;
+    CompService compService;
 
     @Autowired
     LeaveBalanceService leaveBalanceService;
@@ -45,16 +44,18 @@ public class EmployeeController {
 
     @RequestMapping(value = "emp", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
-        List<EmployeeShowList> employeeList = employeeShowListRepository.findAllLeaveLeft();
+        List<Employee> employeeList = employeeRepository.findAll();
         modelAndView.addObject("employeeList", employeeList);
         modelAndView.setViewName("/employee/emp");
+        compService.expired();
         return modelAndView;
     }
     @RequestMapping(value = "emp", method = RequestMethod.POST)
     public ModelAndView showList(ModelAndView modelAndView){
-        List<EmployeeShowList> employeeList = employeeShowListRepository.findAllLeaveLeft();
+        List<Employee> employeeList = employeeRepository.findAll();
         modelAndView.addObject("employeeList", employeeList);
         modelAndView.setViewName("/employee/emp");
+        compService.expired();
         return modelAndView;
     }
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
@@ -83,7 +84,10 @@ public class EmployeeController {
     public ModelAndView showDetail(@PathVariable Integer empId, ModelAndView modelAndView) {
         modelAndView.addObject("employeeDetailForm",  employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/detail");
-        leaveBalanceService.calculate(empId);
+        Integer employ = leaveBalanceService.calculate(empId);
+        Integer compen = compService.compCal(empId);
+        modelAndView.addObject("employ",employ);
+        modelAndView.addObject("compen",compen);
         return modelAndView;
     }
     @RequestMapping(value = "edit/{empId}", method = RequestMethod.GET)

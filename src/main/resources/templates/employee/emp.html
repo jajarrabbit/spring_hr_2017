@@ -34,15 +34,13 @@
 					<th th:text="'No'">No</th>
 					<th th:text="'Name'">Name</th>
 					<th th:text="'Hire Date'">Hire Date</th>
-					<th th:text="'Business Leave Left'">Business Leave Left</th>
 				</tr>
 				</thead>
 				<tbody>
-				<tr th:each="employeeList,index : ${employeeList}"  th:attr="empId=${employeeList.empId}">
+				<tr th:each="employeeList,index : ${employeeList} ",  th:attr="empId=${employeeList.empId}">
 					<td th:text="${index.count}">No</td>
 					<td th:text="${employeeList.firstName} + ' ' + ${employeeList.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(employeeList.hireDate, 'yyyy/MM/dd')}">12</td>
-					<td th:text="${employeeList.leaveLeft}">12</td>
 				</tr>
 				</tbody>
 			</table>

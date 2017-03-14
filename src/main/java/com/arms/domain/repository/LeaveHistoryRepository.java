@@ -33,10 +33,9 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
              , nativeQuery = true)
     List<LeaveHistory> findAllByLeaveHistory(@Param("empId") Integer empId,@Param("periodFrom") String periodFrom,@Param("periodUntil") String periodUntil);
 
-    @Query(value = " SELECT COUNT(*) AS counts FROM leave_history " +
+    @Query(value = " SELECT SUM( datediff( date( period_until ) , date( period_from ) ) + 1 ) AS counts FROM leave_history " +
             " WHERE " +
-            " emp_id = :empId AND year(period_from) BETWEEN year(now()) - 5 AND year( now() ) "
-
+            " emp_id = :empId AND category_id = 1 AND year( period_from )  BETWEEN year( now() ) - 5 AND year( now() ) "
             , nativeQuery = true)
     Integer countByEmpId(@Param("empId") Integer empId);
 

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CalLeaveRepository extends JpaRepository <CalLeave,Integer> {
-    CalLeave findOneByEmpId(Integer empId);
+
 }

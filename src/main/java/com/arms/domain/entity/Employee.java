@@ -1,6 +1,9 @@
 package com.arms.domain.entity;
 
+
+
 import lombok.Data;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "employees")
 public class Employee {
+
 
     private Integer empId;
     @Id
@@ -92,6 +96,11 @@ public class Employee {
 //    @Column(name = "leave_left")
 //    public Integer getLeaveLeft(){return leaveLeft;}
 //    public void setLeaveLeft() {this.leaveLeft = leaveLeft;}
+    public Integer leaveSummary()
+    {
+
+        return 1;
+    }
 
 }
 

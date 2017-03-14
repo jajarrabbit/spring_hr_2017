@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by arms20170106 on 2/3/2560.
@@ -17,13 +16,9 @@ import java.util.Date;
 public class LeaveBalanceService {
     @Autowired
     EmployeeRepository employeeRepository;
-
-//    @Autowired
-//    CalLeaveRepository calLeaveRepository;
     @Autowired
     LeaveHistoryRepository leaveHistoryRepository;
-    @Autowired
-    CalLeaveRepository calLeaveRepository;
+
 
 //    public void balance(LeaveBalanceAmount leaveBalanceAmount, Integer empId, LeaveBalanceStart leaveBalanceStart, Integer categoryId)
 //{
@@ -68,58 +63,58 @@ public class LeaveBalanceService {
 //
 //    calLeaveRepository.save(calLeave);
 //}
-    public void calculate(Integer empId) {
-
+    public int calculate(Integer empId) {
         Employee employee = employeeRepository.findOne(empId);
-        Calendar calendar = Calendar.getInstance();
-        Date a = employee.getHireDate();
-        Integer diff = calendar.getTime().getYear() - a.getYear();
+        Calendar todayCalendar = Calendar.getInstance();
+        Calendar hireDateCalendar = Calendar.getInstance();
+        hireDateCalendar.setTime(employee.getHireDate());
+        Integer diff =   todayCalendar.get(Calendar.YEAR)-hireDateCalendar.get(Calendar.YEAR);;
         int all = 0;
-        if (diff > 6) {
-            int amount = 15;
-            Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
-            all = amount - countLeave;
-
+        Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+        if (countLeave == null)
+        {
+            countLeave = 0;
         }
-        if (diff <= 5) {
+        if (diff >= 6) {
+            int amount = 15;
+            all = amount - countLeave;
+        }else
+        if (diff <= 5)
+        {
+
 
             if (diff == 5) {
                 int amount = 12;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+
                 all = amount - countLeave;
             }
             if (diff == 4) {
                 int amount = 9;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+
                 all = amount - countLeave;
             }
             if (diff == 3) {
                 int amount = 6;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+
                 all = amount - countLeave;
             }
             if (diff == 2) {
                 int amount = 5;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+
                 all = amount - countLeave;
             }
             if (diff == 1) {
                 int amount = 4;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
+
                 all = amount - countLeave;
             }
             if (diff == 0) {
                 int amount = 3;
-                Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
                 all = amount - countLeave;
             }
         }
         //***save status for all
-        CalLeave calLeave = calLeaveRepository.findOneByEmpId(empId);
-
-            calLeave.setBLeave(all);
-            calLeaveRepository.save(calLeave);
-
+        return  all;
     }
 
 
