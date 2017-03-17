@@ -1,5 +1,6 @@
 package com.arms.app.leavehistory;
 
+import com.arms.domain.entity.CompDetail;
 import com.arms.domain.entity.Employee;
 import com.arms.domain.entity.LeaveHistory;
 import com.arms.domain.entity.LeaveType;
@@ -7,7 +8,6 @@ import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.repository.LeaveHistoryRepository;
 import com.arms.domain.repository.LeaveTypeRepository;
 import com.arms.domain.service.ExportPdfService;
-import com.arms.domain.service.LeaveBalanceService;
 import com.arms.domain.service.LeaveHistoryService;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +114,7 @@ public class LeaveHistoryController {
         return modelAndView;
     }
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult) {
+    public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult, Integer empId, CompDetail compDetail) {
         if (bindingResult.hasErrors()) {
             List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
             List<Employee> employeeList = employeeRepository.findAll();

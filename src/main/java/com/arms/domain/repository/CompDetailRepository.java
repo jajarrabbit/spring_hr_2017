@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 /**
  * Created by arms20170106 on 13/3/2560.
  */
@@ -18,6 +20,9 @@ public interface CompDetailRepository extends JpaRepository<CompDetail,Integer> 
             , nativeQuery = true)
     Integer countCompByEmpId(@Param("empId") Integer empId);
 
-
-
+    @Query(value = " SELECT MIN( comp_add_date ) FROM comp_detail " +
+            " WHERE " +
+            " emp_id = :empId AND is_used = 0 "
+            , nativeQuery = true)
+    Date CompByEmpId(@Param("empId") Integer empId);
 }

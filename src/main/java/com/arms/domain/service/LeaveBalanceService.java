@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.math.BigInteger;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by arms20170106 on 2/3/2560.
@@ -20,104 +22,100 @@ public class LeaveBalanceService {
     LeaveHistoryRepository leaveHistoryRepository;
 
 
-//    public void balance(LeaveBalanceAmount leaveBalanceAmount, Integer empId, LeaveBalanceStart leaveBalanceStart, Integer categoryId)
-//{
-//    LeaveBalanceAmount leaveAmount = new LeaveBalanceAmount();
-//    Employee employee = employeeRepository.findOne(empId);
-//    LeaveHistory leaveHistory = leaveHistoryRepository.findOne(empId);
-//    CalLeave calLeave = new CalLeave();
-//    AmountStart amountStart = leaveBalanceRepository.findOne(categoryId);
-//    Calendar calendar = Calendar.getInstance();
-//    Date a = employee.getHireDate() ;
-//    long diff = calendar.getTime().getYear() - a.getYear();
-//    int i;
-//    if (amountStart.getCategoryId() ==1) {
-//        int am = amountStart.getAmount();
-//        for (i = 0; i <= diff; i++) {
-//            if (diff <= 3) {
-//                 am = am+1;
-//            } else if ( diff > 3)
-//            {
-//                am = am + 3;
-//                if(am >=15){
-//                    am = 15;
-//                }
-//            }
-//        }
-//        calLeave.setBLeaveAmount(am);
-//    }else  if (amountStart.getCategoryId() == 3){
-//        int am = amountStart.getAmount();
-//        for (i =0; i <= diff; i++){
-//            if (diff <=3){
-//                am = am +1;
-//            } else if (diff > 3){
-//                am = am + 3;
-//                if (am >= 15){
-//                    am = 15;
-//                }
-//            }
-//        }
-//        calLeave.setSickLeaveAmount(am);
-//    }
-//    calLeave.setEmpId(leaveBalanceAmount.getEmpId());
-//
-//    calLeaveRepository.save(calLeave);
-//}
-    public int calculate(Integer empId) {
+    public Double calculate(Integer empId) {
         Employee employee = employeeRepository.findOne(empId);
+        Double annualCount = leaveHistoryRepository.countAnnualLeave(empId);
+        if (annualCount == null) {
+            annualCount = 0.0;
+        }
         Calendar todayCalendar = Calendar.getInstance();
         Calendar hireDateCalendar = Calendar.getInstance();
         hireDateCalendar.setTime(employee.getHireDate());
-        Integer diff =   todayCalendar.get(Calendar.YEAR)-hireDateCalendar.get(Calendar.YEAR);;
-        int all = 0;
-        Integer countLeave = leaveHistoryRepository.countByEmpId(empId);
-        if (countLeave == null)
-        {
-            countLeave = 0;
+        Integer diff = todayCalendar.get(Calendar.YEAR) - hireDateCalendar.get(Calendar.YEAR);
+        ;
+        Double all = 0.0;
+        Double countLeave = leaveHistoryRepository.countByEmpId(empId);
+        if (countLeave == null) {
+            countLeave = 0.0;
         }
         if (diff >= 6) {
-            int amount = 15;
+            Double amount = 15.0;
             all = amount - countLeave;
-        }else
-        if (diff <= 5)
-        {
-
-
+        } else if (diff <= 5) {
             if (diff == 5) {
-                int amount = 12;
+                Double amount = 12.0;
 
                 all = amount - countLeave;
             }
             if (diff == 4) {
-                int amount = 9;
+                Double amount = 9.0;
 
                 all = amount - countLeave;
             }
             if (diff == 3) {
-                int amount = 6;
+                Double amount = 6.0;
 
                 all = amount - countLeave;
             }
             if (diff == 2) {
-                int amount = 5;
+                Double amount = 5.0;
 
                 all = amount - countLeave;
             }
             if (diff == 1) {
-                int amount = 4;
+                Double amount = 4.0;
 
                 all = amount - countLeave;
             }
             if (diff == 0) {
-                int amount = 3;
+                Double amount = 3.0;
                 all = amount - countLeave;
             }
         }
         //***save status for all
-        return  all;
+
+        Double weekday = cal2(empId);
+        return all + annualCount +weekday;
     }
 
+    public Double cal2(Integer empId) {
+        List<LeaveHistory> leaveHistory = leaveHistoryRepository.findAllByEmpId(empId);
+        Calendar fromCalendar = Calendar.getInstance();
+        Double leave = 0.0;
+
+        for (LeaveHistory leaves : leaveHistory) {
+            BigInteger diff = leaveHistoryRepository.diffDate(leaves.getLeaveId());
+
+            int i;
+            int df = diff.intValue();
+
+            fromCalendar.setTime(leaves.getPeriodFrom());
+            Integer dayweek = fromCalendar.get(Calendar.DAY_OF_WEEK);
 
 
 
+                if (dayweek == 1) {
+                    leave++;
+                }
+                if (dayweek == 7) {
+                    leave++;
+                }
+                for (i = 0; i < df; i++) {
+                    dayweek++;
+                    if (dayweek == 8) {
+                        dayweek = 1;
+                    }
+                    if (dayweek == 1) {
+                        leave++;
+                    }
+                    if (dayweek == 7) {
+                        leave++;
+                    }
+
+                }
+
+
+        }
+        return leave;
+    }
 }

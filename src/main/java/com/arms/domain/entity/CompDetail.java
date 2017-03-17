@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by arms20170106 on 13/3/2560.
@@ -38,6 +39,15 @@ public class CompDetail {
     @Column(name = "emp_id")
     public Integer getEmpId(){return empId;}
     public void setEmpId(Integer empId){this.empId = empId;}
+
+//    private List<LeaveHistory> leaveHistoryLists;
+//    @OneToMany(mappedBy = "compDetail")
+//    public List<LeaveHistory> getLeaveHistoryLists(){
+//        return leaveHistoryLists;
+//    }
+//    public void setLeaveHistorys(List<LeaveHistory> leaveHistoryList){
+//        this.leaveHistoryLists = leaveHistoryList;
+//    }
 
     private Integer isUsed;
     @Basic

@@ -84,7 +84,7 @@ public class EmployeeController {
     public ModelAndView showDetail(@PathVariable Integer empId, ModelAndView modelAndView) {
         modelAndView.addObject("employeeDetailForm",  employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/detail");
-        Integer employ = leaveBalanceService.calculate(empId);
+        Double employ = leaveBalanceService.calculate(empId);
         Integer compen = compService.compCal(empId);
         modelAndView.addObject("employ",employ);
         modelAndView.addObject("compen",compen);

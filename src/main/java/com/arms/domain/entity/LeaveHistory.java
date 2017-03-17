@@ -38,6 +38,12 @@ public class LeaveHistory {
     @JoinColumn(name = "emp_id" , insertable = false , updatable = false)
     public Employee getEmployee() {return employee;}
     public void setEmployee(Employee employee) {this.employee = employee;}
+//
+//    private CompDetail compDetail;
+//    @ManyToOne
+//    @JoinColumn(name = "emp_id" , insertable = false , updatable = false)
+//    public CompDetail getCompDetail() {return compDetail;}
+//    public void setCompDetail(CompDetail compDetail) {this.compDetail = compDetail;}
 
 
 
@@ -96,5 +102,17 @@ public class LeaveHistory {
     public void setRemark(String remark){
         this.remark = remark;
     }
+
+    private Integer fullday;
+    @Basic
+    @Column(name = "fullday")
+    public Integer getFullday(){return fullday;}
+    public void setFullday(Integer fullday){this.fullday = fullday;}
+
+    private Integer halfday;
+    @Basic
+    @Column(name = "halfday")
+    public Integer getHalfday(){return halfday;}
+    public void setHalfday(Integer halfday){this.halfday = halfday;}
 
 }

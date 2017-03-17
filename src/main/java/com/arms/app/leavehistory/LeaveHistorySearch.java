@@ -16,14 +16,18 @@ public class LeaveHistorySearch {
         private Integer categoryId;
         private String reason;
         private String remark;
+        private Integer fullday;
+        private Integer halfday;
 
-        public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark) {
+        public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark,Integer fullday,Integer halfday) {
             this.empId = empId;
             this.periodFrom = periodFrom;
             this.periodUntil = periodUntil;
             this.categoryId = categoryId;
             this.reason = reason;
             this.remark = remark;
+            this.fullday = fullday;
+            this.halfday = halfday;
         }
         public LeaveHistorySearch() {}
     }
