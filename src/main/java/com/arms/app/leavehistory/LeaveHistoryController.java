@@ -99,8 +99,10 @@ public class LeaveHistoryController {
         return modelAndView;
     }
     @RequestMapping(value = "delete/{leaveId}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer leaveId) {
+    public String delete(@PathVariable Integer leaveId) throws Exception {
+        leaveHistoryService.cancelMail(leaveId);
         leaveHistoryService.delete(leaveId);
+
         return "redirect:/leaveHistory/list";
     }
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
@@ -114,7 +116,7 @@ public class LeaveHistoryController {
         return modelAndView;
     }
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult, Integer empId, CompDetail compDetail) {
+    public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult, Integer empId, CompDetail compDetail) throws Exception {
         if (bindingResult.hasErrors()) {
             List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
             List<Employee> employeeList = employeeRepository.findAll();
@@ -124,6 +126,7 @@ public class LeaveHistoryController {
             return modelAndView;
         } else {
             leaveHistoryService.save(leaveHistoryForm);
+            leaveHistoryService.sendMail();
             modelAndView.setViewName("redirect:/leaveHistory/list");
             return modelAndView;
         }

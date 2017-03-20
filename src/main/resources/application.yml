@@ -32,3 +32,4 @@ spring.mail:
 leave:
   jasper:
     path: src/main/resources/jasper
+

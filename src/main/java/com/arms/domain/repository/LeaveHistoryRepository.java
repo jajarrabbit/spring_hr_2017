@@ -56,4 +56,8 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
             " WHERE emp_Id = :empId AND category_id = 1 "
             ,nativeQuery = true)
     List<LeaveHistory> findAllByEmpId(@Param("empId")Integer empId);
+
+    @Query(value = "SELECT MAX(leave_id) FROM leave_history "
+             , nativeQuery = true)
+    Integer findMaxLeaveId();
 }

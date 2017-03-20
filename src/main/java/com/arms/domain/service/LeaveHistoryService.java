@@ -11,9 +11,17 @@ import com.arms.domain.repository.CompDetailRepository;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.repository.LeaveHistoryRepository;
 import com.arms.domain.repository.LeaveTypeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.activation.DataHandler;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.internet.*;
+import javax.mail.util.ByteArrayDataSource;
 import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,6 +44,8 @@ public class LeaveHistoryService {
     EmployeeRepository employeeRepository;
     @Autowired
     CompDetailRepository compDetailRepository;
+    @Autowired
+    private JavaMailSender mailSender;
 
 
     public void save(LeaveHistoryForm leaveHistoryForm) {
@@ -144,5 +154,129 @@ public class LeaveHistoryService {
 
     public  void delete(Integer leaveId) {
         leaveHistoryRepository.delete(leaveId);
+    }
+
+    public void  sendMail() throws Exception {
+        Integer leaveHistorys = leaveHistoryRepository.findMaxLeaveId();
+        LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveHistorys);
+        Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
+        LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getCategoryId());
+        String from = "sorntadza@gmail.com";
+        String to = employee.getEmail();
+        MimeMessage message = mailSender.createMimeMessage();
+        message.addHeaderLine("method=REQUEST");
+        message.addHeaderLine("charset=UTF-8");
+        message.addHeaderLine("component=VEVENT");
+        message.setFrom(new InternetAddress(from));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        message.setSubject("Leave Detail");
+        StringBuffer sb = new StringBuffer();
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
+        StringBuffer buffer = sb.append("BEGIN:VCALENDAR\n" +
+                "PRODID:-//Zoho Corporation//Zoho Calendar-US//EN\n" +
+                "VERSION:2.0\n" +
+                "X-WR-CALNAME:Leave Day\n"+
+                "X-WR-TIMEZONE:Asia/Bangkok\n" +
+                "CALSCALE:GREGORIAN\n" +
+                "METHOD:REQUEST\n" +
+                "BEGIN:VEVENT\n" +
+                "SUMMARY:" + leaveType.getCategoryName()+"\n"+
+                "DESCRIPTION:" + leaveHistory.getReason()  + "\n" +
+                "DTSTART:"+ df.format(leaveHistory.getPeriodFrom()) +"T000000Z\n"+
+                "DTEND:" + df.format(leaveHistory.getPeriodUntil()) +"T010000Z\n"+
+                "LOCATION:\n" +
+                "CLASS:PUBLIC\n" +
+                "IMPORTANT:0\n" +
+                "STATUS: 0\n"+
+                "COMMENT:\n" +
+                "UID:"+leaveHistory.getEmpId()+leaveHistory.getPeriodFrom()+"holidayleave@arms-thai.com\n" +
+                "TRANSP:OPAQUE\n" +
+                "PRIORITY:5\n" +
+                "CREATED:20170222T064459Z\n" +
+                "LAST-MODIFIED:20170222T064459Z\n" +
+                "DTSTAMP:20170228T064509Z\n" +
+                "ORGANIZER;CN=Sorntad:MAILTO:benz.s@arms-thai.com\n" +
+                "ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:MAILTO:"+employee.getEmail()+"\n" +
+                "ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED:MAILTO:benz.s@arms-thai.com\n"+
+                "END:VEVENT\n" +
+                "END:VCALENDAR"
+        );
+        // Create the message part
+        BodyPart messageBodyPart = new MimeBodyPart();
+        // Fill the message
+        messageBodyPart.setHeader("Content-Class", "urn:content-  classes:calendarmessage");
+        messageBodyPart.setHeader("Content-ID", "calendar_message");
+        messageBodyPart.setDataHandler(new DataHandler(
+                new ByteArrayDataSource(buffer.toString(), "text/calendar")));// very important
+        // Create a Multipart
+        Multipart multipart = new MimeMultipart();
+        // Add part one
+        multipart.addBodyPart(messageBodyPart);
+        // Put parts in message
+        message.setContent(multipart);
+        // send message
+        mailSender.send(message);
+    }
+
+    public void cancelMail(Integer leaveId) throws  Exception
+    {
+        LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveId);
+        Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
+        LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getEmpId());
+        String from = "sorntadza@gmail.com";
+        String to = employee.getEmail();
+        MimeMessage message = mailSender.createMimeMessage();
+        message.addHeaderLine("method=CANCEL");
+        message.addHeaderLine("charset=UTF-8");
+        message.addHeaderLine("component=VEVENT");
+        message.setFrom(new InternetAddress(from));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        message.setSubject("Leave Detail");
+        StringBuffer sb = new StringBuffer();
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
+        StringBuffer buffer = sb.append("BEGIN:VCALENDAR\n" +
+                "PRODID:-//Zoho Corporation//Zoho Calendar-US//EN\n" +
+                "VERSION:2.0\n" +
+                "X-WR-CALNAME:Leave Day\n"+
+                "X-WR-TIMEZONE:Asia/Bangkok\n" +
+                "CALSCALE:GREGORIAN\n" +
+                "METHOD:CANCEL\n" +
+                "BEGIN:VEVENT\n" +
+                "SUMMARY:" + leaveType.getCategoryName()+"\n"+
+                "DESCRIPTION:" + leaveHistory.getReason()  + "\n" +
+                "DTSTART:"+ df.format(leaveHistory.getPeriodFrom()) +"T000000Z\n"+
+                "DTEND:" + df.format(leaveHistory.getPeriodUntil()) +"T010000Z\n"+
+                "LOCATION:\n" +
+                "CLASS:PUBLIC\n" +
+                "IMPORTANT:0\n" +
+                "STATUS: 0\n"+
+                "COMMENT:\n" +
+                "UID:"+leaveHistory.getEmpId()+leaveHistory.getPeriodFrom()+"holidayleave@arms-thai.com\n" +
+                "TRANSP:OPAQUE\n" +
+                "PRIORITY:5\n" +
+                "CREATED:20170222T064459Z\n" +
+                "LAST-MODIFIED:20170222T064459Z\n" +
+                "DTSTAMP:20170228T064509Z\n" +
+                "ORGANIZER;CN=Sorntad:MAILTO:benz.s@arms-thai.com\n" +
+                "ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;RSVP=TRUE;PARTSTAT=DECLINED:MAILTO:"+employee.getEmail()+"\n" +
+                "END:VEVENT\n" +
+                "END:VCALENDAR"
+        );
+        // Create the message part
+        BodyPart messageBodyPart = new MimeBodyPart();
+        // Fill the message
+        messageBodyPart.setHeader("Content-Class", "urn:content-  classes:calendarmessage");
+        messageBodyPart.setHeader("Content-ID", "calendar_message");
+        messageBodyPart.setDataHandler(new DataHandler(
+                new ByteArrayDataSource(buffer.toString(), "text/calendar")));// very important
+        // Create a Multipart
+        Multipart multipart = new MimeMultipart();
+        // Add part one
+        multipart.addBodyPart(messageBodyPart);
+        // Put parts in message
+        message.setContent(multipart);
+        // send message
+        mailSender.send(message);
+
     }
 }
