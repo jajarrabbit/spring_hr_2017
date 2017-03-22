@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,19 +28,21 @@ public class AnnualLeaveController {
     EventService eventService;
     @Autowired
     HolidayLeaveService holidayLeaveService;
+    @ModelAttribute
+    AnnualLeaveSearch setAnualLeaveSerach(){return new AnnualLeaveSearch();}
     private org.slf4j.Logger logger = LoggerFactory.getLogger(AnnualLeaveController.class);
 
-    @RequestMapping(value = "three", method = RequestMethod.GET)
+    @RequestMapping(value = "leaveList", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         modelAndView.addObject("annualLeaveSearch", new AnnualLeaveSearch());
-        modelAndView.setViewName("holidayLeave/three");
+        modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
-    @RequestMapping(value = "three", method = RequestMethod.POST)
+    @RequestMapping(value = "leaveList", method = RequestMethod.POST)
     public  ModelAndView showList(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
         modelAndView.addObject("holidayLeaveList", holidayLeaveList);
-        modelAndView.setViewName("holidayLeave/three");
+        modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
     @RequestMapping(value = "add/{holId}", method = RequestMethod.GET)
@@ -50,9 +53,29 @@ public class AnnualLeaveController {
         {
             logger.info("Error sending mail: "+ e.getMessage());
         }
-        modelAndView.setViewName("holidayLeave/three");
+        modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+    @RequestMapping(value = "addAll", method = RequestMethod.GET)
+    public  ModelAndView showList1(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
+        List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
+        modelAndView.addObject("holidayLeaveList", holidayLeaveList);
+        modelAndView.setViewName("holidayLeave/leaveList");
+        return modelAndView;
+    }
+    @RequestMapping(value = "addAll", method = RequestMethod.POST)
+    public ModelAndView addAll(AnnualLeaveSearch annualLeaveSearch, ModelAndView modelAndView) {
+        List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
+        try{
+            eventService.sendAllMail(annualLeaveSearch);
+        }catch (Exception e)
+        {
+            logger.info("Error sending mail: "+ e.getMessage());
+        }
+        modelAndView.setViewName("holidayLeave/leaveList");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAll();
@@ -70,13 +93,13 @@ public class AnnualLeaveController {
             return modelAndView;
         } else {
             holidayLeaveService.save(holidayLeaveCreateForm);
-            modelAndView.setViewName("redirect:/holidayLeave/three");
+            modelAndView.setViewName("redirect:/holidayLeave/leaveList");
             return modelAndView;
         }
     }
     @RequestMapping(value = "delete/{holId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer holId) {
         holidayLeaveService.delete(holId);
-        return "redirect:/holidayLeave/three";
+        return "redirect:/holidayLeave/leaveList";
     }
 }

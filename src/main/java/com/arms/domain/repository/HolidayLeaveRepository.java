@@ -14,6 +14,10 @@ import java.util.List;
 @Repository
 public interface HolidayLeaveRepository extends JpaRepository<HolidayLeave, Integer> {
 
-    @Query(value = "SELECT * FROM holiday_leave WHERE YEAR(holiday_date) = :year", nativeQuery = true)
+    @Query(value = "SELECT * FROM holiday_leave WHERE YEAR(holiday_date) = :year"
+            , nativeQuery = true)
     List<HolidayLeave> findAllByHolidayDate(@Param("year") String year);
+
+
+
 }

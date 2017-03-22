@@ -16,13 +16,13 @@
 <!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
-        <h3>LOG IN</h3>
+        <h2>LOG IN</h2>
     </header>
     <div class="container">
         <!-- Content -->
         <section id="content">
-            <div id="login">
-                <h4>User Login</h4>
+            <div id="login" align="middle">
+
                 <div th:if="${loginFail}" class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <span aria-hidden="true" th:text="${errorMsg}">&times;</span>
@@ -33,12 +33,13 @@
                 <form th:action="@{/user/login}" method="post" role="form" name="form1">
                     <p id="username-field">
                     <div class="form-group">
-                        <label>username</label>
+                        <label>Username</label>
                         <div class="text-left w70 vaM col-3">
                             <input type="text" class=" form-control" name="username" id= username>
                         </div>
                     </div>
                     </p>
+                    <div class="form-group">
                     <p id="password-field">
                         <label >Password</label>
                     <div class="text-left w70 vaM col-3">
@@ -48,11 +49,12 @@
                         <span>Invalid username and password.</span>
                     </div>
                     </p>
+                    </div>
                     <p id="signin-field">
-                        <button class="btn btn-primary btn-lg" type="submit" id="signin" value="Sign in" >Sign in</button>  OR  <a href="/user/signUp" class="btn btn-lg btn-primary"> <span
+                        <button class="btn btn-primary btn-lg" type="submit" id="signin" value="Sign in " >Sign in here!
+                            <span  class="glyphicon glyphicon-globe" aria-hidden="true"></span></button> If not have username press this button >>> <a href="/user/signUp" class="btn btn-lg btn-primary"> <span
                             class="glyphicon glyphicon-user" aria-
-                            hidden="true"></span> Sign up
-                        now!
+                            hidden="true"></span> Sign up now!
                     </a>
                     </p>
                 </form>
@@ -63,7 +65,7 @@
 <!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
-			Try for LEARN!!!</span>
+			 ||||||||||| Leave Management System ||||||||||| </span>
 </footer>
 </body>
 </html>

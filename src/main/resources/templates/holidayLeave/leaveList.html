@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -16,29 +15,32 @@
 </head>
 
 <body>
-
 <header th:include="common/header :: header('Head')"></header>
-
 <!-- Main -->
 <section id="main" class="wrapper style1">
 	<header class="major">
-		<h3>Add Annual leave</h3>
-		<form th:action="@{/holidayLeave/three}" th:object="${annualLeaveSearch}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+		<h2>Add Annual leave</h2>
+		<P>Input year for search  annual leave on that year </P>
+
+		<form th:action="@{/holidayLeave/leaveList}"  method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
 			<div class="form-group row ">
-				<label class="col-2">Year : </label>
-				<div class="col-3" >
-                    <input  class="form-control-lg" th:field="*{year}" type="text" />
+				<label class="col-4">Year : </label>
+				<div class="col-4" >
+                    <input  class="form-control-lg" th:field="${annualLeaveSearch.year}" type="text" />
                   </div>
-				<div class="col-2">
-					<button class="btn-lg btn-success" type="submit">Search !    <i class="	glyphicon glyphicon-search"></i> </button>
+				<div class="col-4	">
+					<button class="btn-lg btn-success" type="submit">Search !  <i class="	glyphicon glyphicon-search"></i> </button>
 				</div>
+
 			</div>
 		</form>
+
 	</header>
 	<div class="container">
 		<!-- Content -->
 		<section id="content">
 			<table id = "leaveHistoryTable" >
+
 				<thead class="fcWhite baseBgcolor fwNomal">
 				<tr>
 					<th th:text="'No'">No</th>
@@ -60,14 +62,27 @@
 				</tr>
 				</tbody>
 			</table>
-			<a href="/holidayLeave/create?form" class="btn-middle-lg btn-success" role ="button">.   Create   .</a>
+			<div align="middle">
+			<a href="/holidayLeave/create?form" class="btn-middle-lg btn-success " role ="button" > <div class="btn -lg btn-success ">  Create </div>  </a>
+			</div>
+			<br>
 		</section>
+		<form th:action="@{/holidayLeave/addAll}"  method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+			<div class="form-group row ">
+				<div class="col-4" >
+					<input  class="form-control-lg" th:field="*{annualLeaveSearch.year}" type="hidden" />
+				</div>
+				<div class="col-8	">
+					<button class="btn-lg btn-success" type="submit">Add All Annual Leave To Calendar !  <i class="	glyphicon glyphicon-plus"></i> </button>
+				</div>
+			</div>
+		</form>
 	</div>
 </section>
 <!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
-			Try for LEARN!!!</span>
+			 ||||||||||| Leave Management System ||||||||||| </span>
 </footer>
 </body>
 </html>

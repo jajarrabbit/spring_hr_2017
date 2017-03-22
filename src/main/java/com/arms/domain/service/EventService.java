@@ -38,6 +38,9 @@ public class EventService {
 //        HolidayLeave holidayLeaves = holidayLeaveRepository.findOne(holidayLeave.getHolId());
 //           sendCalendar(holidayLeaves);
 //       }
+
+
+
     public void sendCalendar(Integer holId) throws Exception {
         HolidayLeave annualLeave =  holidayLeaveRepository.findOne(holId);
         String from = "sorntadza@gmail.com";

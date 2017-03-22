@@ -13,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by arms20170106 on 6/3/2560.
@@ -34,7 +38,7 @@ public class ExportPdfService {
         LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveId);
         List<PdfBean> beanList = new ArrayList<>();
         setAllLeaveHistory(leaveHistory, beanList, leaveId);
-String filename = "leave notification";
+String filename = "leave notification" + new java.text.SimpleDateFormat("YYYY/MM/dd ", Locale.getDefault()).format(new java.util.Date());
 
 return new JasperPdfModelBean(jasperPath +"/leave/leaveCer.jrxml",beanList,filename,jasperPath);
     }

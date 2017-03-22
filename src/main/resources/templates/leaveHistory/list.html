@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
 <head>
 	<title> </title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -19,7 +19,7 @@
 <!-- Main -->
 <section id="main" class="wrapper style1">
 	<header class="major">
-		<h3>Leave History List</h3>
+		<h2>Leave History List</h2>
 		<form th:action="@{/leaveHistory/list}" th:object="${leaveHistorySearch}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
 		<div class="form-group row ">
 			<label for="empId" class="col-2">Name : </label>
@@ -29,7 +29,7 @@
 					<option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
 				</select>
 			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<button class="btn-lg btn-success" type="submit">Search !    <i class="	glyphicon glyphicon-search"></i> </button>
 			</div>
 		</div>
@@ -51,7 +51,8 @@
 			</div>
 		</form>
 	</header>
-	<div class="container">
+	<div class="container" style="width: 1440px;">
+
 		<!-- Content -->
 		<section id="content">
 			<table id = "leaveHistoryTable" >
@@ -65,17 +66,19 @@
 				</thead>
 				<tbody>
 				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId}">
+
 					<td th:text="${index.count}">No</td>
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
 					<td th:text="${leaveHistory.leaveType.categoryName}">32</td>
-				    <td>
+
+					<td colspan="4"    >
 						<a th:href="'/leaveHistory/edit/' + ${leaveHistory.leaveId}" class="btn-sm btn-info" role="button" >
 							Edit<i class="glyphicon glyphicon-pencil"></i></a>
 						<a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger" role="button" >
 							Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
-						<a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-info" role="button" >
-							Download</a>
+						<a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-warning" role="button" >
+							Download<i class="glyphicon glyphicon-save-file"></i></a>
 					</td>
 				</tr>
 				</tbody>
@@ -86,7 +89,7 @@
 <!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
-			Try for LEARN!!!</span>
+			 ||||||||||| Leave Management System ||||||||||| </span>
 </footer>
 <script type="text/javascript">
     $('#leaveHistoryTable tbody tr').dblclick(function(e){

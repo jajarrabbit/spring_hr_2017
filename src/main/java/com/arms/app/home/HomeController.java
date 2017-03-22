@@ -27,9 +27,9 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping("/three")
+    @RequestMapping("/leaveList")
     public ModelAndView home6(ModelAndView modelAndView) {
-        modelAndView.setViewName("three");
+        modelAndView.setViewName("leaveList");
         return modelAndView;
     }
 }
