@@ -3,6 +3,8 @@ package com.arms.app.employee;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
+
 /**
  * Created by arms20170106 on 30/1/2560.
  */

@@ -94,6 +94,46 @@ public class LeaveHistoryService {
         }
         return returnMap;
     }
+    public int checkDateInput(LeaveHistoryForm leaveHistoryForm)
+    {
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
+
+        try{
+            Date date1 = formatt.parse(leaveHistoryForm.getPeriodFrom());
+            Date date2 = formatt.parse(leaveHistoryForm.getPeriodUntil());
+            if(date1.before(date2))
+            {
+                return  1;
+            }
+            if(date1.after(date2))
+            {
+                return 2;
+            }
+
+        }catch(ParseException ex){}
+
+        return 0;
+    }
+    public int checkAmount(LeaveHistoryForm leaveHistoryForm)
+    {
+        SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
+
+        try{
+            Date date1 = formatt.parse(leaveHistoryForm.getPeriodFrom());
+            Date date2 = formatt.parse(leaveHistoryForm.getPeriodUntil());
+            long diff = date2.getTime()-date1.getTime();
+            long diffDays = ((diff / (24 * 60 * 60 * 1000))+1);
+            long day = leaveHistoryForm.getFullday()+leaveHistoryForm.getHalfday();
+
+            if(diffDays != day)
+            {
+                return 1;
+            }
+
+        }catch(ParseException ex){}
+
+        return 0;
+    }
     public LeaveHistoryDetailForm getHistoryDetailByLeaveId(Integer leaveId) {
         LeaveHistoryDetailForm view = new LeaveHistoryDetailForm();
         LeaveHistory leave = leaveHistoryRepository.findOne(leaveId);
@@ -161,7 +201,7 @@ public class LeaveHistoryService {
         LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveHistorys);
         Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
         LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getCategoryId());
-        String from = "sorntadza@gmail.com";
+        String from = "benz.s@arms-thai.com";
         String to = employee.getEmail();
         MimeMessage message = mailSender.createMimeMessage();
         message.addHeaderLine("method=REQUEST");

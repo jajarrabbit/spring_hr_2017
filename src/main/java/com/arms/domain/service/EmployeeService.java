@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by arms20170106 on 30/1/2560.
@@ -61,7 +62,39 @@ public class EmployeeService {
         view.setPhone(emp.getPhone());
         return view;
     }
+   public int checkName(EmployeeCreateForm employeeCreateForm) {
+       List<Employee> employeeList = employeeRepository.findAll();
 
+       for (Employee empList : employeeList) {
+           if (employeeCreateForm.getFirstName().equals(empList.getFirstName()))
+           {
+               return 1;
+           }
+       }
+       return 0;
+   }
+   public int checkLastname(EmployeeCreateForm employeeCreateForm){
+        List<Employee> employeeList = employeeRepository.findAll();
+        for(Employee empList : employeeList)
+        {
+            if (employeeCreateForm.getLastName().equals(empList.getLastName()))
+            {
+                return 2;
+            }
+        }
+        return 0;
+   }
+   public int checkEmail(EmployeeCreateForm employeeCreateForm){
+       List<Employee> employeeList =employeeRepository.findAll();
+       for (Employee empList : employeeList)
+       {
+           if(employeeCreateForm.getEmail().equals(empList.getEmail()))
+           {
+               return 1;
+           }
+       }
+       return 0;
+   }
     public void update(EmployeeEditForm employeeEditForm) {
         Employee employee = employeeRepository.findOne(employeeEditForm.getEmpId());
         employee.setFirstName(employeeEditForm.getFirstName());

@@ -39,11 +39,9 @@ public class EventService {
 //           sendCalendar(holidayLeaves);
 //       }
 
-
-
     public void sendCalendar(Integer holId) throws Exception {
         HolidayLeave annualLeave =  holidayLeaveRepository.findOne(holId);
-        String from = "sorntadza@gmail.com";
+        String from = "benz.s@arms-thai.com";
         String to = "serenez@zoho.com";
             MimeMessage message = mailSender.createMimeMessage();
             message.addHeaderLine("method=REQUEST");
@@ -102,7 +100,7 @@ public class EventService {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
         for (HolidayLeave holidayList : holidayLeaveList)
         {
-            String from = "sorntadza@gmail.com";
+            String from = "benz.s@arms-thai.com";
             String to = "serenez@zoho.com";
             MimeMessage message = mailSender.createMimeMessage();
             message.addHeaderLine("method=REQUEST");

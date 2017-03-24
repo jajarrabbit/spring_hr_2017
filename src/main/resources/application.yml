@@ -22,9 +22,9 @@ spring.thymeleaf:
   encoding: UTF-8
 
 spring.mail:
-  host: smtp.gmail.com
-  username: sorntadza@gmail.com
-  password: sel2enes
+  host: smtp.zoho.com
+  username: benz.s@arms-thai.com
+  password: benz1234
   port: 465
   properties.mail.smtp.auth: true
   properties.mail.smtp.ssl.enable: true

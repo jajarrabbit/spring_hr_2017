@@ -27,7 +27,7 @@
 
         <!-- Content -->
         <section id="content">
-            <form th:action="@{/leaveHistory/create}" th:object="${leaveHistoryForm}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1">
+            <form th:action="@{/leaveHistory/create}" th:object="${leaveHistoryForm}" method="post" onsubmit="return validateForm()" class="form-horizontal form-width120 ml15" role="form" name="form1">
             <div class="form-group row ">
                 <label for="empId" class="col-2">Name : </label>
                 <div class="col-4" >
@@ -77,6 +77,7 @@
                     <label  class="col-2 col-form-label" for = "fullday">Full Day: </label>
                     <div class = "col-4">
                         <input type="text" class="form-control-lg" id="fullday" th:field="*{fullday}" th:value="0" >
+                        <span class="help-block" th:if="${#fields.hasErrors('fullday')}" th:errors="*{fullday}">Fullday Error </span>
                     </div>
                     <label  class="col-2 col-form-label" for="halfday">Half Day: </label>
                     <div class="col-4" >
@@ -123,6 +124,24 @@ $(document).ready(function() {
         });
     });
 });
+
+$validator.addMethod("greaterThan",
+function(value, element, params) {
+    if (!/Invalid|NaN/.test(new Date(value))) {
+        return new Date(value) > new Date($(params).val());
+    }
+
+    return isNaN(value) && isNaN($(params).val())
+        || (Number(value) > Number($(params).val()));
+},'Must be greater than {0}.');
+$("#periodUntil").rules('add', { greaterThan: "#periodFrom" });
+or
+$("form").validate({
+    rules: {
+        periodUntil: { greaterThan: "#periodFrom" }
+    }
+});
+
 </script>
 </body>
 </html>

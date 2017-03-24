@@ -19,4 +19,11 @@ public class PdfBean {
     private String categoryName;
     private String remark;
     private String reason;
+    private Integer fullDay;
+    private Integer halfDay;
+    private Double total;
+    private Double BLeave;
+    private Double BTotal;
+    private Double leaveLeft;
+
 }

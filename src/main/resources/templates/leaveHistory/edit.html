@@ -30,9 +30,6 @@
                     <div class="col-4" >
                         <input type="hidden" th:field="*{empId}" />
                         <input  class="form-control-lg" id="empId" th:value="*{firstName} + ' ' + *{lastName}"  type="text" disabled/>
-                            <!--<select id="empId" th:field="*{empId}" readonly>-->
-                                <!--<option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>-->
-                            <!--</select>-->
                     </div>
                     <label for="hireDate" class="col-2 ">HireDate : </label>
                     <div class="col-4">

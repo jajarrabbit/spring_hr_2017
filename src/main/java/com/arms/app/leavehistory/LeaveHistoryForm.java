@@ -3,7 +3,9 @@ package com.arms.app.leavehistory;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 /**
  * Created by arms20170106 on 16/1/2560.

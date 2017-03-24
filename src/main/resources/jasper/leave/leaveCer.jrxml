@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-21T14:15:21 -->
+<!-- 2017-03-23T18:14:40 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="leaveCer" pageWidth="595" pageHeight="842" columnWidth="540" leftMargin="27" rightMargin="28" topMargin="20" bottomMargin="20" isSummaryNewPage="true" whenResourceMissingType="Error" uuid="45e6a2bf-bdeb-4cf3-a357-23801ca7c193">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -25,13 +25,20 @@
 	<field name="periodUntil" class="java.util.Date"/>
 	<field name="remark" class="java.lang.String"/>
 	<field name="reason" class="java.lang.String"/>
+	<field name="fullDay" class="java.lang.Integer"/>
+	<field name="halfDay" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Double"/>
+	<field name="categoryId" class="java.lang.Integer"/>
+	<field name="BLeave" class="java.lang.Double"/>
+	<field name="BTotal" class="java.lang.Double"/>
+	<field name="leaveLeft" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="176" y="60" width="202" height="19" uuid="48c349b3-84e1-4681-b1bb-61c26f729ad1">
+				<reportElement positionType="FixRelativeToBottom" x="153" y="50" width="202" height="19" uuid="48c349b3-84e1-4681-b1bb-61c26f729ad1">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -68,13 +75,103 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="90" splitType="Stretch"/>
+		<band height="111" splitType="Stretch">
+			<frame>
+				<reportElement x="150" y="10" width="400" height="89" uuid="2b3c7e48-7d7d-4188-8c59-95ce7c7d865f"/>
+				<staticText>
+					<reportElement x="0" y="0" width="99" height="40" uuid="24a199ad-7d02-4045-aad2-4d133e62f5a4"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[CEO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="99" y="0" width="100" height="40" uuid="8c44dcf4-5fe8-4af7-b61c-b6895e995c98"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Director]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="199" y="0" width="100" height="40" uuid="579e62df-9e17-47ed-9a57-c909f4f6c293"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Section Manager]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="40" width="99" height="49" uuid="c4611044-aaec-44a5-8aec-9506d68cca19"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				</textField>
+				<staticText>
+					<reportElement x="299" y="0" width="98" height="40" uuid="13d6b01f-bbda-4185-90c9-a2642097c595"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Project Manager ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="99" y="40" width="100" height="49" uuid="8412f0bc-e175-4f16-8161-e76dfc27bbbf"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="199" y="40" width="100" height="49" uuid="5043f47b-3473-48fc-ae59-80fd3abe2651"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="299" y="40" width="98" height="49" uuid="009ff0ab-cd29-4b3c-aadb-f20ba70eb740"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				</textField>
+			</frame>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="408" splitType="Stretch">
+		<band height="430" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<frame>
-				<reportElement x="2" y="0" width="547" height="280" uuid="43b35ffc-35de-4a62-9b6d-7f36999079f0"/>
+				<reportElement x="-3" y="50" width="547" height="380" uuid="43b35ffc-35de-4a62-9b6d-7f36999079f0"/>
 				<staticText>
 					<reportElement x="-2" y="-1" width="181" height="41" uuid="bce6547a-60e7-4254-b37f-3706a33d8f5b"/>
 					<box>
@@ -207,105 +304,128 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[Reason]]></text>
 				</staticText>
+				<staticText>
+					<reportElement x="-2" y="290" width="181" height="29" uuid="fde3875b-1f5f-4a68-b357-fb8d3fe7df49"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Half Day]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="179" y="260" width="99" height="30" uuid="952df565-6b13-46e2-a971-c379486444a9"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{fullDay}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="179" y="290" width="99" height="29" uuid="2ef324a9-a9b8-48ab-85f2-89a125583d54">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{halfDay}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="278" y="260" width="268" height="118" uuid="5fb34013-5999-42e9-a075-d427c89c5855"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<staticText>
+						<reportElement x="1" y="1" width="111" height="30" uuid="0cdb2b2b-c0f2-45fc-87f3-65d1951a9aca"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<text><![CDATA[Leave Balance]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="112" y="1" width="125" height="30" uuid="d254e9d3-90c4-4926-a50a-a4110c7e6c40"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{BTotal}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="221" y="32" width="38" height="26" uuid="772b0cd2-7688-477c-bde3-4bb0bbd0c9f9"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<text><![CDATA[-]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="110" y="58" width="130" height="31" uuid="6efaa8d0-dbec-4d4f-a13c-6d20478316bd"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="110" y="89" width="129" height="29" uuid="74a5693b-1929-4d40-9661-1b09c96226dc"/>
+						<box>
+							<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{BLeave}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="-1" y="31" width="113" height="48" uuid="0c5dee60-43fe-4eb8-9f87-1847adfd8d93"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<paragraph lineSpacing="Double"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" "+"of" + " " + $F{categoryName}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="-2" y="260" width="181" height="30" uuid="9393f203-ef21-4360-bc85-3f9a565fb8a6"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Full Day]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-2" y="319" width="181" height="30" uuid="03679682-e6e8-45aa-9187-723dedd72fdb"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Current Business Leave ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="179" y="319" width="99" height="30" uuid="4835d268-fa30-4da2-b53f-f9a508fdb1da"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{leaveLeft}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="110" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="82" splitType="Stretch">
 			<frame>
-				<reportElement x="81" y="-110" width="400" height="111" uuid="16d003d4-015d-4657-929e-473db0ed41d0"/>
-				<staticText>
-					<reportElement x="0" y="0" width="99" height="40" uuid="5a30c06b-1dec-40dd-9a2b-0ba8a0baf7e0"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[CEO]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="99" y="0" width="100" height="40" uuid="518ca94e-e621-41a7-b382-79fa9d0c275b"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Director]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="199" y="0" width="100" height="40" uuid="fcb34f75-368a-480b-b11f-1885a587d777"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Section Manager]]></text>
-				</staticText>
-				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="40" width="99" height="69" uuid="177cc2de-eb0d-435d-8163-0b0a4e472b36"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				</textField>
-				<staticText>
-					<reportElement x="299" y="0" width="98" height="40" uuid="06bcf35f-36b4-4cf1-abcc-dc37481f6da3"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Project Manager ]]></text>
-				</staticText>
-				<textField isBlankWhenNull="true">
-					<reportElement x="99" y="40" width="100" height="69" uuid="8e133085-5611-4a4e-a3aa-3d41cca23346"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="199" y="40" width="100" height="69" uuid="281c7ee4-0af2-453f-ac78-b21150daac90"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-				</textField>
-				<textField pattern="" isBlankWhenNull="true">
-					<reportElement x="299" y="40" width="98" height="69" uuid="0f415e50-bbc1-4f3a-83cb-1afe8ad3f16e"/>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement x="280" y="30" width="198" height="40" uuid="a59ad863-568d-4ce1-8eee-b8d689a2db9a"/>
+				<reportElement x="345" y="30" width="198" height="40" uuid="a59ad863-568d-4ce1-8eee-b8d689a2db9a"/>
 				<staticText>
 					<reportElement x="-1" y="0" width="91" height="40" uuid="7f837198-3ab6-44cb-8f3e-2bf67e2f15cd"/>
 					<box>

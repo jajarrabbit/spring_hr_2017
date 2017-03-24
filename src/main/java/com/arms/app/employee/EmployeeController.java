@@ -68,7 +68,16 @@ public class EmployeeController {
     }
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated EmployeeCreateForm employeeCreateForm, BindingResult bindingResult) {
-
+        if(employeeService.checkName(employeeCreateForm)==1)
+        {
+            if(employeeService.checkLastname(employeeCreateForm)==2) {
+                bindingResult.rejectValue("firstName", "messageError", "Have this name in database");
+            }
+        }
+        if(employeeService.checkEmail(employeeCreateForm)== 1)
+        {
+            bindingResult.rejectValue("email","messageError","This E-mail have used");
+        }
         if (bindingResult.hasErrors()) {
             List<Employee> employeeList = employeeRepository.findAll();
             modelAndView.addObject("employeeList", employeeList);

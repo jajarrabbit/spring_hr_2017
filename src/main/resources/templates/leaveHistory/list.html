@@ -71,7 +71,6 @@
 					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
 					<td th:text="${leaveHistory.leaveType.categoryName}">32</td>
-
 					<td colspan="4"    >
 						<a th:href="'/leaveHistory/edit/' + ${leaveHistory.leaveId}" class="btn-sm btn-info" role="button" >
 							Edit<i class="glyphicon glyphicon-pencil"></i></a>

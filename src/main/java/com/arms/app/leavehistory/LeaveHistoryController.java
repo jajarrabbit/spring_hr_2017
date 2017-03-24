@@ -117,6 +117,15 @@ public class LeaveHistoryController {
     }
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult, Integer empId, CompDetail compDetail) throws Exception {
+
+        if(leaveHistoryService.checkDateInput(leaveHistoryForm) == 2)
+        {
+           bindingResult.rejectValue("periodFrom","messageError","Period From must be Greater Than Until" );
+        }
+        if(leaveHistoryService.checkAmount(leaveHistoryForm)==1)
+        {
+            bindingResult.rejectValue("fullday","messageError","Plase check leave amount");
+        }
         if (bindingResult.hasErrors()) {
             List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
             List<Employee> employeeList = employeeRepository.findAll();
