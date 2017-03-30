@@ -23,6 +23,10 @@
     {
     	background-color:#ffe6e6;
     }
+    input[type="text"]{
+    	background-color:#f5f5f5;
+    }
+
 </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
@@ -34,7 +38,7 @@
 		<div class="form-group row ">
 			<label for="empId" class="col-2">Name : </label>
 			<div class="col-3" >
-				<select  id="empId" th:field="*{empId}">
+				<select  id="empId" th:field="*{empId}" style="background-color:#f5f5f5;">
 					<option value=""></option>
 					<option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
 				</select>

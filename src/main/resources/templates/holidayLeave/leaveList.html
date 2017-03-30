@@ -22,6 +22,10 @@ table tbody tr
 {
 background-color:#ffe6e6;
 }
+input[type="text"]
+{
+background-color :#f5f5f5;
+}
 </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
@@ -30,7 +34,6 @@ background-color:#ffe6e6;
 	<header class="major">
 		<h2>Add Annual leave</h2>
 		<P>Input year for search  annual leave on that year </P>
-
 		<form th:action="@{/holidayLeave/leaveList}"  method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
 			<div class="form-group row ">
 				<label class="col-4">Year : </label>
@@ -40,10 +43,8 @@ background-color:#ffe6e6;
 				<div class="col-4	">
 					<button class="btn-lg btn-success" type="submit">Search !  <i class="	glyphicon glyphicon-search"></i> </button>
 				</div>
-
 			</div>
 		</form>
-
 	</header>
 	<div class="container">
 		<!-- Content -->
