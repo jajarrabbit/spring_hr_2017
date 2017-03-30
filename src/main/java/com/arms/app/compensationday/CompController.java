@@ -6,6 +6,7 @@ import com.arms.domain.entity.Employee;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.service.CompService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,7 @@ public class CompController {
     EmployeeRepository employeeRepository;
     @Autowired
     CompService compService;
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "add", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -35,6 +36,7 @@ public class CompController {
         modelAndView.setViewName("/compensation/add");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated CompCreateForm compCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

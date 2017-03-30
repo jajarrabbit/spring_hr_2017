@@ -5,6 +5,7 @@ package com.arms.app.home;
  */
 import com.arms.domain.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,7 @@ public class HomeController {
 
 @Autowired
     MailService mailService;
+
 
     @RequestMapping("/")
     public ModelAndView home(ModelAndView modelAndView) {

@@ -40,15 +40,6 @@ public class CompDetail {
     public Integer getEmpId(){return empId;}
     public void setEmpId(Integer empId){this.empId = empId;}
 
-//    private List<LeaveHistory> leaveHistoryLists;
-//    @OneToMany(mappedBy = "compDetail")
-//    public List<LeaveHistory> getLeaveHistoryLists(){
-//        return leaveHistoryLists;
-//    }
-//    public void setLeaveHistorys(List<LeaveHistory> leaveHistoryList){
-//        this.leaveHistoryLists = leaveHistoryList;
-//    }
-
     private Integer isUsed;
     @Basic
     @Column(name = "is_used")

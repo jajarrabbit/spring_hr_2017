@@ -34,10 +34,6 @@ public class EventService {
 
     public EventService() {
     }
-//    public  void  sendAnnualLeave(HolidayLeave holidayLeave) throws Exception {
-//        HolidayLeave holidayLeaves = holidayLeaveRepository.findOne(holidayLeave.getHolId());
-//           sendCalendar(holidayLeaves);
-//       }
 
     public void sendCalendar(Integer holId) throws Exception {
         HolidayLeave annualLeave =  holidayLeaveRepository.findOne(holId);
@@ -62,8 +58,8 @@ public class EventService {
                     "BEGIN:VEVENT\n" +
                     "SUMMARY:" + annualLeave.getHolidayDetail()+"\n"+
                     "DESCRIPTION:\n" +
-                    "DTSTART:"+ df.format(annualLeave.getHolidayDate()) +"T000000Z\n"+
-                    "DTEND:" + df.format(annualLeave.getHolidayDate()) +"T000000Z\n"+
+                    "DTSTART:"+ df.format(annualLeave.getHolidayDate()) +"\n"+
+                    "DTEND:" + df.format(annualLeave.getHolidayDate()) +"\n"+
                     "LOCATION:\n" +
                     "CLASS:PUBLIC\n" +
                     "IMPORTANT:0\n" +
@@ -121,8 +117,8 @@ public class EventService {
                     "BEGIN:VEVENT\n" +
                     "SUMMARY:" + holidayList.getHolidayDetail()+"\n"+
                     "DESCRIPTION:\n" +
-                    "DTSTART:"+ df.format(holidayList.getHolidayDate()) +"T000000Z\n"+
-                    "DTEND:" + df.format(holidayList.getHolidayDate()) +"T000000Z\n"+
+                    "DTSTART:"+ df.format(holidayList.getHolidayDate()) +"\n"+
+                    "DTEND:" + df.format(holidayList.getHolidayDate()) +"\n"+
                     "LOCATION:\n" +
                     "CLASS:PUBLIC\n" +
                     "IMPORTANT:0\n" +

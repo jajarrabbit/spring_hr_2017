@@ -24,14 +24,14 @@
              <form th:action="@{/user/add}" th:object="${userAddForm}" method="post">
                      <p>
                      <div class="form-group mt20 mb10" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
-                         <label>Name</label>
+                         <label>Username</label>
                          <input type="text" class="form-control col-4" th:field="*{username}" />
                      </div>
                      <span th:if="*{#fields.hasErrors('username')}" th:errors="*{username}" class="help-block">error!</span>
                      </p>
                      <p>
-                     <div class="form-group mt20 mb10" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-                         <label>Email</label>
+                     <div class= " form-group mt20 mb10 " th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                         <label> Email </label>
                          <input type="text" class="form-control col-4" th:field="*{email}" />
                      </div>
                      <span th:if="*{#fields.hasErrors('email')}" th:errors="*{email}" class="help-block">error!</span>
@@ -43,6 +43,15 @@
                      </div>
                      <span th:if="*{#fields.hasErrors('password')}" th:errors="*{password}" class="help-block">error!</span>
                      </p>
+                 <div class="form-group mt20 mb10">
+                     <label for="roleId" class="col-2 col-form-label"> Role Of Account </label>
+                     <div class = "col-4" align="left">
+                         <select id="roleId" th:field="*{roleId}">
+                             <option th:each="role:${roleList}" class="form-control" th:value="${role.roleId}" th:text="${role.roleName}">AAA</option>
+                         </select>
+                     </div>
+                 </div>
+                 <br>
                      <p>
                          <button class="btn btn-primary btn-lg" type="submit" name="submit" value="Create my account" >Create my account</button>
                  </p>

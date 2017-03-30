@@ -15,15 +15,16 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class AuthenticationService implements UserDetailsService {
+public  class AuthenticationService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findOneByUsername(username);
-        GrantedAuthority authority = new SimpleGrantedAuthority("springHr2017");
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+user.getRole().getRoleName());
 
         boolean isEnabled = true;
         boolean isAccountNonExpired = true;

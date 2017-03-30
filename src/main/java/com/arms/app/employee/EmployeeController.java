@@ -8,6 +8,7 @@ import com.arms.domain.service.CompService;
 import com.arms.domain.service.EmployeeService;
 import com.arms.domain.service.LeaveBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -58,6 +59,7 @@ public class EmployeeController {
         compService.expired();
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -66,6 +68,7 @@ public class EmployeeController {
         modelAndView.setViewName("/employee/create");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated EmployeeCreateForm employeeCreateForm, BindingResult bindingResult) {
         if(employeeService.checkName(employeeCreateForm)==1)
@@ -89,6 +92,7 @@ public class EmployeeController {
             return modelAndView;
         }
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "detail/{empId}", method = RequestMethod.GET)
     public ModelAndView showDetail(@PathVariable Integer empId, ModelAndView modelAndView) {
         modelAndView.addObject("employeeDetailForm",  employeeService.getHistoryDetailByEmpId(empId));
@@ -99,12 +103,14 @@ public class EmployeeController {
         modelAndView.addObject("compen",compen);
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit/{empId}", method = RequestMethod.GET)
     public ModelAndView showEdit(@PathVariable Integer empId, ModelAndView modelAndView) {
         modelAndView.addObject("employeeEditForm",  employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/edit");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public ModelAndView edit(ModelAndView modelAndView,EmployeeEditForm employeeEditForm) {
         employeeService.update(employeeEditForm);

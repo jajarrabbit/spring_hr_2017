@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <js th:include="common/js :: js"></js>
+    <css th:include="common/css :: css"></css>
+    <script src=""/js/html5shiv.js"></script>
+</head>
+<body class="landing">
+<header th:include="common/header :: header('Head')"></header>
+<!-- Banner -->
+<section id="banner">
+    <div class="inner">
+        <p class="notFound">500 Server Error</p>
+          <p class="buttonbox">
+            <a href="/"><button type="button" class="button btn-primary" >HOME</button></a>
+         </p>
+          <div th:if="${showException!=null} and ${showException==true}" th:object="${exception}" style="text-align: left">
+            <p><b>Class: </b></p>
+            <p><span th:text="*{class}"></span></p>
+            <p><b>Message: </b></p>
+            <p><span th:text="*{message}"></span></p>
+            <p><b>Cause: </b></p>
+            <ul style="padding-left: 20px; list-style-type: decimal-leading-zero">
+                <li th:each="cause:${causeList}" th:text="${cause}"></li>
+            </ul>
+            <p><b>Stack Trace:</b></p>
+            <ul style="list-style-type: none">
+                <li th:each="stackTraceElement:*{stackTrace}" th:text="${stackTraceElement}"></li>
+            </ul>
+        </div>
+    </div>
+    <!-- StaticPages home.html inserted into main.html End -->
+</section>
+<!-- Footer -->
+<footer id="footer">
+				<span class="copyright">
+					 ||||||||||| Leave Management System |||||||||||
+				</span>
+</footer>
+</body>
+</html>

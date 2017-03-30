@@ -94,6 +94,25 @@ public class LeaveHistoryService {
         }
         return returnMap;
     }
+
+    public int checkDateEdit(LeaveHistoryEditForm leaveHistoryEditForm)
+    {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try{
+            Date date1 = format.parse(leaveHistoryEditForm.getPeriodFrom());
+            Date date2 = format.parse(leaveHistoryEditForm.getPeriodUntil());
+            if(date1.before(date2))
+            {
+                return 1;
+            }
+            if (date1.after(date2))
+            {
+                return 2;
+            }
+        }catch (ParseException ex){}
+        return  0;
+    }
+
     public int checkDateInput(LeaveHistoryForm leaveHistoryForm)
     {
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
@@ -114,6 +133,28 @@ public class LeaveHistoryService {
 
         return 0;
     }
+
+    public int checkAmountEdit(LeaveHistoryEditForm leaveHistoryEditForm)
+    {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try{
+            Date date1 = format.parse(leaveHistoryEditForm.getPeriodFrom());
+            Date date2 = format.parse(leaveHistoryEditForm.getPeriodUntil());
+            long diff = date2.getTime()-date1.getTime();
+            long diffDays = ((diff / (24 * 60 * 60 * 1000))+1);
+            long day = leaveHistoryEditForm.getFullday()+leaveHistoryEditForm.getHalfday();
+
+            if(diffDays != day)
+            {
+                return 1;
+            }
+
+        }catch(ParseException ex){}
+
+        return 0;
+
+    }
+
     public int checkAmount(LeaveHistoryForm leaveHistoryForm)
     {
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
@@ -227,7 +268,7 @@ public class LeaveHistoryService {
                 "LOCATION:\n" +
                 "CLASS:PUBLIC\n" +
                 "IMPORTANT:0\n" +
-                "STATUS: 0\n"+
+                "STATUS:CONFIRMED \n"+
                 "COMMENT:\n" +
                 "UID:"+leaveHistory.getEmpId()+leaveHistory.getPeriodFrom()+"holidayleave@arms-thai.com\n" +
                 "TRANSP:OPAQUE\n" +
@@ -263,7 +304,7 @@ public class LeaveHistoryService {
         LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveId);
         Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
         LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getEmpId());
-        String from = "sorntadza@gmail.com";
+        String from = "benz.s@arms-thai.com";
         String to = employee.getEmail();
         MimeMessage message = mailSender.createMimeMessage();
         message.addHeaderLine("method=CANCEL");
@@ -284,12 +325,12 @@ public class LeaveHistoryService {
                 "BEGIN:VEVENT\n" +
                 "SUMMARY:" + leaveType.getCategoryName()+"\n"+
                 "DESCRIPTION:" + leaveHistory.getReason()  + "\n" +
-                "DTSTART:"+ df.format(leaveHistory.getPeriodFrom()) +"T000000Z\n"+
-                "DTEND:" + df.format(leaveHistory.getPeriodUntil()) +"T010000Z\n"+
+                "DTSTART:"+ df.format(leaveHistory.getPeriodFrom()) +"\n"+
+                "DTEND:" + df.format(leaveHistory.getPeriodUntil()) +"\n"+
                 "LOCATION:\n" +
                 "CLASS:PUBLIC\n" +
                 "IMPORTANT:0\n" +
-                "STATUS: 0\n"+
+                "STATUS: CANCELLED\n"+
                 "COMMENT:\n" +
                 "UID:"+leaveHistory.getEmpId()+leaveHistory.getPeriodFrom()+"holidayleave@arms-thai.com\n" +
                 "TRANSP:OPAQUE\n" +
@@ -317,6 +358,5 @@ public class LeaveHistoryService {
         message.setContent(multipart);
         // send message
         mailSender.send(message);
-
     }
 }

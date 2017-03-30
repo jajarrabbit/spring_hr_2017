@@ -6,6 +6,7 @@ import com.arms.domain.service.EventService;
 import com.arms.domain.service.HolidayLeaveService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -32,12 +33,14 @@ public class AnnualLeaveController {
     AnnualLeaveSearch setAnualLeaveSerach(){return new AnnualLeaveSearch();}
     private org.slf4j.Logger logger = LoggerFactory.getLogger(AnnualLeaveController.class);
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "leaveList", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         modelAndView.addObject("annualLeaveSearch", new AnnualLeaveSearch());
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "leaveList", method = RequestMethod.POST)
     public  ModelAndView showList(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
@@ -45,6 +48,7 @@ public class AnnualLeaveController {
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "add/{holId}", method = RequestMethod.GET)
     public ModelAndView add(@PathVariable Integer holId, ModelAndView modelAndView) {
         try{
@@ -56,6 +60,7 @@ public class AnnualLeaveController {
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "addAll", method = RequestMethod.GET)
     public  ModelAndView showList1(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
@@ -63,6 +68,7 @@ public class AnnualLeaveController {
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "addAll", method = RequestMethod.POST)
     public ModelAndView addAll(AnnualLeaveSearch annualLeaveSearch, ModelAndView modelAndView) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
@@ -76,6 +82,7 @@ public class AnnualLeaveController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAll();
@@ -84,6 +91,7 @@ public class AnnualLeaveController {
         modelAndView.setViewName("/holidayLeave/create");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated HolidayLeaveCreateForm holidayLeaveCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -97,6 +105,9 @@ public class AnnualLeaveController {
             return modelAndView;
         }
     }
+
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "delete/{holId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer holId) {
         holidayLeaveService.delete(holId);

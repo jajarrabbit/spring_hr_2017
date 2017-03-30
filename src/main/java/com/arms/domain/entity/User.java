@@ -17,6 +17,7 @@ private  String username;
 private String password;
 private String email;
 private Date created;
+private Integer roleId;
 
 @Id
 @GeneratedValue
@@ -39,4 +40,15 @@ public  String getEmail() {return email;} public  void  setEmail(String email){t
 @Column(name = "created")
 public  Date getCreated() {return  created;} public  void  setCreated(Date created){this.created = created;}
 
+@Basic
+@Column(name = "role_id")
+public Integer getRoleId(){return roleId;} public void setRoleId(Integer roleId){this.roleId = roleId;}
+
+private Role role;
+@ManyToOne
+@JoinColumn(name = "role_id", insertable = false , updatable = false)
+public Role getRole(){
+    return  role;
+}
+public void setRole(Role role){this.role = role;}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by arms20170106 on 7/2/2560.
@@ -23,6 +24,20 @@ public class UserService extends AppService {
         user.setEmail(userAddForm.getEmail());
         user.setPassword(passwordEncoder.hashMD5(userAddForm.getPassword()));
         user.setCreated(nowDate);
+        user.setRoleId(userAddForm.getRoleId());
         userRepository.save(user);
+    }
+
+    public int checkEmail(UserAddForm userAddForm)
+    {
+        List<User> userList = userRepository.findAll();
+        for (User userL : userList)
+        {
+            if(userAddForm.getEmail().equals(userL.getEmail()))
+            {
+                return 1;
+            }
+        }
+        return 0;
     }
 }

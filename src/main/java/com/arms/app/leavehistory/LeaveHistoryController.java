@@ -11,6 +11,7 @@ import com.arms.domain.service.ExportPdfService;
 import com.arms.domain.service.LeaveHistoryService;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.validation.BindingResult;
@@ -56,6 +57,7 @@ public class LeaveHistoryController {
     @ModelAttribute
     LeaveHistoryEditForm setLeaveHistoryEditForm(){return new LeaveHistoryEditForm();}
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView blankList(ModelAndView modelAndView) {
         List<LeaveHistory> leaveHistoryList = leaveHistoryRepository.findAll();
@@ -66,6 +68,7 @@ public class LeaveHistoryController {
         modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "list", method = RequestMethod.POST)
     public  ModelAndView showList(ModelAndView modelAndView, LeaveHistorySearch leaveHistorySearch) {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -75,6 +78,7 @@ public class LeaveHistoryController {
         modelAndView.setViewName("/leaveHistory/list");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "detail/{leaveId}", method = RequestMethod.GET)
     public ModelAndView showDetail(@PathVariable Integer leaveId, ModelAndView modelAndView, Integer empId) {
         modelAndView.addObject("leaveHistoryDetailForm",  leaveHistoryService.getHistoryDetailByLeaveId(leaveId));
@@ -82,6 +86,7 @@ public class LeaveHistoryController {
 
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit/{leaveId}", method = RequestMethod.GET)
     public ModelAndView showEdit(@PathVariable Integer leaveId, ModelAndView modelAndView) {
         modelAndView.addObject("leaveHistoryEditForm",  leaveHistoryService.getHistoryEditByLeaveId(leaveId));
@@ -92,19 +97,39 @@ public class LeaveHistoryController {
         modelAndView.setViewName("leaveHistory/edit");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView,LeaveHistoryEditForm leaveHistoryEditForm) {
-        leaveHistoryService.update(leaveHistoryEditForm);
-        modelAndView.setViewName("redirect:/leaveHistory/list");
-        return modelAndView;
+    public ModelAndView edit(ModelAndView modelAndView, @Validated LeaveHistoryEditForm leaveHistoryEditForm, BindingResult bindingResult, Integer leaveId) {
+        if(leaveHistoryService.checkDateEdit(leaveHistoryEditForm) == 2){
+            bindingResult.rejectValue("periodFrom","messageError","Please Check your date");
+        }
+        if(leaveHistoryService.checkAmountEdit(leaveHistoryEditForm) == 1)
+        {
+            bindingResult.rejectValue("fullday","messageError","Please check leave amount");
+        }
+        if(bindingResult.hasErrors()){
+            modelAndView.addObject("leaveHistoryEditForm",  leaveHistoryService.getHistoryEditByLeaveId(leaveId));
+            List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
+            modelAndView.addObject("leaveTypeList", leaveTypeList);
+            List<Employee> employeeList = employeeRepository.findAll();
+            modelAndView.addObject("employeeList", employeeList);
+            modelAndView.setViewName("leaveHistory/edit");
+            return modelAndView;
+        }
+        else {
+            leaveHistoryService.update(leaveHistoryEditForm);
+            modelAndView.setViewName("redirect:/leaveHistory/list");
+            return modelAndView;
+        }
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "delete/{leaveId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer leaveId) throws Exception {
         leaveHistoryService.cancelMail(leaveId);
         leaveHistoryService.delete(leaveId);
-
         return "redirect:/leaveHistory/list";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
         List<LeaveType> leaveTypeList = leaveTypeRepository.findAll();
@@ -115,6 +140,7 @@ public class LeaveHistoryController {
         modelAndView.setViewName("/leaveHistory/create");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated LeaveHistoryForm leaveHistoryForm, BindingResult bindingResult, Integer empId, CompDetail compDetail) throws Exception {
 
@@ -147,6 +173,7 @@ public class LeaveHistoryController {
         returnMap = leaveHistoryService.getHireDate(empId);
         return returnMap;
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "exportPdf/{leaveId}", method = RequestMethod.GET)
     public ModelAndView exportPdf(@PathVariable("leaveId") Integer leaveId) {
         return new ModelAndView(exportPdfService.getJasperPdfView(leaveId), new HashedMap());
