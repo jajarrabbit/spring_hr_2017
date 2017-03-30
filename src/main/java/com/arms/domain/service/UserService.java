@@ -27,7 +27,6 @@ public class UserService extends AppService {
         user.setRoleId(userAddForm.getRoleId());
         userRepository.save(user);
     }
-
     public int checkEmail(UserAddForm userAddForm)
     {
         List<User> userList = userRepository.findAll();

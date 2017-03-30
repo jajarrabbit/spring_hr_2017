@@ -7,6 +7,7 @@ import com.arms.domain.entity.Role;
 import com.arms.domain.repository.Rolerepository;
 import com.arms.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +27,7 @@ public class SignupController {
     Rolerepository rolerepository;
     @ModelAttribute
     UserAddForm setUserAddForm(){return new UserAddForm();}
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping("/user/signUp")
     public ModelAndView signup(ModelAndView modelAndView) {
         List<Role> roleList = rolerepository.findAll();
@@ -45,7 +47,6 @@ public class SignupController {
             modelAndView.addObject("roleList",roleList);
             modelAndView.setViewName("/user/sign_up");
             return modelAndView;
-
             }else {
             userService.createUser(userAddForm);
             attributes.addFlashAttribute("messageDialog", "User was created.");

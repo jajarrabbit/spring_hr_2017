@@ -19,7 +19,6 @@ public class HolidayLeaveService {
         holidayLeave.setHolidayDetail(holidayLeaveCreateForm.getHolidayDetail());
         holidayLeaveRepository.save(holidayLeave);
     }
-
     public  void delete(Integer holId) {holidayLeaveRepository.delete(holId);
     }
 }

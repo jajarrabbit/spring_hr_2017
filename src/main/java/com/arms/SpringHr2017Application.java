@@ -6,12 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 @SpringBootApplication
-public class SpringHr2017Application {
-
-	public static void main(String[] args) {
+public class SpringHr2017Application {public static void main(String[] args) {
 		SpringApplication.run(SpringHr2017Application.class, args);
 	}
-@Bean
+	@Bean
 	public ReloadableResourceBundleMessageSource messageSource(){
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:i18n/messages");

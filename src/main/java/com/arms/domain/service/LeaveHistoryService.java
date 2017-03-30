@@ -47,7 +47,6 @@ public class LeaveHistoryService {
     @Autowired
     private JavaMailSender mailSender;
 
-
     public void save(LeaveHistoryForm leaveHistoryForm) {
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
         LeaveHistory leaveHistory = new LeaveHistory();
@@ -69,7 +68,6 @@ public class LeaveHistoryService {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String minDate = df.format(comps);
             List<CompDetail> comp = compDetailRepository.findAll();
-
             for( CompDetail compUse : comp )
             {
                 String date = df.format(compUse.getCompAddDate());
@@ -80,7 +78,6 @@ public class LeaveHistoryService {
                    compDetailRepository.save(compDetail);
                }
             }
-
         }
     }
     public HashMap<String, String> getHireDate(String empId){
@@ -116,7 +113,6 @@ public class LeaveHistoryService {
     public int checkDateInput(LeaveHistoryForm leaveHistoryForm)
     {
         SimpleDateFormat formatt = new SimpleDateFormat("yyyy/MM/dd");
-
         try{
             Date date1 = formatt.parse(leaveHistoryForm.getPeriodFrom());
             Date date2 = formatt.parse(leaveHistoryForm.getPeriodUntil());
@@ -128,9 +124,7 @@ public class LeaveHistoryService {
             {
                 return 2;
             }
-
         }catch(ParseException ex){}
-
         return 0;
     }
 
@@ -148,7 +142,6 @@ public class LeaveHistoryService {
             {
                 return 1;
             }
-
         }catch(ParseException ex){}
 
         return 0;

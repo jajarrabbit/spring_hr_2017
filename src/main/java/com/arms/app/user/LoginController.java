@@ -19,14 +19,11 @@ import java.io.IOException;
  */
 @Controller
 public class LoginController {
-
-
     @RequestMapping("/user/login")
     public ModelAndView login(ModelAndView modelAndView) throws IOException{
         modelAndView.setViewName("user/login");
         return modelAndView;
     }
-
     @RequestMapping(value = "/user/successLogin", method = RequestMethod.GET)
     public Object successLogin(ModelAndView model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -37,7 +34,6 @@ public class LoginController {
         model.addObject("loginSuccess", true);
         return "redirect:/";
     }
-
     @RequestMapping(value = "/user/failLogin", method = RequestMethod.GET)
     public ModelAndView failLogin(ModelAndView model) {
         model.addObject("errorMsg", "Login failed, Invalid name and/or passwod");
@@ -45,7 +41,6 @@ public class LoginController {
         model.setViewName("user/login");
         return model;
     }
-
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

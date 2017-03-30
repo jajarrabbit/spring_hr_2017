@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -11,32 +10,23 @@
     <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
-
 </head>
 <style>
  input[type=text] {
  background-color: #ffff99;
-
  }
  input[type=password] {
  background-color: #ffff99;
-
  }
-
-
  </style>
 <body>
-
-
 <header th:include="common/header :: header('Head')"></header>
-
 <!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
         <h2>Create Leave history</h2>
     </header>
     <div class="container">
-
         <!-- Content -->
         <section id="content">
             <form th:action="@{/leaveHistory/create}" th:object="${leaveHistoryForm}" method="post" onsubmit="return validateForm()" class="form-horizontal form-width120 ml15" role="form" name="form1">
@@ -49,21 +39,17 @@
                     </select>
                     <span class="help-block" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}">Name Error </span>
                 </div>
-
                 <label for="hireDate" class="col-2 ">HireDate : </label>
                 <div class="col-4">
                     <input  class="form-control-lg" id="hireDate" th:field="*{hireDate}"   type="text" disabled/>
                 </div>
             </div>
-
             <div class="form-group row">
-
                 <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
                 <div class="col-4" >
                     <div class="input-group date ">
                         <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-
                         </div>
                     <span class="help-block" th:if="${#fields.hasErrors('periodFrom')}" th:errors="*{periodFrom}">Date Start Error </span>
                 </div>
@@ -96,7 +82,6 @@
                         <input type="text" class="form-control-lg" id="halfday" th:field="*{halfday}" th:value="0" >
                     </div>
                 </div>
-
             <div class="form-group row">
                 <label for="reason" class="col-2 col-form-label">Reason : </label>
                 <div class="col-10">

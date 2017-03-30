@@ -16,13 +16,10 @@
 <style>
  input[type=text] {
  background-color: #ffff99;
-
  }
  input[type=password] {
  background-color: #ffff99;
-
  }
-
  </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
@@ -94,7 +91,7 @@
                             <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style=" background-color: #ffff99;margin: 0px; width: 671px; height: 180px;" />
                         </div>
                     </div>
-                    <button type="submit">Submit!</button>
+                    <button type="submit" class="btn-success">Submit!</button>
             </form>
         </section>
     </div>

@@ -21,7 +21,6 @@ public class LeaveBalanceService {
     @Autowired
     LeaveHistoryRepository leaveHistoryRepository;
 
-
     public Double calculate(Integer empId) {
         Employee employee = employeeRepository.findOne(empId);
         Double annualCount = leaveHistoryRepository.countAnnualLeave(empId);
@@ -32,7 +31,6 @@ public class LeaveBalanceService {
         Calendar hireDateCalendar = Calendar.getInstance();
         hireDateCalendar.setTime(employee.getHireDate());
         Integer diff = todayCalendar.get(Calendar.YEAR) - hireDateCalendar.get(Calendar.YEAR);
-        ;
         Double all = 0.0;
         Double countLeave = leaveHistoryRepository.countByEmpId(empId);
         if (countLeave == null) {

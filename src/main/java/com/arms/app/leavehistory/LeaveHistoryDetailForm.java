@@ -17,7 +17,6 @@ public class LeaveHistoryDetailForm {
     private Integer fullday;
     private Integer halfday;
     private Double  total;
-
     public LeaveHistoryDetailForm(Integer leaveId, Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, String firstName,
                                   String lastName,String categoryName, String hireDate,Integer fullday,Integer halfday, Double total) {
         this.leaveId = leaveId;

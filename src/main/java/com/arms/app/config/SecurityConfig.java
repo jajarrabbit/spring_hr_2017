@@ -22,19 +22,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthenticationService authenticationService;
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         Md5PasswordEncoder encoder = new Md5PasswordEncoder();
         auth.userDetailsService(authenticationService).passwordEncoder(encoder);
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .and().authorizeRequests().antMatchers("/static/**","/templates/**","/commmon/**","/js/**","/css/**","/templates/common/**", "/images/**", "/**/favicon.ico","/fonts/**","/stylesheets/**").permitAll()
-                .and().authorizeRequests().antMatchers( "/user/login","/user/signUp", "/user/add", "/help", "/contact", "/about").permitAll()
+                .and().authorizeRequests().antMatchers( "/user/login", "/user/add", "/help", "/contact", "/about").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()

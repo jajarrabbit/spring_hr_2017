@@ -81,7 +81,6 @@ public class AnnualLeaveController {
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
@@ -105,8 +104,6 @@ public class AnnualLeaveController {
             return modelAndView;
         }
     }
-
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "delete/{holId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer holId) {

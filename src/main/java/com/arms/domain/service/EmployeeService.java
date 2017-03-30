@@ -38,7 +38,6 @@ public class EmployeeService {
         }catch(ParseException ex){}
         employeeRepository.save(employee);
         save1();
-
     }
 
     public  void  save1()
@@ -49,7 +48,6 @@ public class EmployeeService {
         calLeave.setBLeave(15);
         calLeaveRepository.save(calLeave);
     }
-
     public EmployeeDetailForm getHistoryDetailByEmpId (Integer empId) {
         EmployeeDetailForm view = new EmployeeDetailForm();
         Employee emp = employeeRepository.findOne(empId);
@@ -64,7 +62,6 @@ public class EmployeeService {
     }
    public int checkName(EmployeeCreateForm employeeCreateForm) {
        List<Employee> employeeList = employeeRepository.findAll();
-
        for (Employee empList : employeeList) {
            if (employeeCreateForm.getFirstName().equals(empList.getFirstName()))
            {

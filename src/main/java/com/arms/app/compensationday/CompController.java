@@ -22,7 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping("compensation")
 public class CompController {
-
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired

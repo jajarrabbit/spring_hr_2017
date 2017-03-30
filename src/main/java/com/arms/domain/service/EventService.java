@@ -32,8 +32,6 @@ public class EventService {
     @Autowired
     HolidayLeaveRepository holidayLeaveRepository;
 
-    public EventService() {
-    }
 
     public void sendCalendar(Integer holId) throws Exception {
         HolidayLeave annualLeave =  holidayLeaveRepository.findOne(holId);
