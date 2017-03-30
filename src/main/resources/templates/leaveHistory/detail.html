@@ -14,6 +14,16 @@
     <css th:include="common/css :: css"></css>
     <!--</noscript>-->
 </head>
+<style>
+input[type=text] {
+background-color: #e6ff99;
+
+}
+input[type=password] {
+background-color: #e6ff99;
+
+}
+</style>
 <body>
 
 <header th:include="common/header :: header('Head')"></header>
@@ -73,13 +83,13 @@
                 <div class="form-group row">
                     <label for="reason" class="col-2 col-form-label">Reason : </label>
                     <div class="col-10">
-                        <textarea class="form-control-lg " rows="5" id="reason"  th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;" disabled/>
+                        <textarea class="form-control-lg " rows="5" id="reason"  th:field="*{reason}"style="background-color: #e6ff99; margin: 0px; width: 671px; height: 180px;" disabled/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="remark" class="col-2 col-form-label">Remark : </label>
                     <div class="col-10">
-                        <textarea class="form-control-lg " rows="5" id="remark"  th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;" disabled/>
+                        <textarea class="form-control-lg " rows="5" id="remark"  th:field="*{remark}" style="background-color: #e6ff99; margin: 0px; width: 671px; height: 180px;" disabled/>
                     </div>
                 </div>
 

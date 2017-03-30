@@ -11,6 +11,17 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
 </head>
+<style>
+ input[type=text] {
+ background-color: #ffff99;
+
+ }
+ input[type=password] {
+ background-color: #ffff99;
+
+ }
+
+ </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
@@ -25,7 +36,7 @@
                 <div class="form-group row ">
                     <label for="empId" class="col-2">Name : </label>
                     <div class="col-4" >
-                        <select  id="empId" th:field="*{empId}">
+                        <select  id="empId" th:field="*{empId}" style="background-color: #ffff99;">
                             <option value=""></option>
                             <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
                         </select>
@@ -43,7 +54,7 @@
                     <div class="form-group row">
                         <label for="compDetail" class="col-2 col-form-label">Detail : </label>
                         <div class="col-10">
-                            <textarea class="form-control " rows="5" id="compDetail" th:field="*{compDetail}" style="margin: 0px; width: 671px; height: 180px;"></textarea>
+                            <textarea class="form-control " rows="5" id="compDetail" th:field="*{compDetail}" style="background-color: #ffff99;margin: 0px; width: 671px; height: 180px;"></textarea>
                             <span class="help-block" th:if="${#fields.hasErrors('compDetail')}" th:errors="*{compDetail}">Remark Error </span>
                         </div>
                     </div>

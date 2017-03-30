@@ -13,6 +13,17 @@
     <css th:include="common/css :: css"></css>
     <!--</noscript>-->
 </head>
+<style>
+ input[type=text] {
+ background-color: #ffff99;
+
+ }
+ input[type=password] {
+ background-color: #ffff99;
+
+ }
+
+ </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
@@ -55,7 +66,7 @@
                     <div class="form-group row">
                         <label for="categoryId" class="col-2 col-form-label">Category : </label>
                         <div class="col-5">
-                            <select id="categoryId" th:field="*{categoryId}" >
+                            <select id="categoryId" th:field="*{categoryId}" style=" background-color: #ffff99;">
                                 <!--<option th:value ="*{categoryId}" th:text="*{categoryName}"></option>-->
                                 <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
                             </select>
@@ -74,13 +85,13 @@
                     <div class="form-group row">
                         <label for="reason" class="col-2 col-form-label">Reason : </label>
                         <div class="col-10">
-                            <textarea class="form-control " rows="5" id="reason"  th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;" />
+                            <textarea class="form-control " rows="5" id="reason"  th:field="*{reason}"style="  background-color: #ffff99;margin: 0px; width: 671px; height: 180px;" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="remark" class="col-2 col-form-label">Remark : </label>
                         <div class="col-10">
-                            <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;" />
+                            <textarea class="form-control " rows="5" id="remark"  th:field="*{remark}" style=" background-color: #ffff99;margin: 0px; width: 671px; height: 180px;" />
                         </div>
                     </div>
                     <button type="submit">Submit!</button>

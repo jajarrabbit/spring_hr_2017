@@ -13,6 +13,18 @@
     <css th:include="common/css :: css"></css>
 
 </head>
+<style>
+ input[type=text] {
+ background-color: #ffff99;
+
+ }
+ input[type=password] {
+ background-color: #ffff99;
+
+ }
+
+
+ </style>
 <body>
 
 
@@ -31,7 +43,7 @@
             <div class="form-group row ">
                 <label for="empId" class="col-2">Name : </label>
                 <div class="col-4" >
-                    <select  id="empId" th:field="*{empId}">
+                    <select  id="empId" th:field="*{empId}" style ="background-color: #ffff99;">
                         <option value=""></option>
                         <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
                     </select>
@@ -67,7 +79,7 @@
                 <div class="form-group row">
                     <label for="categoryId" class="col-2 col-form-label">Category : </label>
                     <div class="col-5">
-                        <select id="categoryId" th:field="*{categoryId}">
+                        <select id="categoryId" th:field="*{categoryId}" style="background-color: #ffff99;">
                             <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
                         </select>
                         <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
@@ -88,14 +100,14 @@
             <div class="form-group row">
                 <label for="reason" class="col-2 col-form-label">Reason : </label>
                 <div class="col-10">
-                    <textarea class="form-control " rows="5" id="reason" th:field="*{reason}"style="margin: 0px; width: 671px; height: 180px;"></textarea>
+                    <textarea class="form-control " rows="5" id="reason" th:field="*{reason}"style="background-color: #ffff99; margin: 0px; width: 671px; height: 180px;"></textarea>
                     <span class="help-block" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}">Reason Error </span>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="remark" class="col-2 col-form-label">Remark : </label>
                 <div class="col-10">
-                    <textarea class="form-control " rows="5" id="remark" th:field="*{remark}" style="margin: 0px; width: 671px; height: 180px;"></textarea>
+                    <textarea class="form-control " rows="5" id="remark" th:field="*{remark}" style="background-color: #ffff99; margin: 0px; width: 671px; height: 180px;"></textarea>
                     <span class="help-block" th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">Remark Error </span>
                 </div>
             </div>

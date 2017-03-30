@@ -13,6 +13,16 @@
 		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 	</noscript>
 </head>
+<style>
+    table tbody tr:hover
+    {
+        background-color:#e6eeff;
+    }
+    table tbody tr
+    {
+    	background-color:#ffe6e6;
+    }
+</style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 
@@ -38,8 +48,8 @@
 					<th th:text="'Hire Date'">Hire Date</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr th:each="employeeList,index : ${employeeList} ",  th:attr="empId=${employeeList.empId}">
+				<tbody >
+				<tr th:each="employeeList,index : ${employeeList} ",  th:attr="empId=${employeeList.empId}"  >
 					<td th:text="${index.count}">No</td>
 					<td th:text="${employeeList.firstName} + ' ' + ${employeeList.lastName}">Thymus Thymi</td>
 					<td th:text="${#dates.format(employeeList.hireDate, 'yyyy/MM/dd')}">12</td>
@@ -59,6 +69,11 @@
         var index = $(this).attr('empId');
         window.location.href = "/employee/detail/" + index;
     });
+ $('#employeeTable tbody tr').css('cursor', 'pointer');
+
 </script>
+
+
+
 </body>
 </html>
