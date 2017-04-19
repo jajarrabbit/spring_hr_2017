@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by arms20170106 on 13/3/2560.
  */
 @Repository
-public interface CompDetailRepository extends JpaRepository<CompDetail,Integer> {
+public interface CompDetailRepository extends JpaRepository<CompDetail, Integer> {
 
     @Query(value = " SELECT COUNT(*) AS counts FROM comp_detail " +
             " WHERE " +

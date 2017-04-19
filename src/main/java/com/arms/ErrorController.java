@@ -10,23 +10,30 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ErrorController {
 
-    @RequestMapping(value ="/403")
-    public  String forbidden(){return "403";}
+    @RequestMapping(value = "/403")
+    public String forbidden() {
+        return "403";
+    }
 
-    @RequestMapping(value ="/400")
-    public  String badRequest(){return "400";}
+    @RequestMapping(value = "/400")
+    public String badRequest() {
+        return "400";
+    }
 
     @RequestMapping(value = "/404")
-    public  String notFound(){return "404";}
+    public String notFound() {
+        return "404";
+    }
 
     @RequestMapping(value = "/413")
-    public  String entityToLarge(){return "413";}
+    public String entityToLarge() {
+        return "413";
+    }
 
     @RequestMapping(value = "/500")
-    public ModelAndView internalServerError(ModelAndView modelAndView,Exception exception)
-    {
+    public ModelAndView internalServerError(ModelAndView modelAndView, Exception exception) {
         modelAndView.addObject("showException", true);
-        modelAndView.addObject("exception",exception);
+        modelAndView.addObject("exception", exception);
         modelAndView.setViewName("500");
         return modelAndView;
     }

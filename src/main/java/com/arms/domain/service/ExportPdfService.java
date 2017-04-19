@@ -42,61 +42,50 @@ public class ExportPdfService {
         LeaveHistory leaveHistory = leaveHistoryRepository.findOne(leaveId);
         List<PdfBean> beanList = new ArrayList<>();
         setAllLeaveHistory(leaveHistory, beanList, leaveId);
-String filename = "leave notification" + new java.text.SimpleDateFormat("YYYY/MM/dd ", Locale.getDefault()).format(new java.util.Date());
-
-return new JasperPdfModelBean(jasperPath +"/leave/leaveCer.jrxml",beanList,filename,jasperPath);
+        String filename = "leave notification" + new java.text.SimpleDateFormat("YYYY/MM/dd ", Locale.getDefault()).format(new java.util.Date());
+        return new JasperPdfModelBean(jasperPath + "/leave/leaveCer.jrxml", beanList, filename, jasperPath);
     }
-    private void setAllLeaveHistory(LeaveHistory leaveHistory, List<PdfBean> beanList, Integer leaveId)
-    {
-         PdfBean bean = new PdfBean();
-         if(leaveHistory.getEmpId() != null)
-         {
-             Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
-             bean.setFirstName(employee.getFirstName());
-             bean.setLastName(employee.getLastName());
-         }
-         if (leaveHistory.getPeriodFrom() != null)
-        {
+
+    private void setAllLeaveHistory(LeaveHistory leaveHistory, List<PdfBean> beanList, Integer leaveId) {
+        PdfBean bean = new PdfBean();
+        if (leaveHistory.getEmpId() != null) {
+            Employee employee = employeeRepository.findOne(leaveHistory.getEmpId());
+            bean.setFirstName(employee.getFirstName());
+            bean.setLastName(employee.getLastName());
+        }
+        if (leaveHistory.getPeriodFrom() != null) {
             bean.setPeriodFrom(leaveHistory.getPeriodFrom());
         }
-        if (leaveHistory.getPeriodUntil() != null)
-        {
+        if (leaveHistory.getPeriodUntil() != null) {
             bean.setPeriodUntil(leaveHistory.getPeriodUntil());
         }
-        if (leaveHistory.getCategoryId()!= null)
-        {
+        if (leaveHistory.getCategoryId() != null) {
             LeaveType leaveType = leaveTypeRepository.findOne(leaveHistory.getCategoryId());
             bean.setCategoryName(leaveType.getCategoryName());
             if (leaveHistory.getCategoryId() == 1) {
-                bean.setBTotal(leaveBalanceService.calculate(leaveHistory.getEmpId())+(leaveHistory.getFullday()+(((double)leaveHistory.getHalfday())/2)));
+                bean.setBTotal(leaveBalanceService.calculate(leaveHistory.getEmpId()) + (leaveHistory.getFullday() + (((double) leaveHistory.getHalfday()) / 2)));
                 bean.setBLeave(leaveBalanceService.calculate(leaveHistory.getEmpId()));
-                bean.setTotal(leaveHistory.getFullday()+(((double)leaveHistory.getHalfday())/2));
-            } else if (leaveHistory.getCategoryId() == 2)
-                {
-                    bean.setBTotal((double)(compService.compCal(leaveHistory.getEmpId()))+(leaveHistory.getFullday()+(((double)leaveHistory.getHalfday())/2)));
-                    bean.setBLeave((double)(compService.compCal(leaveHistory.getEmpId())));
-                    bean.setTotal(leaveHistory.getFullday()+(((double)leaveHistory.getHalfday())/2));
-                } else
-                    {
-                        bean.setBLeave(0.0);
-                        bean.setBTotal(0.0);
-                        bean.setTotal(0.0);
-                    }
+                bean.setTotal(leaveHistory.getFullday() + (((double) leaveHistory.getHalfday()) / 2));
+            } else if (leaveHistory.getCategoryId() == 2) {
+                bean.setBTotal((double) (compService.compCal(leaveHistory.getEmpId())) + (leaveHistory.getFullday() + (((double) leaveHistory.getHalfday()) / 2)));
+                bean.setBLeave((double) (compService.compCal(leaveHistory.getEmpId())));
+                bean.setTotal(leaveHistory.getFullday() + (((double) leaveHistory.getHalfday()) / 2));
+            } else {
+                bean.setBLeave(0.0);
+                bean.setBTotal(0.0);
+                bean.setTotal(0.0);
+            }
         }
-        if (leaveHistory.getReason() != null)
-        {
+        if (leaveHistory.getReason() != null) {
             bean.setReason(leaveHistory.getReason());
         }
-        if(leaveHistory.getRemark() != null)
-        {
+        if (leaveHistory.getRemark() != null) {
             bean.setRemark(leaveHistory.getRemark());
         }
-        if(leaveHistory.getFullday()!= null)
-        {
+        if (leaveHistory.getFullday() != null) {
             bean.setFullDay(leaveHistory.getFullday());
         }
-        if (leaveHistory.getHalfday() != null)
-        {
+        if (leaveHistory.getHalfday() != null) {
             bean.setHalfDay(leaveHistory.getHalfday());
             bean.setLeaveLeft(leaveBalanceService.calculate(leaveHistory.getEmpId()));
         }

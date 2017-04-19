@@ -1,103 +1,106 @@
 <!DOCTYPE HTML>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title> </title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
     <js th:include="common/js :: js"></js>
     <!--<noscript>-->
-    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
     <!--</noscript>-->
 </head>
-<style>
-input[type=text] {
-background-color: #e6ff99;
-}
-input[type=password] {
-background-color: #e6ff99;
-}
-</style>
-<body>
+<body >
 <header th:include="common/header :: header('Head')"></header>
-<!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
         <h2>Leave History Detail</h2>
     </header>
     <div class="container">
-        <!-- Content -->
         <section id="content">
-            <form  th:object="${leaveHistoryDetailForm}" class="form-horizontal form-width120 ml15" role="form" name="form1" >
+            <form th:object="${leaveHistoryDetailForm}" class="form-horizontal form-width120 ml15" role="form" name="form1">
+                <input id="leaveId" th:value="${leaveId}" type="hidden"/>
                 <div class="form-group row ">
                     <label for="name" class="col-2">Name : </label>
-                    <div class="col-4" >
-                        <!--<input class="form-control" th:field="*{empId}" id="empId" type="text" name="empId">-->
-                        <input class="form-control-lg"  id="name"  th:value="*{firstName} + ' ' + *{lastName}" type="text" disabled />
-                    </div>
-                        <label for="hireDate" class="col-2 ">HireDate : </label>
                     <div class="col-4">
-                        <input  class="form-control-lg" id="hireDate" th:field="*{hireDate}"  type="text"   disabled/>
+                        <input class="form-control-lg" id="name" th:value="*{firstName} + ' ' + *{lastName}" type="text" disabled/>
+                    </div>
+                    <label for="hireDate" class="col-2 ">HireDate : </label>
+                    <div class="col-4">
+                        <input class="form-control-lg" id="hireDate" th:field="*{hireDate}" type="text" disabled/>
                     </div>
                 </div>
-
-                <div class = "form-group row " >
+                <div class="form-group row ">
                     <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
-                    <div class="col-4" >
-                            <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}" disabled/>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}" disabled/>
                     </div>
                     <label for="periodUntil" class="col-2 col-form-label">Until : </label>
-                    <div class="col-4" >
-                            <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}"  disabled/>
+                    <div class="col-4">
+                        <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}" disabled/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="categoryId" class="col-2 col-form-label">Category : </label>
                     <div class="col-5">
-                        <input class="form-control-lg" id="categoryId" th:field="*{categoryName}" type="text"  disabled/>
+                        <input class="form-control-lg" id="categoryId" th:field="*{categoryName}" type="text" disabled/>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label  class="col-2 col-form-label" for = "fullday">Full Day: </label>
-                    <div class = "col-4">
-                        <input type="text" class="form-control-lg" id="fullday" th:field="*{fullday}" >
+                    <label class="col-2 col-form-label" for="fullday">Full Day: </label>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="fullday" th:field="*{fullday}">
                     </div>
-                    <label  class="col-2 col-form-label" for="halfday">Half Day: </label>
-                    <div class="col-4" >
-                        <input type="text" class="form-control-lg" id="halfday" th:field="*{halfday}" >
+                    <label class="col-2 col-form-label" for="halfday">Half Day: </label>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="halfday" th:field="*{halfday}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label  class="col-2 col-form-label" for = "total">Total : </label>
-                    <div class = "col-4">
-                        <input type="text" class="form-control-lg" id="total" th:field="*{total}"  >
+                    <label class="col-2 col-form-label" for="total">Total : </label>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="total" th:field="*{total}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="reason" class="col-2 col-form-label">Reason : </label>
                     <div class="col-10">
-                        <textarea class="form-control-lg " rows="5" id="reason"  th:field="*{reason}"style="background-color: #e6ff99; margin: 0px; width: 671px; height: 180px;" disabled/>
+                        <textarea class="form-control-lg " rows="5" id="reason" th:field="*{reason}"
+                                  style=" margin: 0px; width: 671px; height: 180px;"
+                                  disabled/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="remark" class="col-2 col-form-label">Remark : </label>
                     <div class="col-10">
-                        <textarea class="form-control-lg " rows="5" id="remark"  th:field="*{remark}" style="background-color: #e6ff99; margin: 0px; width: 671px; height: 180px;" disabled/>
+                        <textarea class="form-control-lg " rows="5" id="remark" th:field="*{remark}"style=" margin: 0px; width: 671px; height: 180px;"
+                                  disabled/>
                     </div>
                 </div>
+                    <div class="form-group row">
+                    <th:block th:if="*{categoryName} == 'sick leave with medical certificate'">
+                        <label class = "col-2 col-form-label">Picture :</label>
+                        <img width="300" height="400" id="images" th:src="${imageString}" />
+                    </th:block>
+                    </div>
             </form>
         </section>
     </div>
 </section>
-<!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
 			 ||||||||||| Leave Management System |||||||||||  </span>
 </footer>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>

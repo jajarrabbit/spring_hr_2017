@@ -3,6 +3,7 @@ package com.arms.app.config;
 /**
  * Created by arms20170106 on 8/2/2560.
  */
+
 import com.arms.domain.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,10 +19,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @ComponentScan("com.concretepage")
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthenticationService authenticationService;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -31,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .and().authorizeRequests().antMatchers("/static/**","/templates/**","/commmon/**","/js/**","/css/**","/templates/common/**", "/images/**", "/**/favicon.ico","/fonts/**","/stylesheets/**").permitAll()
-                .and().authorizeRequests().antMatchers( "/user/login", "/user/add", "/help", "/contact", "/about").permitAll()
+                .and().authorizeRequests().antMatchers("/static/**", "/templates/**", "/commmon/**", "/js/**", "/css/**", "/templates/common/**", "/images/**", "/**/favicon.ico", "/fonts/**", "/stylesheets/**").permitAll()
+                .and().authorizeRequests().antMatchers("/user/login", "/user/add", "/help", "/contact", "/about").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
@@ -40,14 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/user/login")
                 .defaultSuccessUrl("/user/successLogin", true)
-    	  .failureUrl("/user/failLogin")
-            .usernameParameter("username")
-            .passwordParameter("password")
-            .permitAll()
-            .and()
-            .logout()
-            .logoutUrl("/user/logout")
-            .logoutSuccessUrl("/")
-            .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"));
-}
+                .failureUrl("/user/failLogin")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/user/logout")
+                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"));
+    }
 }

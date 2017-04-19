@@ -10,15 +10,17 @@ import java.util.Date;
  */
 @Data
 public class HolidayLeaveCreateForm {
-    private  Integer holId;
+    private Integer holId;
     private Date holidayDate;
     private String holidayDetail;
 
-    public HolidayLeaveCreateForm(Integer holId, Date holidayDate, String holidayDetail){
+    public HolidayLeaveCreateForm(Integer holId, Date holidayDate, String holidayDetail) {
         this.holId = holId;
         this.holidayDate = holidayDate;
         this.holidayDetail = holidayDetail;
     }
-    public  HolidayLeaveCreateForm(){}
+
+    public HolidayLeaveCreateForm() {
+    }
 
 }

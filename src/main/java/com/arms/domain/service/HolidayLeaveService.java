@@ -13,12 +13,15 @@ import org.springframework.stereotype.Service;
 public class HolidayLeaveService {
     @Autowired
     HolidayLeaveRepository holidayLeaveRepository;
+
     public void save(HolidayLeaveCreateForm holidayLeaveCreateForm) {
         HolidayLeave holidayLeave = new HolidayLeave();
         holidayLeave.setHolidayDate(holidayLeaveCreateForm.getHolidayDate());
         holidayLeave.setHolidayDetail(holidayLeaveCreateForm.getHolidayDetail());
         holidayLeaveRepository.save(holidayLeave);
     }
-    public  void delete(Integer holId) {holidayLeaveRepository.delete(holId);
+
+    public void delete(Integer holId) {
+        holidayLeaveRepository.delete(holId);
     }
 }

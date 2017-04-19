@@ -1,30 +1,32 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title> </title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
     <js th:include="common/js :: js"></js>
     <css th:include="common/css :: css"></css>
     <script src="/js/html5shiv.js"></script>
 </head>
-<body class="landing">
 <header th:include="common/header :: header('Head')"></header>
-<!-- Banner -->
+<body class="landing">
 <section id="banner">
     <div class="inner">
         <p class="notFound">403 Access Denied</p>
-        <p class="mt10" >You cannot access this page or need to change username for ADMIN function.</p>
+        <p class="mt10">You cannot access this page or need to change username for ADMIN function.</p>
         <p class="buttonbox">
-            <a href="/"><button type="button" class="button btn-primary" >HOME</button></a>
-            <a href="/user/login"><button type="button" class="button btn-danger" >LOGIN</button></a>
+            <a href="/">
+                <button type="button" class="button btn-primary">HOME</button>
+            </a>
+            <a href="/user/login">
+                <button type="button" class="button btn-danger">LOGIN</button>
+            </a>
         </p>
     </div>
-    <!-- StaticPages home.html inserted into main.html End -->
 </section>
-<!-- Footer -->
 <footer id="footer">
 				<span class="copyright">
 					 ||||||||||| Leave Management System |||||||||||

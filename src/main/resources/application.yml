@@ -33,3 +33,6 @@ leave:
   jasper:
     path: src/main/resources/jasper
 
+
+multipart.maxFileSize: 3Mb
+multipart.maxRequestSize: 20Mb

@@ -1,6 +1,7 @@
 package com.arms.app.HolidayLeave;
 
 import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -8,16 +9,18 @@ import java.util.Date;
  */
 @Data
 public class AnnualLeaveSearch {
-    private  Integer holId;
+    private Integer holId;
     private String year;
     private Date holidayDate;
     private String holidayDetail;
 
- public AnnualLeaveSearch(Integer holId,String year,Date holidayDate,String holidayDetail){
-     this.holId = holId;
-     this.year = year;
-     this.holidayDate = holidayDate;
-     this.holidayDetail = holidayDetail;
- }
- public  AnnualLeaveSearch(){}
+    public AnnualLeaveSearch(Integer holId, String year, Date holidayDate, String holidayDetail) {
+        this.holId = holId;
+        this.year = year;
+        this.holidayDate = holidayDate;
+        this.holidayDetail = holidayDetail;
+    }
+
+    public AnnualLeaveSearch() {
+    }
 }

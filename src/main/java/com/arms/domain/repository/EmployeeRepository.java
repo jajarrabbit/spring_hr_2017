@@ -13,10 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-
-
     @Query(value = "SELECT MAX(emp_id) from employees", nativeQuery = true)
     Integer maxByEmpId();
-
-
 }

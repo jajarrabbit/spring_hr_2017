@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <js th:include="common/js :: js"></js>
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+    <css th:include="common/css :: css"></css>
+</head>
+<style>
+ input[type=text] {
+ background-color: #ffff99;
+ }
+ input[type=password] {
+ background-color: #ffff99;
+ }
+</style>
+<body>
+<header th:include="common/header :: header('Head')"></header>
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h2>Edit leave History</h2>
+    </header>
+    <div class="container">
+        <section id="content">
+            <body>
+            <form id="upload-file-form">
+                <div class="form-group row">
+                    <input id="leaveId" th:value="${leaveId}" type="hidden"/>
+
+                    <label for="upload-file-input">Upload your file:</label>
+                    <img id="blah"/>
+                </div>
+                <div align="middle">
+                    <input id="upload-file-input" type="file" name="uploadfile" accept="*"
+                           onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"/>
+                </div>
+                <div align="right">
+                    <a href="/leaveHistory/list" class="btn-lg btn-success" role="button" id="button">Upload</a>
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+<footer id="footer">
+	<span class="copyright">
+			 ||||||||||| Leave Management System ||||||||||| </span>
+</footer>
+</body>
+
+<script>
+    $(document).ready(function() {
+  $("#button").on("click", uploadFile);
+});
+
+function uploadFile() {
+    var leaveId = $('#leaveId').val();
+      $.ajax({
+        url: "/uploadFile/"+leaveId,
+        type: "POST",
+        data:    new FormData($("#upload-file-form")[0]),
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function () {
+          // Handle upload success
+          // ...
+        },
+        error: function () {
+          // Handle upload error
+          // ...
+        }
+      });
+}
+
+</script>
+</html>

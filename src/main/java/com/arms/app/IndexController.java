@@ -36,11 +36,9 @@ public class IndexController implements ErrorController {
                 cause = cause.getCause();
                 logger.error(String.valueOf(cause));
             }
-
             for (StackTraceElement stackTrace : e.getStackTrace()){
                 logger.error(String.valueOf(stackTrace));
             }
-
             modelAndView.addObject("showException", true);
             modelAndView.addObject("exception", e);
             modelAndView.addObject("causeList", causeList);
@@ -48,15 +46,12 @@ public class IndexController implements ErrorController {
         modelAndView.setViewName(statusCode.toString());
         return modelAndView;
     }
-
     @Override
     public String getErrorPath() {
         return PATH;
     }
-
     @RequestMapping(value = "/showDialog")
     public String showDialog(RedirectAttributes redirectAttributes) {
         return "messageDialog";
-
     }
 }

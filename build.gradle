@@ -42,5 +42,8 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 	compile('net.sourceforge.nekohtml:nekohtml')
 	compile('org.projectlombok:lombok')
-	compile 'net.sf.jasperreports:jasperreports:6.3.0'
+	compile('net.sf.jasperreports:jasperreports:6.3.0')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
+
+    
 }

@@ -15,18 +15,39 @@ import java.util.Date;
 @Table(name = "holiday_leave")
 public class HolidayLeave {
     private Integer holId;
+
     @Id
     @GeneratedValue
     @Column(name = "hol_id")
-    public Integer getHolId(){return holId;}public void setHolId(Integer holId){this.holId=holId;}
+    public Integer getHolId() {
+        return holId;
+    }
+
+    public void setHolId(Integer holId) {
+        this.holId = holId;
+    }
+
     private Date holidayDate;
+
     @Basic
     @Column(name = "holiday_date")
-    public Date setHolidayDate(){return holidayDate;}public void  setHolidayDate(Date holidayDate){this.holidayDate=holidayDate;}
+    public Date setHolidayDate() {
+        return holidayDate;
+    }
+
+    public void setHolidayDate(Date holidayDate) {
+        this.holidayDate = holidayDate;
+    }
+
     private String holidayDetail;
+
     @Basic
     @Column(name = "holiday_detail")
-    public String setHolidayDetail(){return holidayDetail;}public void setHolidayDetail(String holidayDetail){this.holidayDetail=holidayDetail;}
+    public String setHolidayDetail() {
+        return holidayDetail;
+    }
 
-
+    public void setHolidayDetail(String holidayDetail) {
+        this.holidayDetail = holidayDetail;
+    }
 }

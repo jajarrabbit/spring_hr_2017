@@ -1,17 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title> </title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<js th:include="common/js :: js"></js>
-	<noscript>
-		<css th:include="common/css :: css"></css>
-		<link rel="stylesheet" type="text/css" href="/css/style-xlarge.css" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
-	</noscript>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <js th:include="common/js :: js"></js>
+    <noscript>
+        <css th:include="common/css :: css"></css>
+        <link rel="stylesheet" type="text/css" href="/css/style-xlarge.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    </noscript>
 </head>
 <style>
     table tbody tr:hover
@@ -22,41 +23,36 @@
     {
     	background-color:#ffe6e6;
     }
+
 </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
 <section id="main" class="wrapper style1">
-	<header class="major">
-		<h2>Employee List</h2>
-	</header>
-	<div class="container">
-		<!-- Content -->
-		<section id="content">
-			<table id = "employeeTable" >
-				<thead class="fcWhite baseBgcolor fwNomal">
-				<div align="right">
-				<a href="/employee/create?form" class="btn-middle-lg btn-success" role ="button"><div class="btn -lg btn-success">
-					Create Employee
-				</div>
-				</a>
-				</div>
-				<tr>
-					<th th:text="'No'">No</th>
-					<th th:text="'Name'">Name</th>
-					<th th:text="'Hire Date'">Hire Date</th>
-				</tr>
-				</thead>
-				<tbody >
-				<tr th:each="employeeList,index : ${employeeList} ",  th:attr="empId=${employeeList.empId}"  >
-					<td th:text="${index.count}">No</td>
-					<td th:text="${employeeList.firstName} + ' ' + ${employeeList.lastName}">Thymus Thymi</td>
-					<td th:text="${#dates.format(employeeList.hireDate, 'yyyy/MM/dd')}">12</td>
-				</tr>
-				</tbody>
-			</table>
-		</section>
-	</div>
+    <header class="major">
+        <h2>Employee List</h2>
+    </header>
+    <div class="container">
+        <!-- Content -->
+        <section id="content">
+            <table id="employeeTable">
+                <thead class="fcWhite baseBgcolor fwNomal">
+                <tr>
+                    <th th:text="'No'">No</th>
+                    <th th:text="'Name'">Name</th>
+                    <th th:text="'Hire Date'">Hire Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employeeList,index : ${employeeList} " , th:attr="empId=${employeeList.empId}">
+                    <td th:text="${index.count}">No</td>
+                    <td th:text="${employeeList.firstName} + ' ' + ${employeeList.lastName}">Thymus Thymi</td>
+                    <td th:text="${#dates.format(employeeList.hireDate, 'yyyy/MM/dd')}">12</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </section>
 <!-- Footer -->
 <footer id="footer">
@@ -69,6 +65,7 @@
         window.location.href = "/employee/detail/" + index;
     });
  $('#employeeTable tbody tr').css('cursor', 'pointer');
+
 </script>
 </body>
 </html>

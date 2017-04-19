@@ -31,8 +31,8 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
             " ELSE " +
             " period_until <= :periodUntil " +
             " END "
-             , nativeQuery = true)
-    List<LeaveHistory> findAllByLeaveHistory(@Param("empId") Integer empId,@Param("periodFrom") String periodFrom,@Param("periodUntil") String periodUntil);
+            , nativeQuery = true)
+    List<LeaveHistory> findAllByLeaveHistory(@Param("empId") Integer empId, @Param("periodFrom") String periodFrom, @Param("periodUntil") String periodUntil);
 
     @Query(value = " SELECT SUM( fullday + ( halfday / 2 ) ) AS counts FROM leave_history " +
             " WHERE " +
@@ -49,15 +49,15 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
 
     @Query(value = " SELECT datediff( period_until , period_from ) + 1 AS count FROM leave_history " +
             " WHERE leave_id = :leaveId AND category_id = 1 "
-            ,nativeQuery = true)
+            , nativeQuery = true)
     BigInteger diffDate(@Param("leaveId") Integer leaveId);
 
     @Query(value = " SELECT * FROM leave_history" +
             " WHERE emp_Id = :empId AND category_id = 1 "
-            ,nativeQuery = true)
-    List<LeaveHistory> findAllByEmpId(@Param("empId")Integer empId);
+            , nativeQuery = true)
+    List<LeaveHistory> findAllByEmpId(@Param("empId") Integer empId);
 
     @Query(value = "SELECT MAX(leave_id) FROM leave_history "
-             , nativeQuery = true)
+            , nativeQuery = true)
     Integer findMaxLeaveId();
 }

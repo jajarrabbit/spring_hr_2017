@@ -16,11 +16,13 @@ public class HomeController {
         modelAndView.setViewName("/index");
         return modelAndView;
     }
+
     @RequestMapping("/index")
     public ModelAndView home1(ModelAndView modelAndView) {
         modelAndView.setViewName("/index");
         return modelAndView;
     }
+
     @RequestMapping("/leaveList")
     public ModelAndView home6(ModelAndView modelAndView) {
         modelAndView.setViewName("leaveList");

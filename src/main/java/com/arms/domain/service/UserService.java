@@ -5,6 +5,7 @@ import com.arms.app.user.UserAddForm;
 import com.arms.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.List;
 public class UserService extends AppService {
     @Autowired
     PasswordEncoder passwordEncoder;
+
     public void createUser(UserAddForm userAddForm) throws NoSuchAlgorithmException {
         Date nowDate = Calendar.getInstance().getTime();
         User user = new User();
@@ -27,13 +29,11 @@ public class UserService extends AppService {
         user.setRoleId(userAddForm.getRoleId());
         userRepository.save(user);
     }
-    public int checkEmail(UserAddForm userAddForm)
-    {
+
+    public int checkEmail(UserAddForm userAddForm) {
         List<User> userList = userRepository.findAll();
-        for (User userL : userList)
-        {
-            if(userAddForm.getEmail().equals(userL.getEmail()))
-            {
+        for (User userL : userList) {
+            if (userAddForm.getEmail().equals(userL.getEmail())) {
                 return 1;
             }
         }

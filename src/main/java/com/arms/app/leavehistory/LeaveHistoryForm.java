@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 /**
  * Created by arms20170106 on 16/1/2560.
  */
@@ -18,7 +19,6 @@ public class LeaveHistoryForm {
     private String periodFrom;
     @NotEmpty
     private String periodUntil;
-    @NotNull
     private Integer categoryId;
     @NotEmpty
     private String reason;
@@ -28,7 +28,7 @@ public class LeaveHistoryForm {
     private Integer fullday;
     private Integer halfday;
 
-    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark,String hireDate,Integer fullday,Integer halfday) {
+    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, String hireDate, Integer fullday, Integer halfday) {
         this.empId = empId;
         this.periodFrom = periodFrom;
         this.periodUntil = periodUntil;
@@ -39,5 +39,7 @@ public class LeaveHistoryForm {
         this.fullday = fullday;
         this.halfday = halfday;
     }
-    public LeaveHistoryForm() {}
+
+    public LeaveHistoryForm() {
+    }
 }

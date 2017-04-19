@@ -1,4 +1,5 @@
 package com.arms.domain.service;
+
 import com.arms.app.employee.EmployeeCreateForm;
 import com.arms.app.employee.EmployeeDetailForm;
 import com.arms.app.employee.EmployeeEditForm;
@@ -17,7 +18,8 @@ import java.util.List;
 
 /**
  * Created by arms20170106 on 30/1/2560.
- */@Service
+ */
+@Service
 @Transactional
 public class EmployeeService {
     @Autowired
@@ -33,22 +35,23 @@ public class EmployeeService {
         employee.setLastName(employeeCreateForm.getLastName());
         employee.setEmail(employeeCreateForm.getEmail());
         employee.setPhone(employeeCreateForm.getPhone());
-        try{
+        try {
             employee.setHireDate(formatt.parse(employeeCreateForm.getHireDate()));
-        }catch(ParseException ex){}
+        } catch (ParseException ex) {
+        }
         employeeRepository.save(employee);
         save1();
     }
 
-    public  void  save1()
-    {
+    public void save1() {
         Integer employees = employeeRepository.maxByEmpId();
         CalLeave calLeave = new CalLeave();
         calLeave.setEmpId(employees);
         calLeave.setBLeave(15);
         calLeaveRepository.save(calLeave);
     }
-    public EmployeeDetailForm getHistoryDetailByEmpId (Integer empId) {
+
+    public EmployeeDetailForm getHistoryDetailByEmpId(Integer empId) {
         EmployeeDetailForm view = new EmployeeDetailForm();
         Employee emp = employeeRepository.findOne(empId);
         view.setEmpId(emp.getEmpId());
@@ -60,46 +63,46 @@ public class EmployeeService {
         view.setPhone(emp.getPhone());
         return view;
     }
-   public int checkName(EmployeeCreateForm employeeCreateForm) {
-       List<Employee> employeeList = employeeRepository.findAll();
-       for (Employee empList : employeeList) {
-           if (employeeCreateForm.getFirstName().equals(empList.getFirstName()))
-           {
-               return 1;
-           }
-       }
-       return 0;
-   }
-   public int checkLastname(EmployeeCreateForm employeeCreateForm){
+
+    public int checkName(EmployeeCreateForm employeeCreateForm) {
         List<Employee> employeeList = employeeRepository.findAll();
-        for(Employee empList : employeeList)
-        {
-            if (employeeCreateForm.getLastName().equals(empList.getLastName()))
-            {
+        for (Employee empList : employeeList) {
+            if (employeeCreateForm.getFirstName().equals(empList.getFirstName())) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int checkLastname(EmployeeCreateForm employeeCreateForm) {
+        List<Employee> employeeList = employeeRepository.findAll();
+        for (Employee empList : employeeList) {
+            if (employeeCreateForm.getLastName().equals(empList.getLastName())) {
                 return 2;
             }
         }
         return 0;
-   }
-   public int checkEmail(EmployeeCreateForm employeeCreateForm){
-       List<Employee> employeeList =employeeRepository.findAll();
-       for (Employee empList : employeeList)
-       {
-           if(employeeCreateForm.getEmail().equals(empList.getEmail()))
-           {
-               return 1;
-           }
-       }
-       return 0;
-   }
+    }
+
+    public int checkEmail(EmployeeCreateForm employeeCreateForm) {
+        List<Employee> employeeList = employeeRepository.findAll();
+        for (Employee empList : employeeList) {
+            if (employeeCreateForm.getEmail().equals(empList.getEmail())) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     public void update(EmployeeEditForm employeeEditForm) {
         Employee employee = employeeRepository.findOne(employeeEditForm.getEmpId());
         employee.setFirstName(employeeEditForm.getFirstName());
         employee.setLastName(employeeEditForm.getLastName());
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-        try{
+        try {
             employee.setHireDate(df.parse(employeeEditForm.getHireDate()));
-        }catch(ParseException ex){}
+        } catch (ParseException ex) {
+        }
         employee.setEmail(employeeEditForm.getEmail());
         employee.setPhone(employeeEditForm.getPhone());
         employeeRepository.save(employee);

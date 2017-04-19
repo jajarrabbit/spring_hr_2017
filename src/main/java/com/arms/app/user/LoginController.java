@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by arms20170106 on 7/2/2560.
- */
 @Controller
 public class LoginController {
     @RequestMapping("/user/login")

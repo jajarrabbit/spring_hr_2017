@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 /**
@@ -29,8 +30,12 @@ public class AnnualLeaveController {
     EventService eventService;
     @Autowired
     HolidayLeaveService holidayLeaveService;
+
     @ModelAttribute
-    AnnualLeaveSearch setAnualLeaveSerach(){return new AnnualLeaveSearch();}
+    AnnualLeaveSearch setAnualLeaveSerach() {
+        return new AnnualLeaveSearch();
+    }
+
     private org.slf4j.Logger logger = LoggerFactory.getLogger(AnnualLeaveController.class);
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -40,47 +45,50 @@ public class AnnualLeaveController {
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "leaveList", method = RequestMethod.POST)
-    public  ModelAndView showList(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
+    public ModelAndView showList(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
         modelAndView.addObject("holidayLeaveList", holidayLeaveList);
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "add/{holId}", method = RequestMethod.GET)
     public ModelAndView add(@PathVariable Integer holId, ModelAndView modelAndView) {
-        try{
-                eventService.sendCalendar(holId);
-        }catch (Exception e)
-        {
-            logger.info("Error sending mail: "+ e.getMessage());
+        try {
+            eventService.sendCalendar(holId);
+        } catch (Exception e) {
+            logger.info("Error sending mail: " + e.getMessage());
         }
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "addAll", method = RequestMethod.GET)
-    public  ModelAndView showList1(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
+    public ModelAndView showList1(ModelAndView modelAndView, AnnualLeaveSearch annualLeaveSearch) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
         modelAndView.addObject("holidayLeaveList", holidayLeaveList);
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "addAll", method = RequestMethod.POST)
     public ModelAndView addAll(AnnualLeaveSearch annualLeaveSearch, ModelAndView modelAndView) {
         List<HolidayLeave> holidayLeaveList = holidayLeaveRepository.findAllByHolidayDate(annualLeaveSearch.getYear());
-        try{
+        try {
             eventService.sendAllMail(annualLeaveSearch);
-        }catch (Exception e)
-        {
-            logger.info("Error sending mail: "+ e.getMessage());
+        } catch (Exception e) {
+            logger.info("Error sending mail: " + e.getMessage());
         }
         modelAndView.setViewName("holidayLeave/leaveList");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
@@ -90,6 +98,7 @@ public class AnnualLeaveController {
         modelAndView.setViewName("/holidayLeave/create");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated HolidayLeaveCreateForm holidayLeaveCreateForm, BindingResult bindingResult) {
@@ -104,6 +113,7 @@ public class AnnualLeaveController {
             return modelAndView;
         }
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "delete/{holId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer holId) {

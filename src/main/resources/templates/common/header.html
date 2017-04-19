@@ -13,16 +13,20 @@
         <nav id="nav">
             <ul>
                 <li><a href="/index.html">Home</a></li>
+                <li><a href="/leaveHistory/list">Leave History List</a></li>
+                <li><a href="/employee/emp.html">Employee List</a></li>
                 <li>
-                    <a href="" class="icon fa-angle-down">Leave History</a>
+                    <a href="" class="icon fa-angle-down">Create</a>
                     <ul>
-                        <li><a href="/leaveHistory/list">List</a></li>
-                        <li><a href="/leaveHistory/create?form">Create</a></li>
+                        <li><a href="/leaveHistory/create?form">Create Leave</a></li>
+                        <li><a href="/employee/create?form">Create Employee</a></li>
                         <li><a href="/holidayLeave/leaveList">Add Annual Leave</a></li>
+                        <li><a href="/compensation/add?form">Add Compensation Day</a></li>
                     </ul>
                 </li>
-                <li><a href="/employee/emp.html">Employee</a></li>
-                <li><a href="/compensation/add?form">Add Compensation Day</a></li>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li> <a href="/logout"> Logout </a></li>
+                </th:block>
             </ul>
         </nav>
     </header>

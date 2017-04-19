@@ -3,7 +3,9 @@ package com.arms.app.component;
 /**
  * Created by arms20170106 on 8/2/2560.
  */
+
 import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

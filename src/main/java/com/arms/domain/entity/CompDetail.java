@@ -15,35 +15,65 @@ import java.util.List;
 @Table(name = "comp_detail")
 public class CompDetail {
 
-    private  Integer compDetailId;
+    private Integer compDetailId;
+
     @Id
     @GeneratedValue
     @Column(name = "comp_detail_id")
-    public Integer getCompDetailId(){return compDetailId;}
-    public  void setCompDetailId(Integer compDetailId){this.compDetailId = compDetailId;}
+    public Integer getCompDetailId() {
+        return compDetailId;
+    }
+
+    public void setCompDetailId(Integer compDetailId) {
+        this.compDetailId = compDetailId;
+    }
 
     private Date compAddDate;
+
     @Basic
     @Column(name = "comp_add_date")
-    public Date getCompAddDate(){return compAddDate;}
-    public  void setCompAddDate(Date compAddDate){this.compAddDate = compAddDate;}
+    public Date getCompAddDate() {
+        return compAddDate;
+    }
+
+    public void setCompAddDate(Date compAddDate) {
+        this.compAddDate = compAddDate;
+    }
 
     private String compDetail;
+
     @Basic
     @Column(name = "comp_detail")
-    public String getCompDetail(){return compDetail;}
-    public  void setCompDetail(String compDetail){this.compDetail = compDetail;}
+    public String getCompDetail() {
+        return compDetail;
+    }
+
+    public void setCompDetail(String compDetail) {
+        this.compDetail = compDetail;
+    }
 
     private Integer empId;
+
     @Basic
     @Column(name = "emp_id")
-    public Integer getEmpId(){return empId;}
-    public void setEmpId(Integer empId){this.empId = empId;}
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
     private Integer isUsed;
+
     @Basic
     @Column(name = "is_used")
-    public Integer getIsUsed(){return isUsed;}
-    public  void  setIsUsed(Integer isUsed){this.isUsed = isUsed;}
+    public Integer getIsUsed() {
+        return isUsed;
+    }
+
+    public void setIsUsed(Integer isUsed) {
+        this.isUsed = isUsed;
+    }
 
 }

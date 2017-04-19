@@ -1,7 +1,5 @@
 package com.arms.app.employee;
 
-
-
 import com.arms.domain.entity.Employee;
 import com.arms.domain.repository.EmployeeRepository;
 import com.arms.domain.service.CompService;
@@ -35,12 +33,21 @@ public class EmployeeController {
 
     @Autowired
     LeaveBalanceService leaveBalanceService;
+
     @ModelAttribute
-    EmployeeDetailForm setEmployeeDetailForm(){return new EmployeeDetailForm();}
+    EmployeeDetailForm setEmployeeDetailForm() {
+        return new EmployeeDetailForm();
+    }
+
     @ModelAttribute
-    EmployeeEditForm setEmployeeEditForm(){return new EmployeeEditForm();}
+    EmployeeEditForm setEmployeeEditForm() {
+        return new EmployeeEditForm();
+    }
+
     @ModelAttribute
-    EmployeeCreateForm setEmployeeCreateForm(){return new EmployeeCreateForm();}
+    EmployeeCreateForm setEmployeeCreateForm() {
+        return new EmployeeCreateForm();
+    }
 
 
     @RequestMapping(value = "emp", method = RequestMethod.GET)
@@ -51,14 +58,16 @@ public class EmployeeController {
         compService.expired();
         return modelAndView;
     }
+
     @RequestMapping(value = "emp", method = RequestMethod.POST)
-    public ModelAndView showList(ModelAndView modelAndView){
+    public ModelAndView showList(ModelAndView modelAndView) {
         List<Employee> employeeList = employeeRepository.findAll();
         modelAndView.addObject("employeeList", employeeList);
         modelAndView.setViewName("/employee/emp");
         compService.expired();
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
     public ModelAndView createForm(ModelAndView modelAndView) {
@@ -68,18 +77,17 @@ public class EmployeeController {
         modelAndView.setViewName("/employee/create");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public ModelAndView create(ModelAndView modelAndView, @Validated EmployeeCreateForm employeeCreateForm, BindingResult bindingResult) {
-        if(employeeService.checkName(employeeCreateForm)==1)
-        {
-            if(employeeService.checkLastname(employeeCreateForm)==2) {
+        if (employeeService.checkName(employeeCreateForm) == 1) {
+            if (employeeService.checkLastname(employeeCreateForm) == 2) {
                 bindingResult.rejectValue("firstName", "messageError", "Have this name in database");
             }
         }
-        if(employeeService.checkEmail(employeeCreateForm)== 1)
-        {
-            bindingResult.rejectValue("email","messageError","This E-mail have used");
+        if (employeeService.checkEmail(employeeCreateForm) == 1) {
+            bindingResult.rejectValue("email", "messageError", "This E-mail have used");
         }
         if (bindingResult.hasErrors()) {
             List<Employee> employeeList = employeeRepository.findAll();
@@ -92,27 +100,30 @@ public class EmployeeController {
             return modelAndView;
         }
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @RequestMapping(value = "detail/{empId}", method = RequestMethod.GET)
     public ModelAndView showDetail(@PathVariable Integer empId, ModelAndView modelAndView) {
-        modelAndView.addObject("employeeDetailForm",  employeeService.getHistoryDetailByEmpId(empId));
+        modelAndView.addObject("employeeDetailForm", employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/detail");
         Double employ = leaveBalanceService.calculate(empId);
         Integer compen = compService.compCal(empId);
-        modelAndView.addObject("employ",employ);
-        modelAndView.addObject("compen",compen);
+        modelAndView.addObject("employ", employ);
+        modelAndView.addObject("compen", compen);
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit/{empId}", method = RequestMethod.GET)
     public ModelAndView showEdit(@PathVariable Integer empId, ModelAndView modelAndView) {
-        modelAndView.addObject("employeeEditForm",  employeeService.getHistoryDetailByEmpId(empId));
+        modelAndView.addObject("employeeEditForm", employeeService.getHistoryDetailByEmpId(empId));
         modelAndView.setViewName("employee/edit");
         return modelAndView;
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView,EmployeeEditForm employeeEditForm) {
+    public ModelAndView edit(ModelAndView modelAndView, EmployeeEditForm employeeEditForm) {
         employeeService.update(employeeEditForm);
         modelAndView.setViewName("redirect:/employee/emp");
         return modelAndView;

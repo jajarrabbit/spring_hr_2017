@@ -1,24 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title> </title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
     <js th:include="common/js :: js"></js>
-    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
 </head>
-<style>
- input[type=text] {
- background-color: #ffff99;
- }
- input[type=password] {
- background-color: #ffff99;
- }
- </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
@@ -29,75 +22,84 @@
     <div class="container">
         <!-- Content -->
         <section id="content">
-            <form th:action="@{/leaveHistory/create}" th:object="${leaveHistoryForm}" method="post" onsubmit="return validateForm()" class="form-horizontal form-width120 ml15" role="form" name="form1">
-            <div class="form-group row ">
-                <label for="empId" class="col-2">Name : </label>
-                <div class="col-4" >
-                    <select  id="empId" th:field="*{empId}" style ="background-color: #ffff99;">
-                        <option value=""></option>
-                        <option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
-                    </select>
-                    <span class="help-block" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}">Name Error </span>
+            <form id="upload-file-form" th:action="@{/leaveHistory/create}" th:object="${leaveHistoryForm}" method="post"
+                  onsubmit="return validateForm()" class="form-horizontal form-width120 ml15" role="form" name="form1">
+                <div class="form-group row ">
+                    <label for="empId" class="col-2">Name : </label>
+                    <div class="col-4">
+                        <select id="empId" th:field="*{empId}" >
+                            <option value=""></option>
+                            <option th:each="employee : ${employeeList}" th:value="${employee.empId}"
+                                    th:text="${employee.firstName}+' '+${employee.lastName}">AAA
+                            </option>
+                        </select>
+                        <span class="help-block" th:if="${#fields.hasErrors('empId')}"
+                              th:errors="*{empId}">Name Error </span>
+                    </div>
+                    <label for="hireDate" class="col-2 ">HireDate : </label>
+                    <div class="col-4">
+                        <input class="form-control-lg" id="hireDate" th:field="*{hireDate}" type="text" disabled/>
+                    </div>
                 </div>
-                <label for="hireDate" class="col-2 ">HireDate : </label>
-                <div class="col-4">
-                    <input  class="form-control-lg" id="hireDate" th:field="*{hireDate}"   type="text" disabled/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
-                <div class="col-4" >
-                    <div class="input-group date ">
-                        <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
+                <div class="form-group row">
+                    <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
+                    <div class="col-4">
+                        <div class="input-group date ">
+                            <input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('periodFrom')}" th:errors="*{periodFrom}">Date Start Error </span>
-                </div>
-                <label for="periodUntil" class="col-2 col-form-label">Until : </label>
-                <div class="col-4" >
-                    <div class="input-group date">
-                    <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <span class="help-block" th:if="${#fields.hasErrors('periodFrom')}" th:errors="*{periodFrom}">Date Start Error </span>
                     </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('periodUntil')}" th:errors="*{periodUntil}">Date end Error </span>
+                    <label for="periodUntil" class="col-2 col-form-label">Until : </label>
+                    <div class="col-4">
+                        <div class="input-group date">
+                            <input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                        <span class="help-block" th:if="${#fields.hasErrors('periodUntil')}" th:errors="*{periodUntil}">Date end Error </span>
+                    </div>
                 </div>
-            </div>
                 <div class="form-group row">
                     <label for="categoryId" class="col-2 col-form-label">Category : </label>
                     <div class="col-5">
-                        <select id="categoryId" th:field="*{categoryId}" style="background-color: #ffff99;">
-                            <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}" th:text="${leaveType.categoryName}">AAA</option>
+                        <select id="categoryId" th:field="*{categoryId}" >
+                            <option th:each="leaveType : ${leaveTypeList}" th:value="${leaveType.categoryId}"
+                                    th:text="${leaveType.categoryName}">AAA
+                            </option>
                         </select>
                         <span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error </span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label  class="col-2 col-form-label" for = "fullday">Full Day: </label>
-                    <div class = "col-4">
-                        <input type="text" class="form-control-lg" id="fullday" th:field="*{fullday}" th:value="0" >
+                    <label class="col-2 col-form-label" for="fullday">Full Day: </label>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="fullday" th:field="*{fullday}" th:value="0">
                         <span class="help-block" th:if="${#fields.hasErrors('fullday')}" th:errors="*{fullday}">Fullday Error </span>
                     </div>
-                    <label  class="col-2 col-form-label" for="halfday">Half Day: </label>
-                    <div class="col-4" >
-                        <input type="text" class="form-control-lg" id="halfday" th:field="*{halfday}" th:value="0" >
+                    <label class="col-2 col-form-label" for="halfday">Half Day: </label>
+                    <div class="col-4">
+                        <input type="text" class="form-control-lg" id="halfday" th:field="*{halfday}" th:value="0">
                     </div>
                 </div>
-            <div class="form-group row">
-                <label for="reason" class="col-2 col-form-label">Reason : </label>
-                <div class="col-10">
-                    <textarea class="form-control " rows="5" id="reason" th:field="*{reason}"style="background-color: #ffff99; margin: 0px; width: 671px; height: 180px;"></textarea>
-                    <span class="help-block" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}">Reason Error </span>
+                <div class="form-group row">
+                    <label for="reason" class="col-2 col-form-label">Reason : </label>
+                    <div class="col-10">
+
+                        <textarea class="form-control " rows="5" id="reason" th:field="*{reason}"
+                                  style=" margin: 0px; width: 500px; height: 180px;"></textarea>
+                        <span class="help-block" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}">Reason Error </span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="remark" class="col-2 col-form-label">Remark : </label>
-                <div class="col-10">
-                    <textarea class="form-control " rows="5" id="remark" th:field="*{remark}" style="background-color: #ffff99; margin: 0px; width: 671px; height: 180px;"></textarea>
-                    <span class="help-block" th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">Remark Error </span>
+                <div class="form-group row">
+                    <label for="remark" class="col-2 col-form-label">Remark : </label>
+                    <div class="col-10">
+                        <textarea class="form-control " rows="5" id="remark" th:field="*{remark}"
+                                  style=" margin: 0px; width: 500px; height: 180px;"></textarea>
+                        <span class="help-block" th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">Remark Error </span>
+                    </div>
                 </div>
-            </div>
                 <div align="right">
-            <button type="submit" class="btn-success">Submit!</button>
+                    <button type="submit" class="btn-success">Submit!</button>
                 </div>
             </form>
         </section>
@@ -120,23 +122,6 @@ $(document).ready(function() {
             }
         });
     });
-});
-
-$validator.addMethod("greaterThan",
-function(value, element, params) {
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
-
-    return isNaN(value) && isNaN($(params).val())
-        || (Number(value) > Number($(params).val()));
-},'Must be greater than {0}.');
-$("#periodUntil").rules('add', { greaterThan: "#periodFrom" });
-or
-$("form").validate({
-    rules: {
-        periodUntil: { greaterThan: "#periodFrom" }
-    }
 });
 
 </script>

@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:width="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title> </title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<js th:include="common/js :: js"></js>
-	<noscript>
-		<css th:include="common/css :: css"></css>
-		<link rel="stylesheet" type="text/css" href="/css/style-xlarge.css" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
-	</noscript>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <js th:include="common/js :: js"></js>
+    <noscript>
+        <css th:include="common/css :: css"></css>
+        <link rel="stylesheet" type="text/css" href="/css/style-xlarge.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    </noscript>
 </head>
 <style>
     table tbody tr:hover
@@ -23,79 +25,94 @@
     {
     	background-color:#ffe6e6;
     }
-    input[type="text"]{
-    	background-color:#f5f5f5;
-    }
+
+
 </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
 <section id="main" class="wrapper style1">
-	<header class="major">
-		<h2>Leave History List</h2>
-		<form th:action="@{/leaveHistory/list}" th:object="${leaveHistorySearch}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1" >
-		<div class="form-group row ">
-			<label for="empId" class="col-2">Name : </label>
-			<div class="col-3" >
-				<select  id="empId" th:field="*{empId}" style="background-color:#f5f5f5;">
-					<option value=""></option>
-					<option th:each="employee : ${employeeList}" th:value="${employee.empId}" th:text="${employee.firstName}+' '+${employee.lastName}">AAA</option>
-				</select>
-			</div>
-			<div class="col-3">
-				<button class="btn-lg btn-success" type="submit">Search !    <i class="	glyphicon glyphicon-search"></i> </button>
-			</div>
-		</div>
-			<div class="form-group row">
-				<label for="periodFrom" class="col-2 col-form-label">Period From : </label>
-				<div class="col-3" >
-					<div class="input-group date ">
-						<input type="text" class="form-control-lg" id="periodFrom" th:field="*{periodFrom}">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					</div>
-				</div>
-				<label for="periodUntil" class="col-1 col-form-label">Until : </label>
-				<div class="col-3" >
-					<div class="input-group date">
-						<input class="form-control-lg" type="text" id="periodUntil" th:field="*{periodUntil}">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-					</div>
-				</div>
-			</div>
-		</form>
-	</header>
-	<div class="container" style="width: 1440px;">
-		<!-- Content -->
-		<section id="content">
-			<table id = "leaveHistoryTable" >
-				<thead class="fcWhite baseBgcolor fwNomal">
-				<tr>
-					<th th:text="'No'">No</th>
-					<th th:text="'Name'">Name</th>
-					<th th:text="'Time'">Time</th>
-					<th th:text="'Type'">Type</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}" th:attr="leaveId=${leaveHistory.leaveId}">
+    <header class="major">
+        <h2>Leave History List</h2>
+        <form th:action="@{/leaveHistory/list}" th:object="${leaveHistorySearch}" method="post"
+              class="form-horizontal form-width120 ml15" role="form" name="form1">
+            <div class="form-group row ">
+                <label for="empId" class="col-2">Name : </label>
+                <div class="col-3">
+                    <select id="empId" th:field="*{empId}" style="background-color:#f5f5f5;">
+                        <option value=""></option>
+                        <option th:each="employee : ${employeeList}" th:value="${employee.empId}"
+                                th:text="${employee.firstName}+' '+${employee.lastName}">AAA
+                        </option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <button class="btn-lg btn-success" type="submit">Search ! <i
+                            class="	glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="periodFrom" class="col-2 col-form-label">Period From : </label>
+                <div class="col-3">
+                    <div class="input-group date ">
+                        <input type="text" class="form-control-lg" style="background-color:#ffffff;" id="periodFrom" th:field="*{periodFrom}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </div>
+                <label for="periodUntil" class="col-1 col-form-label">Until : </label>
+                <div class="col-3">
+                    <div class="input-group date">
+                        <input class="form-control-lg" type="text" style="background-color:#ffffff;" id="periodUntil" th:field="*{periodUntil}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </header>
+    <div class="container" style="width: 1440px;">
+        <!-- Content -->
+        <section id="content">
+            <table id="leaveHistoryTable">
+                <thead class="fcWhite baseBgcolor fwNomal">
+                <tr>
+                    <th th:text="'No'">No</th>
+                    <th th:text="'Name'">Name</th>
+                    <th th:text="'Time'">Time</th>
+                    <th th:text="'Type'">Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="leaveHistory,index : ${leaveHistoryList}" th:action="@{/leaveHistory/edit}"
+                    th:attr="leaveId=${leaveHistory.leaveId}">
 
-					<td th:text="${index.count}">No</td>
-					<td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus Thymi</td>
-					<td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">12</td>
-					<td th:text="${leaveHistory.leaveType.categoryName}">32</td>
-					<td colspan="4"    >
-						<a th:href="'/leaveHistory/edit/' + ${leaveHistory.leaveId}" class="btn-sm btn-info" role="button" >
-							Edit<i class="glyphicon glyphicon-pencil"></i></a>
-						<a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger" role="button" >
-							Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
-						<a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-warning" role="button" >
-							Download<i class="glyphicon glyphicon-save-file"></i></a>
-					 </td>
-				  </tr>
-				</tbody>
-			</table>
-		</section>
-	</div>
+                    <td th:text="${index.count}">No</td>
+                    <td th:text="${leaveHistory.employee.firstName} + ' ' + ${leaveHistory.employee.lastName}">Thymus
+                        Thymi
+                    </td>
+                    <td th:text="${#dates.format(leaveHistory.periodFrom, 'yyyy/MM/dd')}+' - '+${#dates.format(leaveHistory.periodUntil, 'yyyy/MM/dd')}">
+                        12
+                    </td>
+                    <td th:text="${leaveHistory.leaveType.categoryName}">32</td>
+                    <td colspan="4">
+                        <a th:href="'/leaveHistory/edit/' + ${leaveHistory.leaveId}" class="btn-sm btn-info"
+                           role="button">
+                            Edit<i class="glyphicon glyphicon-pencil"></i></a>
+                        <a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger"
+                           role="button">
+                            Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
+                        <a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-warning"
+                           role="button">
+                            Download<i class="glyphicon glyphicon-save-file"></i></a>
+                        <th:block th:if="${leaveHistory.leaveType.categoryName == 'sick leave with medical certificate'}">
+                            <a th:href="'/uploadFile/'+ ${leaveHistory.leaveId}" class="btn-sm btn-success"
+                               role="button">Upload<i class="glyphicon glyphicon-globe"></i></a>
+                        </th:block>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </section>
 <!-- Footer -->
 <footer id="footer">
@@ -108,6 +125,7 @@
         window.location.href = "/leaveHistory/detail/" + index;
     });
      $('#leaveHistoryTable tbody tr').css('cursor', 'pointer');
+
 </script>
 </body>
 </html>

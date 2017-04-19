@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title> </title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -11,23 +12,13 @@
         <css th:include="common/css :: css"></css>
     </noscript>
 </head>
-<style>
- input[type=text] {
- background-color: #ffff99;
- }
- input[type=password] {
- background-color: #ffff99;
- }
- </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
-<!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
         <h2>LOG IN</h2>
     </header>
     <div class="container">
-        <!-- Content -->
         <section id="content">
             <div id="login" align="middle">
                 <div th:if="${loginFail}" class="alert alert-danger alert-dismissible" role="alert">
@@ -66,7 +57,6 @@
         </section>
 </div>
 </section>
-<!-- Footer -->
 <footer id="footer">
 	<span class="copyright">
 			 ||||||||||| Leave Management System ||||||||||| </span>

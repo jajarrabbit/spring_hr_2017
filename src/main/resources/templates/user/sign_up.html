@@ -1,6 +1,7 @@
  <!DOCTYPE HTML>
  <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org">
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
  <head>
      <title> </title>
      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -11,26 +12,13 @@
          <css th:include="common/css :: css"></css>
      </noscript>
  </head>
- <style>
- input[type=text] {
- background-color: #ffff99;
-
- }
- input[type=password] {
- background-color: #ffff99;
-
- }
-
- </style>
  <body>
  <header th:include="common/header :: header('Head')"></header>
- <!-- Main -->
  <section id="main" class="wrapper style1">
      <header class="major">
          <h2>Sign Up</h2>
      </header>
      <div class="container">
-         <!-- Content -->
          <section id="content">
              <form th:action="@{/user/add}" th:object="${userAddForm}" method="post">
                      <p>
@@ -57,7 +45,7 @@
                  <div class="form-group mt20 mb10">
                      <label for="roleId" class="col-2 col-form-label"> Role Of Account </label>
                      <div class = "col-4" align="left">
-                         <select id="roleId" th:field="*{roleId}" style=" background-color: #ffff99;">
+                         <select id="roleId" th:field="*{roleId}" >
                              <option th:each="role:${roleList}" class="form-control" th:value="${role.roleId}" th:text="${role.roleName}">AAA</option>
                          </select>
                      </div>
@@ -70,7 +58,6 @@
  </section>
  </div>
  </section>
- <!-- Footer -->
  <footer id="footer">
 	<span class="copyright"> ||||||||||| Leave Management System ||||||||||| </span>
  </footer>

@@ -14,32 +14,38 @@ import java.util.List;
 public class LeaveType {
 
     private Integer categoryId;
+
     @Id
     @GeneratedValue
     @Column(name = "category_id")
-    public  Integer getCategoryId(){
+    public Integer getCategoryId() {
         return categoryId;
     }
-    public void setCategoryId(Integer categoryId){
+
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
     private List<LeaveHistory> leaveHistoryList;
+
     @OneToMany(mappedBy = "leaveType")
-    public List<LeaveHistory> getLeaveHistoryList(){
+    public List<LeaveHistory> getLeaveHistoryList() {
         return leaveHistoryList;
     }
-    public void setLeaveHistory(List<LeaveHistory> leaveHistoryList){
+
+    public void setLeaveHistory(List<LeaveHistory> leaveHistoryList) {
         this.leaveHistoryList = leaveHistoryList;
     }
 
     private String categoryName;
+
     @Basic
     @Column(name = "category_name")
-    public String getCategoryName(){
+    public String getCategoryName() {
         return categoryName;
     }
-    public void setCategoryName(String categoryName){
+
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 

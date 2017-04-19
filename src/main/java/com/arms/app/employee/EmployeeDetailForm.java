@@ -16,8 +16,8 @@ public class EmployeeDetailForm {
     private String hireDate;
     private Integer leaveLeft;
 
-    public  EmployeeDetailForm (Integer leaveLeft,Integer empId, String firstName, String lastName, String email, String phone, String hireDate){
-        this.empId =empId;
+    public EmployeeDetailForm(Integer leaveLeft, Integer empId, String firstName, String lastName, String email, String phone, String hireDate) {
+        this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -25,5 +25,7 @@ public class EmployeeDetailForm {
         this.hireDate = hireDate;
         this.leaveLeft = leaveLeft;
     }
-    public  EmployeeDetailForm() {}
+
+    public EmployeeDetailForm() {
+    }
 }

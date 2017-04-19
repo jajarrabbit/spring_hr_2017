@@ -20,20 +20,40 @@ public class Role {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId(){return id;}
-    public void setId(int id){this.id = id;}
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Basic
     @Column(name = "role_id")
-    public Integer getRoleId(){return roleId;}
-    public  void setRoleId(Integer roleId){this.roleId = roleId;}
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
     @Basic
     @Column(name = "role_name")
-    public String getRoleName(){return roleName;}
-    public void getRoleName(String roleName){this.roleName = roleName;}
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void getRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     @OneToMany(mappedBy = "role")
-    public List<User> getUserList(){return userList;}
-    public void setUserList(List<User> userList){this.userList = userList;}
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 }

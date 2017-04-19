@@ -10,24 +10,26 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class LeaveHistorySearch {
-        private Integer empId;
-        private String periodFrom;
-        private String periodUntil;
-        private Integer categoryId;
-        private String reason;
-        private String remark;
-        private Integer fullday;
-        private Integer halfday;
+    private Integer empId;
+    private String periodFrom;
+    private String periodUntil;
+    private Integer categoryId;
+    private String reason;
+    private String remark;
+    private Integer fullday;
+    private Integer halfday;
 
-        public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark,Integer fullday,Integer halfday) {
-            this.empId = empId;
-            this.periodFrom = periodFrom;
-            this.periodUntil = periodUntil;
-            this.categoryId = categoryId;
-            this.reason = reason;
-            this.remark = remark;
-            this.fullday = fullday;
-            this.halfday = halfday;
-        }
-        public LeaveHistorySearch() {}
+    public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, Integer fullday, Integer halfday) {
+        this.empId = empId;
+        this.periodFrom = periodFrom;
+        this.periodUntil = periodUntil;
+        this.categoryId = categoryId;
+        this.reason = reason;
+        this.remark = remark;
+        this.fullday = fullday;
+        this.halfday = halfday;
     }
+
+    public LeaveHistorySearch() {
+    }
+}

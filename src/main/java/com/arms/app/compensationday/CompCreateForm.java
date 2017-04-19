@@ -10,20 +10,20 @@ import java.util.Date;
  */
 @Data
 public class CompCreateForm {
-
     private Integer compDetailId;
     private Integer empId;
     private String compDetail;
     private Date compAddDate;
     private Integer isused;
 
-    public CompCreateForm(Integer compDetailId,Integer empId, String compDetail,Date compAddDate,Integer isused)
-    {
+    public CompCreateForm(Integer compDetailId, Integer empId, String compDetail, Date compAddDate, Integer isused) {
         this.compDetailId = compDetailId;
         this.compDetail = compDetail;
         this.compAddDate = compAddDate;
         this.empId = empId;
         this.isused = isused;
     }
-    public  CompCreateForm(){}
+
+    public CompCreateForm() {
+    }
 }

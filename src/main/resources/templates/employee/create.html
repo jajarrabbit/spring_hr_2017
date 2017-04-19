@@ -1,24 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title> </title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
     <js th:include="common/js :: js"></js>
-    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css" />
+    <link rel="stylesheet" type="text/css" href="css/style-xlarge.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
 </head>
-<style>
- input[type=text] {
- background-color: #ffff99;
- }
- input[type=password] {
- background-color: #ffff99;
- }
- </style>
 <body>
 <header th:include="common/header :: header('Head')"></header>
 <!-- Main -->
@@ -29,24 +22,25 @@
     <div class="container">
         <!-- Content -->
         <section id="content">
-            <form th:action="@{/employee/create}"  th:object="${employeeCreateForm}" method="post" class="form-horizontal form-width120 ml15" role="form" name="form1">
+            <form th:action="@{/employee/create}" th:object="${employeeCreateForm}" method="post"
+                  class="form-horizontal form-width120 ml15" role="form" name="form1">
                 <div class="form-group row">
                     <label for="firstName" class="col-2 ">First name : </label>
                     <div class="col-4">
-                        <input  class="form-control-lg" id="firstName" th:field="*{firstName}"   type="text" />
+                        <input class="form-control-lg" id="firstName" th:field="*{firstName}" type="text"/>
                         <span class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error! </span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lastName" class="col-2 ">Last name : </label>
                     <div class="col-4">
-                        <input  class="form-control-lg" id="lastName" th:field="*{lastName}"   type="text" />
+                        <input class="form-control-lg" id="lastName" th:field="*{lastName}" type="text"/>
                         <span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error!</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="hireDate" class="col-2 col-form-label">Hire Date : </label>
-                    <div class="col-4" >
+                    <div class="col-4">
                         <div class="input-group date ">
                             <input type="text" class="form-control-lg" id="hireDate" th:field="*{hireDate}">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -57,15 +51,17 @@
                 <div class="form-group row">
                     <label for="email" class="col-2 ">E mail: </label>
                     <div class="col-4">
-                        <input  class="form-control-lg" id="email" th:field="*{email}"   type="text" />
-                        <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error! </span>
+                        <input class="form-control-lg" id="email" th:field="*{email}" type="text"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">Email Error! </span>
                     </div>
                 </div>
-                    <div class="form-group row">
+                <div class="form-group row">
                     <label for="phone" class="col-2 ">Phone : </label>
                     <div class="col-4">
-                        <input  class="form-control-lg" id="phone" th:field="*{phone}"   type="text" />
-                        <span class="help-block" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error!</span>
+                        <input class="form-control-lg" id="phone" th:field="*{phone}" type="text"/>
+                        <span class="help-block" th:if="${#fields.hasErrors('phone')}"
+                              th:errors="*{phone}">Phone Error!</span>
                     </div>
                 </div>
                 <button type="submit" class="btn-success">Create !</button>

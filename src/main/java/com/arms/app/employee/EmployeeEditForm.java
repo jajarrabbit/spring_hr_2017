@@ -15,17 +15,17 @@ public class EmployeeEditForm {
     private String firstName;
     private String lastName;
     @NotEmpty
-    @Pattern(regexp ="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
     private String email;
     @NotEmpty
-    @Pattern(regexp ="0[8-9][0-9]*")
-    @Size(min = 9,max = 10)
+    @Pattern(regexp = "0[8-9][0-9]*")
+    @Size(min = 9, max = 10)
     private String phone;
     private String hireDate;
     private Integer leaveLeft;
 
-    public  EmployeeEditForm (Integer leaveLeft,Integer empId, String firstName, String lastName, String email, String phone, String hireDate){
-        this.empId =empId;
+    public EmployeeEditForm(Integer leaveLeft, Integer empId, String firstName, String lastName, String email, String phone, String hireDate) {
+        this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,5 +33,7 @@ public class EmployeeEditForm {
         this.hireDate = hireDate;
         this.leaveLeft = leaveLeft;
     }
-    public  EmployeeEditForm() {}
+
+    public EmployeeEditForm() {
+    }
 }

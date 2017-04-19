@@ -9,7 +9,6 @@ import java.util.Date;
  */
 @Data
 public class PdfBean {
-
     private String firstName;
     private String lastName;
     private Date periodFrom;
@@ -25,5 +24,4 @@ public class PdfBean {
     private Double BLeave;
     private Double BTotal;
     private Double leaveLeft;
-
 }

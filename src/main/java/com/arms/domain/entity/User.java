@@ -12,43 +12,83 @@ import java.util.Date;
 @Data
 @Table(name = "user")
 public class User {
-private Integer id;
-private  String username;
-private String password;
-private String email;
-private Date created;
-private Integer roleId;
+    private Integer id;
+    private String username;
+    private String password;
+    private String email;
+    private Date created;
+    private Integer roleId;
 
-@Id
-@GeneratedValue
-@Column(name = "id")
-public Integer getId(){return id;} public void setId(Integer id){this.id = id;}
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    public Integer getId() {
+        return id;
+    }
 
-@Basic
-@Column(name = "username")
-public  String getUsername() {return username;} public void  setUsername(String username){this.username = username;}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-@Basic
-@Column(name = "password")
-public String getPassword() {return  password;} public void setPassword(String password){this.password =password;}
+    @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
 
-@Basic
-@Column(name = "email")
-public  String getEmail() {return email;} public  void  setEmail(String email){this.email = email;}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-@Basic
-@Column(name = "created")
-public  Date getCreated() {return  created;} public  void  setCreated(Date created){this.created = created;}
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
 
-@Basic
-@Column(name = "role_id")
-public Integer getRoleId(){return roleId;} public void setRoleId(Integer roleId){this.roleId = roleId;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-private Role role;
-@ManyToOne
-@JoinColumn(name = "role_id", insertable = false , updatable = false)
-public Role getRole(){
-    return  role;
-}
-public void setRole(Role role){this.role = role;}
+    @Basic
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Basic
+    @Column(name = "created")
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Basic
+    @Column(name = "role_id")
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

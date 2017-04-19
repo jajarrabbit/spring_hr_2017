@@ -1,10 +1,6 @@
 package com.arms.domain.bean;//package com.arms.domain.bean;
 
 
-/**
- * Created by arms20170106 on 6/3/2560.
- */
-
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.web.servlet.view.AbstractView;
@@ -23,7 +19,6 @@ import java.util.Map;
 public class JasperPdfModelBean extends AbstractView {
 
     private static final String CONTENT_TYPE = "application/pdf";
-
     private String jrxmlPath;
     private String fileName;
     private String jasperPath;
@@ -63,6 +58,5 @@ public class JasperPdfModelBean extends AbstractView {
             return new ByteArrayInputStream(pdf);
         }
     }
-
 }
-//
+

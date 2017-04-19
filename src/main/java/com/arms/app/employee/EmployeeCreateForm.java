@@ -18,18 +18,18 @@ public class EmployeeCreateForm {
     @NotEmpty
     private String lastName;
     @NotEmpty
-    @Pattern(regexp ="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
     private String email;
     @NotEmpty
-    @Pattern(regexp ="0[][0-9]*")
-    @Size(min = 9,max = 10)
+    @Pattern(regexp = "0[0-9]*")
+    @Size(min = 9, max = 10)
     private String phone;
     @NotEmpty
     private String hireDate;
     private Integer leaveLeft;
 
-    public  EmployeeCreateForm (Integer empId, String firstName, String lastName, String email, String phone, String hireDate, Integer leaveLeft){
-        this.empId =empId;
+    public EmployeeCreateForm(Integer empId, String firstName, String lastName, String email, String phone, String hireDate, Integer leaveLeft) {
+        this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -37,5 +37,7 @@ public class EmployeeCreateForm {
         this.hireDate = hireDate;
         this.leaveLeft = leaveLeft;
     }
-    public  EmployeeCreateForm() {}
+
+    public EmployeeCreateForm() {
+    }
 }
