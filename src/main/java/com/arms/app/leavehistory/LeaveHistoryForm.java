@@ -27,8 +27,9 @@ public class LeaveHistoryForm {
     private String hireDate;
     private Integer fullday;
     private Integer halfday;
+    private Integer approve;
 
-    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, String hireDate, Integer fullday, Integer halfday) {
+    public LeaveHistoryForm(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, String hireDate, Integer fullday, Integer halfday, Integer approve) {
         this.empId = empId;
         this.periodFrom = periodFrom;
         this.periodUntil = periodUntil;
@@ -38,6 +39,7 @@ public class LeaveHistoryForm {
         this.hireDate = hireDate;
         this.fullday = fullday;
         this.halfday = halfday;
+        this.approve = approve;
     }
 
     public LeaveHistoryForm() {

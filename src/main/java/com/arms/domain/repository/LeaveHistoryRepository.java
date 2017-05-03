@@ -36,7 +36,7 @@ public interface LeaveHistoryRepository extends JpaRepository<LeaveHistory, Inte
 
     @Query(value = " SELECT SUM( fullday + ( halfday / 2 ) ) AS counts FROM leave_history " +
             " WHERE " +
-            " emp_id = :empId AND category_id = 1 AND year( period_from )  BETWEEN year( now() ) - 5 AND year( now() ) "
+            " emp_id = :empId AND category_id = 1 AND approve = 1 AND year( period_from )  BETWEEN year( now() ) - 5 AND year( now() ) "
             , nativeQuery = true)
     Double countByEmpId(@Param("empId") Integer empId);
 

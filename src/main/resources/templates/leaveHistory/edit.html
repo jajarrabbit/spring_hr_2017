@@ -8,11 +8,11 @@
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <js th:include="common/js :: js"></js>
-    <!--<noscript>-->
+>
     <link rel="stylesheet" type="text/css" href="css/style-xlarge.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
     <css th:include="common/css :: css"></css>
-    <!--</noscript>-->
+
 </head>
 <body>
 <header th:include="common/header :: header('Head')"></header>
@@ -22,7 +22,7 @@
         <h2>Edit leave History</h2>
     </header>
     <div class="container">
-        <!-- Content -->
+
         <section id="content">
             <form th:action="@{/leaveHistory/edit}" method="POST" th:object="${leaveHistoryEditForm}"
                   class="form-horizontal form-width120 ml15" role="form" name="form1">

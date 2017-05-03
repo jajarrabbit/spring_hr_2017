@@ -147,4 +147,10 @@ public class LeaveHistory {
         this.halfday = halfday;
     }
 
+    private Integer approve;
+    @Basic
+    @Column(name = "approve")
+    public Integer getApprove(){return approve;}
+    public  void setApprove(Integer approve) {this.approve = approve;}
+
 }

@@ -153,7 +153,6 @@ public class LeaveHistoryController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "delete/{leaveId}", method = RequestMethod.GET)
     public String delete(@PathVariable Integer leaveId) throws Exception {
-        leaveHistoryService.cancelMail(leaveId);
         leaveHistoryService.delete(leaveId);
         return "redirect:/leaveHistory/list";
     }
@@ -195,7 +194,7 @@ public class LeaveHistoryController {
             return modelAndView;
         } else {
             leaveHistoryService.save(leaveHistoryForm);
-            leaveHistoryService.sendMail();
+//            leaveHistoryService.sendMail();
 
             modelAndView.setViewName("redirect:/leaveHistory/list");
             return modelAndView;
@@ -217,5 +216,12 @@ public class LeaveHistoryController {
         return new ModelAndView(exportPdfService.getJasperPdfView(leaveId), new HashedMap());
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping(value = "approve/{leaveId}", method = RequestMethod.GET)
+    public ModelAndView approve(@PathVariable Integer leaveId,ModelAndView modelAndView) throws Exception {
+        leaveHistoryService.approved(leaveId);
+        leaveHistoryService.sendMail(leaveId);
+     modelAndView.setViewName("redirect:/leaveHistory/list");
+     return modelAndView;
+    }
 }

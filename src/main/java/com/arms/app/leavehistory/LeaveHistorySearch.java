@@ -18,8 +18,9 @@ public class LeaveHistorySearch {
     private String remark;
     private Integer fullday;
     private Integer halfday;
+    private Integer approve;
 
-    public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, Integer fullday, Integer halfday) {
+    public LeaveHistorySearch(Integer empId, String periodFrom, String periodUntil, Integer categoryId, String reason, String remark, Integer fullday, Integer halfday, Integer approve) {
         this.empId = empId;
         this.periodFrom = periodFrom;
         this.periodUntil = periodUntil;
@@ -28,6 +29,7 @@ public class LeaveHistorySearch {
         this.remark = remark;
         this.fullday = fullday;
         this.halfday = halfday;
+        this.approve = approve;
     }
 
     public LeaveHistorySearch() {

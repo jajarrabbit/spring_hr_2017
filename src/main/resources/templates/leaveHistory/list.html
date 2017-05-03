@@ -94,19 +94,32 @@
                     </td>
                     <td th:text="${leaveHistory.leaveType.categoryName}">32</td>
                     <td colspan="4">
+                        <a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-warning"
+                           role="button">
+                            Download<i class="glyphicon glyphicon-save-file"></i></a>
+                        <th:block th:if="${leaveHistory.approve == 0}">
                         <a th:href="'/leaveHistory/edit/' + ${leaveHistory.leaveId}" class="btn-sm btn-info"
                            role="button">
                             Edit<i class="glyphicon glyphicon-pencil"></i></a>
                         <a th:href="'/leaveHistory/delete/' + ${leaveHistory.leaveId}" class="btn-sm btn-danger"
                            role="button">
                             Delete<i class="glyphicon glyphicon-remove-circle"></i></a>
-                        <a th:href="'/leaveHistory/exportPdf/' + ${leaveHistory.leaveId}" class="btn-sm btn-warning"
-                           role="button">
-                            Download<i class="glyphicon glyphicon-save-file"></i></a>
+
+
+
                         <th:block th:if="${leaveHistory.leaveType.categoryName == 'sick leave with medical certificate'}">
                             <a th:href="'/uploadFile/'+ ${leaveHistory.leaveId}" class="btn-sm btn-success"
                                role="button">Upload<i class="glyphicon glyphicon-globe"></i></a>
                         </th:block>
+                            <br>
+                            <a th:href="'/leaveHistory/approve/' + ${leaveHistory.leaveId}" class=" btn btn-success"
+                               role="button">
+                                Approve Now</a>
+                        </th:block>
+                        <th:block th:if="${leaveHistory.approve == 1}">
+                            Approved
+                        </th:block>
+
                     </td>
                 </tr>
                 </tbody>
